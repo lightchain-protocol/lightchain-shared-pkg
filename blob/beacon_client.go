@@ -145,6 +145,9 @@ func (bc *BeaconClient) fetchBlobAtBlock(ctx context.Context, versionedHash comm
 
 	for _, sc := range sidecars {
 		commitHash := KzgToVersionedHash(sc.KzgCommitment)
+		if commitHash == (common.Hash{}) {
+			continue // skip sidecar with malformed KZG commitment
+		}
 		if commitHash == versionedHash {
 			blobData, err := hex.DecodeString(StripHexPrefix(sc.Blob))
 			if err != nil {
