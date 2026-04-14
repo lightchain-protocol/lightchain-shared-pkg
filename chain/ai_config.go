@@ -19,11 +19,9 @@ import (
 type AIConfig interface {
 	// --- Model Parameters ---
 
-	// GetModelBaseFee returns the base fee for a model.
-	GetModelBaseFee(ctx context.Context, modelID types.ModelID) (*big.Int, error)
-
-	// GetModelPerByteRate returns the per-byte rate for a model.
-	GetModelPerByteRate(ctx context.Context, modelID types.ModelID) (*big.Int, error)
+	// GetModelFee returns the flat fee for a model.
+	// Solidity: getModelFee(bytes32) view returns (uint256).
+	GetModelFee(ctx context.Context, modelID types.ModelID) (*big.Int, error)
 
 	// GetMinWorkerStake returns the minimum global stake required for a worker.
 	// Amendment A-2: replaces per-model GetModelMinStake — single global stake.
@@ -36,6 +34,24 @@ type AIConfig interface {
 	// GetSuspensionThreshold returns the offense count at which a worker is suspended.
 	// Solidity: getSuspensionThreshold() view returns (uint256).
 	GetSuspensionThreshold(ctx context.Context) (*big.Int, error)
+
+	// GetSuspensionCooldown returns the time a worker must wait after suspension.
+	// Solidity: getSuspensionCooldown() view returns (uint256).
+	GetSuspensionCooldown(ctx context.Context) (*big.Int, error)
+
+	// IsModelEnabled returns whether a model is currently enabled.
+	// Solidity: isModelEnabled(bytes32) view returns (bool).
+	IsModelEnabled(ctx context.Context, modelID types.ModelID) (bool, error)
+
+	// --- Infrastructure Addresses ---
+
+	// GetDispatcherAddress returns the address of the dispatcher contract.
+	// Solidity: getDispatcherAddress() view returns (address).
+	GetDispatcherAddress(ctx context.Context) (types.WorkerAddr, error)
+
+	// GetDisputerAddress returns the address of the disputer contract.
+	// Solidity: getDisputerAddress() view returns (address).
+	GetDisputerAddress(ctx context.Context) (types.WorkerAddr, error)
 
 	// --- Fee Distribution ---
 
@@ -84,9 +100,6 @@ type AIConfig interface {
 	// GetBlobRetentionPeriod returns the blob retention period in seconds.
 	GetBlobRetentionPeriod(ctx context.Context) (*big.Int, error)
 
-	// GetMaxBlobsPerJob returns the maximum number of blobs per job.
-	GetMaxBlobsPerJob(ctx context.Context) (*big.Int, error)
-
 	// GetSessionInactivityTimeout returns the session inactivity timeout in seconds.
 	GetSessionInactivityTimeout(ctx context.Context) (*big.Int, error)
 
@@ -101,6 +114,7 @@ type AIConfig interface {
 
 	// --- Fee Calculation ---
 
-	// CalculateJobFee calculates the total fee for a job given model and input size.
-	CalculateJobFee(ctx context.Context, modelID types.ModelID, inputBytes uint64) (*big.Int, error)
+	// CalculateJobFee calculates the total fee for a job given the model.
+	// Solidity: calculateJobFee(bytes32) view returns (uint256).
+	CalculateJobFee(ctx context.Context, modelID types.ModelID) (*big.Int, error)
 }

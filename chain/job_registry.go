@@ -34,8 +34,8 @@ type JobRegistry interface {
 	ReassignSession(ctx context.Context, sessionID types.SessionID) error
 
 	// UpdateSessionKey updates the encrypted session keys after reassignment.
-	// Solidity: updateSessionKey(uint256, bytes, bytes).
-	UpdateSessionKey(ctx context.Context, sessionID types.SessionID, encWorkerKey []byte, encDisputerKey []byte) error
+	// Solidity: updateSessionKey(uint256, bytes, bytes, bytes, uint256).
+	UpdateSessionKey(ctx context.Context, sessionID types.SessionID, encWorkerKey []byte, encDisputerKey []byte, dispatcherSignature []byte, expiry uint64) error
 
 	// CloseSession closes a session and refunds remaining deposit.
 	// Solidity: closeSession(uint256).
@@ -44,12 +44,11 @@ type JobRegistry interface {
 	// --- Jobs ---
 
 	// SubmitJob submits a new inference job within a session. Returns the new
-	// job ID. Solidity: submitJob(uint256, bytes32[], uint256) payable returns (uint256).
+	// job ID. Solidity: submitJob(uint256, bytes32) payable returns (uint256).
 	SubmitJob(
 		ctx context.Context,
 		sessionID types.SessionID,
-		blobHashes [][32]byte,
-		dataLength uint64,
+		blobHash [32]byte,
 		fee *big.Int,
 	) (types.JobID, error)
 
@@ -57,13 +56,13 @@ type JobRegistry interface {
 	// Solidity: acknowledgeJob(uint256).
 	AcknowledgeJob(ctx context.Context, jobID types.JobID) error
 
-	// CompleteJob marks a job as completed with response blob hashes and the
+	// CompleteJob marks a job as completed with a single response blob hash and the
 	// keccak256 hash of the full encrypted response ciphertext.
-	// Solidity: completeJob(uint256, bytes32[], bytes32).
+	// Solidity: completeJob(uint256, bytes32, bytes32).
 	CompleteJob(
 		ctx context.Context,
 		jobID types.JobID,
-		responseBlobHashes [][32]byte,
+		responseBlobHash [32]byte,
 		responseCiphertextHash [32]byte,
 	) error
 
@@ -74,12 +73,12 @@ type JobRegistry interface {
 	DisputeJob(ctx context.Context, jobID types.JobID, bond *big.Int) error
 
 	// ResolveDispute resolves a dispute with the re-execution result.
-	// Solidity: resolveDispute(uint256, bool, bytes32[], uint256).
+	// Solidity: resolveDispute(uint256, bool, bytes32, uint256).
 	ResolveDispute(
 		ctx context.Context,
 		jobID types.JobID,
 		workerGuilty bool,
-		reExecutionBlobHashes [][32]byte,
+		reExecutionBlobHash [32]byte,
 		similarityScore uint64,
 	) error
 

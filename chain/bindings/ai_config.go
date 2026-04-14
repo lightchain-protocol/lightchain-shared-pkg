@@ -4,6 +4,7 @@
 package bindings
 
 import (
+	"errors"
 	"math/big"
 	"strings"
 
@@ -17,6 +18,7 @@ import (
 
 // Reference imports to suppress errors if they are not otherwise used.
 var (
+	_ = errors.New
 	_ = big.NewInt
 	_ = strings.NewReader
 	_ = ethereum.NotFound
@@ -24,10 +26,17 @@ var (
 	_ = common.Big1
 	_ = types.BloomLookup
 	_ = event.NewSubscription
+	_ = abi.ConvertType
 )
 
+// AIConfigMetaData contains all meta data concerning the AIConfig contract.
+var AIConfigMetaData = &bind.MetaData{
+	ABI: "[{\"type\":\"function\",\"name\":\"UPGRADE_INTERFACE_VERSION\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"internalType\":\"string\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"calculateJobFee\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"disableModel\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"enableModel\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"getAckTimeout\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getBlobRetentionPeriod\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getBurnFeeBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getCanarySimilarityThreshold\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getCompletionTimeout\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getCompletionTimeoutSlashBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDispatcherAddress\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDisputeBondMultiplier\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDisputeSlashBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDisputeWindow\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDisputerAddress\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getMaxReassignments\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getMaxSlashBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getMinAckTimeout\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getMinDisputeWindow\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getMinResolutionTimeout\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getMinWorkerStake\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getModelFee\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getModelMaxOutputTokens\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getProtocolFeeBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getResolutionTimeout\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSamplingRateBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSessionInactivityTimeout\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSimilarityThreshold\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSuspensionCooldown\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSuspensionThreshold\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getTimeoutSlashBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getWorkerFeeBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"initialize\",\"inputs\":[{\"name\":\"_initialOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_dispatcher\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_disputer\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"isModelEnabled\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"owner\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"proxiableUUID\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"registerModel\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"fee\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxOutputTokens\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"renounceOwnership\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setAckTimeout\",\"inputs\":[{\"name\":\"timeout\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setBlobRetentionPeriod\",\"inputs\":[{\"name\":\"period\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setCanarySimilarityThreshold\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setCompletionTimeout\",\"inputs\":[{\"name\":\"timeout\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setCompletionTimeoutSlashBps\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDispatcherAddress\",\"inputs\":[{\"name\":\"dispatcher\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDisputeBondMultiplier\",\"inputs\":[{\"name\":\"multiplier\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDisputeSlashBps\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDisputeWindow\",\"inputs\":[{\"name\":\"window\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDisputerAddress\",\"inputs\":[{\"name\":\"disputer\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setFeeDistribution\",\"inputs\":[{\"name\":\"workerBps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"protocolBps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"burnBps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setMaxReassignments\",\"inputs\":[{\"name\":\"max\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setMaxSlashBps\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setMinAckTimeout\",\"inputs\":[{\"name\":\"timeout\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setMinDisputeWindow\",\"inputs\":[{\"name\":\"window\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setMinResolutionTimeout\",\"inputs\":[{\"name\":\"timeout\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setMinWorkerStake\",\"inputs\":[{\"name\":\"stake\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setModelFee\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"fee\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setModelMaxOutputTokens\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"tokens\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setResolutionTimeout\",\"inputs\":[{\"name\":\"timeout\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setSamplingRateBps\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setSessionInactivityTimeout\",\"inputs\":[{\"name\":\"timeout\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setSimilarityThreshold\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setSuspensionCooldown\",\"inputs\":[{\"name\":\"duration\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setSuspensionThreshold\",\"inputs\":[{\"name\":\"count\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setTimeoutSlashBps\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferOwnership\",\"inputs\":[{\"name\":\"newOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"upgradeToAndCall\",\"inputs\":[{\"name\":\"newImplementation\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"event\",\"name\":\"DispatcherAddressUpdated\",\"inputs\":[{\"name\":\"newDispatcher\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DisputeParamsUpdated\",\"inputs\":[{\"name\":\"bondMultiplier\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"window\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"resolutionTimeout\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DisputerAddressUpdated\",\"inputs\":[{\"name\":\"newDisputer\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"FeeDistributionUpdated\",\"inputs\":[{\"name\":\"workerBps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"protocolBps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"burnBps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"InfraParamsUpdated\",\"inputs\":[{\"name\":\"param\",\"type\":\"string\",\"indexed\":false,\"internalType\":\"string\"},{\"name\":\"value\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Initialized\",\"inputs\":[{\"name\":\"version\",\"type\":\"uint64\",\"indexed\":false,\"internalType\":\"uint64\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"MinWorkerStakeUpdated\",\"inputs\":[{\"name\":\"newStake\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ModelConfigUpdated\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"},{\"name\":\"fee\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"maxOutputTokens\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ModelDisabled\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ModelEnabled\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ModelRegistered\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"},{\"name\":\"fee\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"maxOutputTokens\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"OwnershipTransferred\",\"inputs\":[{\"name\":\"previousOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SlashingParamsUpdated\",\"inputs\":[{\"name\":\"timeoutSlashBps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"completionTimeoutSlashBps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"disputeSlashBps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SuspensionParamsUpdated\",\"inputs\":[{\"name\":\"threshold\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"cooldown\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Upgraded\",\"inputs\":[{\"name\":\"implementation\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false}]",
+}
+
 // AIConfigABI is the input ABI used to generate the binding from.
-const AIConfigABI = "[{\"type\":\"function\",\"name\":\"UPGRADE_INTERFACE_VERSION\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"internalType\":\"string\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"calculateJobFee\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"inputBytes\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"disableModel\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"enableModel\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"getAckTimeout\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getBlobRetentionPeriod\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getBurnFeeBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getCanarySimilarityThreshold\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getCompletionTimeout\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getCompletionTimeoutSlashBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDispatcherAddress\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDisputeBondMultiplier\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDisputeSlashBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDisputeWindow\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDisputerAddress\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getMaxBlobsPerJob\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getMaxReassignments\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getMaxSlashBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getMinAckTimeout\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getMinDisputeWindow\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getMinResolutionTimeout\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getMinWorkerStake\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getModelBaseFee\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getModelMaxOutputTokens\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getModelPerByteRate\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getProtocolFeeBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getResolutionTimeout\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSamplingRateBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSessionInactivityTimeout\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSimilarityThreshold\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSuspensionCooldown\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSuspensionThreshold\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getTimeoutSlashBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getWorkerFeeBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"initialize\",\"inputs\":[{\"name\":\"_initialOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_dispatcher\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_disputer\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"isModelEnabled\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"owner\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"proxiableUUID\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"registerModel\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"baseFee\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"perByteRate\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxOutputTokens\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"renounceOwnership\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setAckTimeout\",\"inputs\":[{\"name\":\"timeout\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setBlobRetentionPeriod\",\"inputs\":[{\"name\":\"period\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setCanarySimilarityThreshold\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setCompletionTimeout\",\"inputs\":[{\"name\":\"timeout\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setCompletionTimeoutSlashBps\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDispatcherAddress\",\"inputs\":[{\"name\":\"dispatcher\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDisputeBondMultiplier\",\"inputs\":[{\"name\":\"multiplier\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDisputeSlashBps\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDisputeWindow\",\"inputs\":[{\"name\":\"window\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDisputerAddress\",\"inputs\":[{\"name\":\"disputer\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setFeeDistribution\",\"inputs\":[{\"name\":\"workerBps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"protocolBps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"burnBps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setMaxBlobsPerJob\",\"inputs\":[{\"name\":\"max\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setMaxReassignments\",\"inputs\":[{\"name\":\"max\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setMaxSlashBps\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setMinAckTimeout\",\"inputs\":[{\"name\":\"timeout\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setMinDisputeWindow\",\"inputs\":[{\"name\":\"window\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setMinResolutionTimeout\",\"inputs\":[{\"name\":\"timeout\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setMinWorkerStake\",\"inputs\":[{\"name\":\"stake\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setModelBaseFee\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"fee\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setModelMaxOutputTokens\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"tokens\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setModelPerByteRate\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"rate\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setResolutionTimeout\",\"inputs\":[{\"name\":\"timeout\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setSamplingRateBps\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setSessionInactivityTimeout\",\"inputs\":[{\"name\":\"timeout\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setSimilarityThreshold\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setSuspensionCooldown\",\"inputs\":[{\"name\":\"duration\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setSuspensionThreshold\",\"inputs\":[{\"name\":\"count\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setTimeoutSlashBps\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferOwnership\",\"inputs\":[{\"name\":\"newOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"upgradeToAndCall\",\"inputs\":[{\"name\":\"newImplementation\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"event\",\"name\":\"DispatcherAddressUpdated\",\"inputs\":[{\"name\":\"newDispatcher\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DisputeParamsUpdated\",\"inputs\":[{\"name\":\"bondMultiplier\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"window\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"resolutionTimeout\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DisputerAddressUpdated\",\"inputs\":[{\"name\":\"newDisputer\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"FeeDistributionUpdated\",\"inputs\":[{\"name\":\"workerBps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"protocolBps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"burnBps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"InfraParamsUpdated\",\"inputs\":[{\"name\":\"param\",\"type\":\"string\",\"indexed\":false,\"internalType\":\"string\"},{\"name\":\"value\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Initialized\",\"inputs\":[{\"name\":\"version\",\"type\":\"uint64\",\"indexed\":false,\"internalType\":\"uint64\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"MinWorkerStakeUpdated\",\"inputs\":[{\"name\":\"newStake\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ModelConfigUpdated\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"},{\"name\":\"baseFee\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"perByteRate\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"maxOutputTokens\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ModelDisabled\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ModelEnabled\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ModelRegistered\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"},{\"name\":\"baseFee\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"perByteRate\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"maxOutputTokens\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"OwnershipTransferred\",\"inputs\":[{\"name\":\"previousOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SlashingParamsUpdated\",\"inputs\":[{\"name\":\"timeoutSlashBps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"completionTimeoutSlashBps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"disputeSlashBps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SuspensionParamsUpdated\",\"inputs\":[{\"name\":\"threshold\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"cooldown\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Upgraded\",\"inputs\":[{\"name\":\"implementation\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false}]"
+// Deprecated: Use AIConfigMetaData.ABI instead.
+var AIConfigABI = AIConfigMetaData.ABI
 
 // AIConfig is an auto generated Go binding around an Ethereum contract.
 type AIConfig struct {
@@ -126,11 +135,11 @@ func NewAIConfigFilterer(address common.Address, filterer bind.ContractFilterer)
 
 // bindAIConfig binds a generic wrapper to an already deployed contract.
 func bindAIConfig(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := abi.JSON(strings.NewReader(AIConfigABI))
+	parsed, err := AIConfigMetaData.GetAbi()
 	if err != nil {
 		return nil, err
 	}
-	return bind.NewBoundContract(address, parsed, caller, transactor, filterer), nil
+	return bind.NewBoundContract(address, *parsed, caller, transactor, filterer), nil
 }
 
 // Call invokes the (constant) contract method with params as input values and
@@ -202,12 +211,12 @@ func (_AIConfig *AIConfigCallerSession) UPGRADEINTERFACEVERSION() (string, error
 	return _AIConfig.Contract.UPGRADEINTERFACEVERSION(&_AIConfig.CallOpts)
 }
 
-// CalculateJobFee is a free data retrieval call binding the contract method 0x5a7b3587.
+// CalculateJobFee is a free data retrieval call binding the contract method 0x33763d83.
 //
-// Solidity: function calculateJobFee(bytes32 modelId, uint256 inputBytes) view returns(uint256)
-func (_AIConfig *AIConfigCaller) CalculateJobFee(opts *bind.CallOpts, modelId [32]byte, inputBytes *big.Int) (*big.Int, error) {
+// Solidity: function calculateJobFee(bytes32 modelId) view returns(uint256)
+func (_AIConfig *AIConfigCaller) CalculateJobFee(opts *bind.CallOpts, modelId [32]byte) (*big.Int, error) {
 	var out []interface{}
-	err := _AIConfig.contract.Call(opts, &out, "calculateJobFee", modelId, inputBytes)
+	err := _AIConfig.contract.Call(opts, &out, "calculateJobFee", modelId)
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -219,18 +228,18 @@ func (_AIConfig *AIConfigCaller) CalculateJobFee(opts *bind.CallOpts, modelId [3
 
 }
 
-// CalculateJobFee is a free data retrieval call binding the contract method 0x5a7b3587.
+// CalculateJobFee is a free data retrieval call binding the contract method 0x33763d83.
 //
-// Solidity: function calculateJobFee(bytes32 modelId, uint256 inputBytes) view returns(uint256)
-func (_AIConfig *AIConfigSession) CalculateJobFee(modelId [32]byte, inputBytes *big.Int) (*big.Int, error) {
-	return _AIConfig.Contract.CalculateJobFee(&_AIConfig.CallOpts, modelId, inputBytes)
+// Solidity: function calculateJobFee(bytes32 modelId) view returns(uint256)
+func (_AIConfig *AIConfigSession) CalculateJobFee(modelId [32]byte) (*big.Int, error) {
+	return _AIConfig.Contract.CalculateJobFee(&_AIConfig.CallOpts, modelId)
 }
 
-// CalculateJobFee is a free data retrieval call binding the contract method 0x5a7b3587.
+// CalculateJobFee is a free data retrieval call binding the contract method 0x33763d83.
 //
-// Solidity: function calculateJobFee(bytes32 modelId, uint256 inputBytes) view returns(uint256)
-func (_AIConfig *AIConfigCallerSession) CalculateJobFee(modelId [32]byte, inputBytes *big.Int) (*big.Int, error) {
-	return _AIConfig.Contract.CalculateJobFee(&_AIConfig.CallOpts, modelId, inputBytes)
+// Solidity: function calculateJobFee(bytes32 modelId) view returns(uint256)
+func (_AIConfig *AIConfigCallerSession) CalculateJobFee(modelId [32]byte) (*big.Int, error) {
+	return _AIConfig.Contract.CalculateJobFee(&_AIConfig.CallOpts, modelId)
 }
 
 // GetAckTimeout is a free data retrieval call binding the contract method 0x6ef7016d.
@@ -574,37 +583,6 @@ func (_AIConfig *AIConfigCallerSession) GetDisputerAddress() (common.Address, er
 	return _AIConfig.Contract.GetDisputerAddress(&_AIConfig.CallOpts)
 }
 
-// GetMaxBlobsPerJob is a free data retrieval call binding the contract method 0x302695ef.
-//
-// Solidity: function getMaxBlobsPerJob() view returns(uint256)
-func (_AIConfig *AIConfigCaller) GetMaxBlobsPerJob(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _AIConfig.contract.Call(opts, &out, "getMaxBlobsPerJob")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// GetMaxBlobsPerJob is a free data retrieval call binding the contract method 0x302695ef.
-//
-// Solidity: function getMaxBlobsPerJob() view returns(uint256)
-func (_AIConfig *AIConfigSession) GetMaxBlobsPerJob() (*big.Int, error) {
-	return _AIConfig.Contract.GetMaxBlobsPerJob(&_AIConfig.CallOpts)
-}
-
-// GetMaxBlobsPerJob is a free data retrieval call binding the contract method 0x302695ef.
-//
-// Solidity: function getMaxBlobsPerJob() view returns(uint256)
-func (_AIConfig *AIConfigCallerSession) GetMaxBlobsPerJob() (*big.Int, error) {
-	return _AIConfig.Contract.GetMaxBlobsPerJob(&_AIConfig.CallOpts)
-}
-
 // GetMaxReassignments is a free data retrieval call binding the contract method 0x27ad5f34.
 //
 // Solidity: function getMaxReassignments() view returns(uint256)
@@ -791,12 +769,12 @@ func (_AIConfig *AIConfigCallerSession) GetMinWorkerStake() (*big.Int, error) {
 	return _AIConfig.Contract.GetMinWorkerStake(&_AIConfig.CallOpts)
 }
 
-// GetModelBaseFee is a free data retrieval call binding the contract method 0x90ef1bb4.
+// GetModelFee is a free data retrieval call binding the contract method 0xcbee2004.
 //
-// Solidity: function getModelBaseFee(bytes32 modelId) view returns(uint256)
-func (_AIConfig *AIConfigCaller) GetModelBaseFee(opts *bind.CallOpts, modelId [32]byte) (*big.Int, error) {
+// Solidity: function getModelFee(bytes32 modelId) view returns(uint256)
+func (_AIConfig *AIConfigCaller) GetModelFee(opts *bind.CallOpts, modelId [32]byte) (*big.Int, error) {
 	var out []interface{}
-	err := _AIConfig.contract.Call(opts, &out, "getModelBaseFee", modelId)
+	err := _AIConfig.contract.Call(opts, &out, "getModelFee", modelId)
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -808,18 +786,18 @@ func (_AIConfig *AIConfigCaller) GetModelBaseFee(opts *bind.CallOpts, modelId [3
 
 }
 
-// GetModelBaseFee is a free data retrieval call binding the contract method 0x90ef1bb4.
+// GetModelFee is a free data retrieval call binding the contract method 0xcbee2004.
 //
-// Solidity: function getModelBaseFee(bytes32 modelId) view returns(uint256)
-func (_AIConfig *AIConfigSession) GetModelBaseFee(modelId [32]byte) (*big.Int, error) {
-	return _AIConfig.Contract.GetModelBaseFee(&_AIConfig.CallOpts, modelId)
+// Solidity: function getModelFee(bytes32 modelId) view returns(uint256)
+func (_AIConfig *AIConfigSession) GetModelFee(modelId [32]byte) (*big.Int, error) {
+	return _AIConfig.Contract.GetModelFee(&_AIConfig.CallOpts, modelId)
 }
 
-// GetModelBaseFee is a free data retrieval call binding the contract method 0x90ef1bb4.
+// GetModelFee is a free data retrieval call binding the contract method 0xcbee2004.
 //
-// Solidity: function getModelBaseFee(bytes32 modelId) view returns(uint256)
-func (_AIConfig *AIConfigCallerSession) GetModelBaseFee(modelId [32]byte) (*big.Int, error) {
-	return _AIConfig.Contract.GetModelBaseFee(&_AIConfig.CallOpts, modelId)
+// Solidity: function getModelFee(bytes32 modelId) view returns(uint256)
+func (_AIConfig *AIConfigCallerSession) GetModelFee(modelId [32]byte) (*big.Int, error) {
+	return _AIConfig.Contract.GetModelFee(&_AIConfig.CallOpts, modelId)
 }
 
 // GetModelMaxOutputTokens is a free data retrieval call binding the contract method 0x1678f85b.
@@ -851,37 +829,6 @@ func (_AIConfig *AIConfigSession) GetModelMaxOutputTokens(modelId [32]byte) (*bi
 // Solidity: function getModelMaxOutputTokens(bytes32 modelId) view returns(uint256)
 func (_AIConfig *AIConfigCallerSession) GetModelMaxOutputTokens(modelId [32]byte) (*big.Int, error) {
 	return _AIConfig.Contract.GetModelMaxOutputTokens(&_AIConfig.CallOpts, modelId)
-}
-
-// GetModelPerByteRate is a free data retrieval call binding the contract method 0x04fa3cc6.
-//
-// Solidity: function getModelPerByteRate(bytes32 modelId) view returns(uint256)
-func (_AIConfig *AIConfigCaller) GetModelPerByteRate(opts *bind.CallOpts, modelId [32]byte) (*big.Int, error) {
-	var out []interface{}
-	err := _AIConfig.contract.Call(opts, &out, "getModelPerByteRate", modelId)
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// GetModelPerByteRate is a free data retrieval call binding the contract method 0x04fa3cc6.
-//
-// Solidity: function getModelPerByteRate(bytes32 modelId) view returns(uint256)
-func (_AIConfig *AIConfigSession) GetModelPerByteRate(modelId [32]byte) (*big.Int, error) {
-	return _AIConfig.Contract.GetModelPerByteRate(&_AIConfig.CallOpts, modelId)
-}
-
-// GetModelPerByteRate is a free data retrieval call binding the contract method 0x04fa3cc6.
-//
-// Solidity: function getModelPerByteRate(bytes32 modelId) view returns(uint256)
-func (_AIConfig *AIConfigCallerSession) GetModelPerByteRate(modelId [32]byte) (*big.Int, error) {
-	return _AIConfig.Contract.GetModelPerByteRate(&_AIConfig.CallOpts, modelId)
 }
 
 // GetProtocolFeeBps is a free data retrieval call binding the contract method 0xe590cea5.
@@ -1319,25 +1266,25 @@ func (_AIConfig *AIConfigTransactorSession) Initialize(_initialOwner common.Addr
 	return _AIConfig.Contract.Initialize(&_AIConfig.TransactOpts, _initialOwner, _dispatcher, _disputer)
 }
 
-// RegisterModel is a paid mutator transaction binding the contract method 0xf529d3d6.
+// RegisterModel is a paid mutator transaction binding the contract method 0xed842e5d.
 //
-// Solidity: function registerModel(bytes32 modelId, uint256 baseFee, uint256 perByteRate, uint256 maxOutputTokens) returns()
-func (_AIConfig *AIConfigTransactor) RegisterModel(opts *bind.TransactOpts, modelId [32]byte, baseFee *big.Int, perByteRate *big.Int, maxOutputTokens *big.Int) (*types.Transaction, error) {
-	return _AIConfig.contract.Transact(opts, "registerModel", modelId, baseFee, perByteRate, maxOutputTokens)
+// Solidity: function registerModel(bytes32 modelId, uint256 fee, uint256 maxOutputTokens) returns()
+func (_AIConfig *AIConfigTransactor) RegisterModel(opts *bind.TransactOpts, modelId [32]byte, fee *big.Int, maxOutputTokens *big.Int) (*types.Transaction, error) {
+	return _AIConfig.contract.Transact(opts, "registerModel", modelId, fee, maxOutputTokens)
 }
 
-// RegisterModel is a paid mutator transaction binding the contract method 0xf529d3d6.
+// RegisterModel is a paid mutator transaction binding the contract method 0xed842e5d.
 //
-// Solidity: function registerModel(bytes32 modelId, uint256 baseFee, uint256 perByteRate, uint256 maxOutputTokens) returns()
-func (_AIConfig *AIConfigSession) RegisterModel(modelId [32]byte, baseFee *big.Int, perByteRate *big.Int, maxOutputTokens *big.Int) (*types.Transaction, error) {
-	return _AIConfig.Contract.RegisterModel(&_AIConfig.TransactOpts, modelId, baseFee, perByteRate, maxOutputTokens)
+// Solidity: function registerModel(bytes32 modelId, uint256 fee, uint256 maxOutputTokens) returns()
+func (_AIConfig *AIConfigSession) RegisterModel(modelId [32]byte, fee *big.Int, maxOutputTokens *big.Int) (*types.Transaction, error) {
+	return _AIConfig.Contract.RegisterModel(&_AIConfig.TransactOpts, modelId, fee, maxOutputTokens)
 }
 
-// RegisterModel is a paid mutator transaction binding the contract method 0xf529d3d6.
+// RegisterModel is a paid mutator transaction binding the contract method 0xed842e5d.
 //
-// Solidity: function registerModel(bytes32 modelId, uint256 baseFee, uint256 perByteRate, uint256 maxOutputTokens) returns()
-func (_AIConfig *AIConfigTransactorSession) RegisterModel(modelId [32]byte, baseFee *big.Int, perByteRate *big.Int, maxOutputTokens *big.Int) (*types.Transaction, error) {
-	return _AIConfig.Contract.RegisterModel(&_AIConfig.TransactOpts, modelId, baseFee, perByteRate, maxOutputTokens)
+// Solidity: function registerModel(bytes32 modelId, uint256 fee, uint256 maxOutputTokens) returns()
+func (_AIConfig *AIConfigTransactorSession) RegisterModel(modelId [32]byte, fee *big.Int, maxOutputTokens *big.Int) (*types.Transaction, error) {
+	return _AIConfig.Contract.RegisterModel(&_AIConfig.TransactOpts, modelId, fee, maxOutputTokens)
 }
 
 // RenounceOwnership is a paid mutator transaction binding the contract method 0x715018a6.
@@ -1592,27 +1539,6 @@ func (_AIConfig *AIConfigTransactorSession) SetFeeDistribution(workerBps *big.In
 	return _AIConfig.Contract.SetFeeDistribution(&_AIConfig.TransactOpts, workerBps, protocolBps, burnBps)
 }
 
-// SetMaxBlobsPerJob is a paid mutator transaction binding the contract method 0xbb7274fc.
-//
-// Solidity: function setMaxBlobsPerJob(uint256 max) returns()
-func (_AIConfig *AIConfigTransactor) SetMaxBlobsPerJob(opts *bind.TransactOpts, max *big.Int) (*types.Transaction, error) {
-	return _AIConfig.contract.Transact(opts, "setMaxBlobsPerJob", max)
-}
-
-// SetMaxBlobsPerJob is a paid mutator transaction binding the contract method 0xbb7274fc.
-//
-// Solidity: function setMaxBlobsPerJob(uint256 max) returns()
-func (_AIConfig *AIConfigSession) SetMaxBlobsPerJob(max *big.Int) (*types.Transaction, error) {
-	return _AIConfig.Contract.SetMaxBlobsPerJob(&_AIConfig.TransactOpts, max)
-}
-
-// SetMaxBlobsPerJob is a paid mutator transaction binding the contract method 0xbb7274fc.
-//
-// Solidity: function setMaxBlobsPerJob(uint256 max) returns()
-func (_AIConfig *AIConfigTransactorSession) SetMaxBlobsPerJob(max *big.Int) (*types.Transaction, error) {
-	return _AIConfig.Contract.SetMaxBlobsPerJob(&_AIConfig.TransactOpts, max)
-}
-
 // SetMaxReassignments is a paid mutator transaction binding the contract method 0xc35400f1.
 //
 // Solidity: function setMaxReassignments(uint256 max) returns()
@@ -1739,25 +1665,25 @@ func (_AIConfig *AIConfigTransactorSession) SetMinWorkerStake(stake *big.Int) (*
 	return _AIConfig.Contract.SetMinWorkerStake(&_AIConfig.TransactOpts, stake)
 }
 
-// SetModelBaseFee is a paid mutator transaction binding the contract method 0x70de6cef.
+// SetModelFee is a paid mutator transaction binding the contract method 0xf029ac3e.
 //
-// Solidity: function setModelBaseFee(bytes32 modelId, uint256 fee) returns()
-func (_AIConfig *AIConfigTransactor) SetModelBaseFee(opts *bind.TransactOpts, modelId [32]byte, fee *big.Int) (*types.Transaction, error) {
-	return _AIConfig.contract.Transact(opts, "setModelBaseFee", modelId, fee)
+// Solidity: function setModelFee(bytes32 modelId, uint256 fee) returns()
+func (_AIConfig *AIConfigTransactor) SetModelFee(opts *bind.TransactOpts, modelId [32]byte, fee *big.Int) (*types.Transaction, error) {
+	return _AIConfig.contract.Transact(opts, "setModelFee", modelId, fee)
 }
 
-// SetModelBaseFee is a paid mutator transaction binding the contract method 0x70de6cef.
+// SetModelFee is a paid mutator transaction binding the contract method 0xf029ac3e.
 //
-// Solidity: function setModelBaseFee(bytes32 modelId, uint256 fee) returns()
-func (_AIConfig *AIConfigSession) SetModelBaseFee(modelId [32]byte, fee *big.Int) (*types.Transaction, error) {
-	return _AIConfig.Contract.SetModelBaseFee(&_AIConfig.TransactOpts, modelId, fee)
+// Solidity: function setModelFee(bytes32 modelId, uint256 fee) returns()
+func (_AIConfig *AIConfigSession) SetModelFee(modelId [32]byte, fee *big.Int) (*types.Transaction, error) {
+	return _AIConfig.Contract.SetModelFee(&_AIConfig.TransactOpts, modelId, fee)
 }
 
-// SetModelBaseFee is a paid mutator transaction binding the contract method 0x70de6cef.
+// SetModelFee is a paid mutator transaction binding the contract method 0xf029ac3e.
 //
-// Solidity: function setModelBaseFee(bytes32 modelId, uint256 fee) returns()
-func (_AIConfig *AIConfigTransactorSession) SetModelBaseFee(modelId [32]byte, fee *big.Int) (*types.Transaction, error) {
-	return _AIConfig.Contract.SetModelBaseFee(&_AIConfig.TransactOpts, modelId, fee)
+// Solidity: function setModelFee(bytes32 modelId, uint256 fee) returns()
+func (_AIConfig *AIConfigTransactorSession) SetModelFee(modelId [32]byte, fee *big.Int) (*types.Transaction, error) {
+	return _AIConfig.Contract.SetModelFee(&_AIConfig.TransactOpts, modelId, fee)
 }
 
 // SetModelMaxOutputTokens is a paid mutator transaction binding the contract method 0x14953714.
@@ -1779,27 +1705,6 @@ func (_AIConfig *AIConfigSession) SetModelMaxOutputTokens(modelId [32]byte, toke
 // Solidity: function setModelMaxOutputTokens(bytes32 modelId, uint256 tokens) returns()
 func (_AIConfig *AIConfigTransactorSession) SetModelMaxOutputTokens(modelId [32]byte, tokens *big.Int) (*types.Transaction, error) {
 	return _AIConfig.Contract.SetModelMaxOutputTokens(&_AIConfig.TransactOpts, modelId, tokens)
-}
-
-// SetModelPerByteRate is a paid mutator transaction binding the contract method 0xc09707fe.
-//
-// Solidity: function setModelPerByteRate(bytes32 modelId, uint256 rate) returns()
-func (_AIConfig *AIConfigTransactor) SetModelPerByteRate(opts *bind.TransactOpts, modelId [32]byte, rate *big.Int) (*types.Transaction, error) {
-	return _AIConfig.contract.Transact(opts, "setModelPerByteRate", modelId, rate)
-}
-
-// SetModelPerByteRate is a paid mutator transaction binding the contract method 0xc09707fe.
-//
-// Solidity: function setModelPerByteRate(bytes32 modelId, uint256 rate) returns()
-func (_AIConfig *AIConfigSession) SetModelPerByteRate(modelId [32]byte, rate *big.Int) (*types.Transaction, error) {
-	return _AIConfig.Contract.SetModelPerByteRate(&_AIConfig.TransactOpts, modelId, rate)
-}
-
-// SetModelPerByteRate is a paid mutator transaction binding the contract method 0xc09707fe.
-//
-// Solidity: function setModelPerByteRate(bytes32 modelId, uint256 rate) returns()
-func (_AIConfig *AIConfigTransactorSession) SetModelPerByteRate(modelId [32]byte, rate *big.Int) (*types.Transaction, error) {
-	return _AIConfig.Contract.SetModelPerByteRate(&_AIConfig.TransactOpts, modelId, rate)
 }
 
 // SetResolutionTimeout is a paid mutator transaction binding the contract method 0xdb625232.
@@ -2066,10 +1971,15 @@ type AIConfigDispatcherAddressUpdated struct {
 
 // FilterDispatcherAddressUpdated is a free log retrieval operation binding the contract event 0x20d0ae5feff505aaacb84857d5436350cdb9c9c0ff57bb2fe8611e298913df7f.
 //
-// Solidity: event DispatcherAddressUpdated(address newDispatcher)
-func (_AIConfig *AIConfigFilterer) FilterDispatcherAddressUpdated(opts *bind.FilterOpts) (*AIConfigDispatcherAddressUpdatedIterator, error) {
+// Solidity: event DispatcherAddressUpdated(address indexed newDispatcher)
+func (_AIConfig *AIConfigFilterer) FilterDispatcherAddressUpdated(opts *bind.FilterOpts, newDispatcher []common.Address) (*AIConfigDispatcherAddressUpdatedIterator, error) {
 
-	logs, sub, err := _AIConfig.contract.FilterLogs(opts, "DispatcherAddressUpdated")
+	var newDispatcherRule []interface{}
+	for _, newDispatcherItem := range newDispatcher {
+		newDispatcherRule = append(newDispatcherRule, newDispatcherItem)
+	}
+
+	logs, sub, err := _AIConfig.contract.FilterLogs(opts, "DispatcherAddressUpdated", newDispatcherRule)
 	if err != nil {
 		return nil, err
 	}
@@ -2078,10 +1988,15 @@ func (_AIConfig *AIConfigFilterer) FilterDispatcherAddressUpdated(opts *bind.Fil
 
 // WatchDispatcherAddressUpdated is a free log subscription operation binding the contract event 0x20d0ae5feff505aaacb84857d5436350cdb9c9c0ff57bb2fe8611e298913df7f.
 //
-// Solidity: event DispatcherAddressUpdated(address newDispatcher)
-func (_AIConfig *AIConfigFilterer) WatchDispatcherAddressUpdated(opts *bind.WatchOpts, sink chan<- *AIConfigDispatcherAddressUpdated) (event.Subscription, error) {
+// Solidity: event DispatcherAddressUpdated(address indexed newDispatcher)
+func (_AIConfig *AIConfigFilterer) WatchDispatcherAddressUpdated(opts *bind.WatchOpts, sink chan<- *AIConfigDispatcherAddressUpdated, newDispatcher []common.Address) (event.Subscription, error) {
 
-	logs, sub, err := _AIConfig.contract.WatchLogs(opts, "DispatcherAddressUpdated")
+	var newDispatcherRule []interface{}
+	for _, newDispatcherItem := range newDispatcher {
+		newDispatcherRule = append(newDispatcherRule, newDispatcherItem)
+	}
+
+	logs, sub, err := _AIConfig.contract.WatchLogs(opts, "DispatcherAddressUpdated", newDispatcherRule)
 	if err != nil {
 		return nil, err
 	}
@@ -2115,7 +2030,7 @@ func (_AIConfig *AIConfigFilterer) WatchDispatcherAddressUpdated(opts *bind.Watc
 
 // ParseDispatcherAddressUpdated is a log parse operation binding the contract event 0x20d0ae5feff505aaacb84857d5436350cdb9c9c0ff57bb2fe8611e298913df7f.
 //
-// Solidity: event DispatcherAddressUpdated(address newDispatcher)
+// Solidity: event DispatcherAddressUpdated(address indexed newDispatcher)
 func (_AIConfig *AIConfigFilterer) ParseDispatcherAddressUpdated(log types.Log) (*AIConfigDispatcherAddressUpdated, error) {
 	event := new(AIConfigDispatcherAddressUpdated)
 	if err := _AIConfig.contract.UnpackLog(event, "DispatcherAddressUpdated", log); err != nil {
@@ -2336,10 +2251,15 @@ type AIConfigDisputerAddressUpdated struct {
 
 // FilterDisputerAddressUpdated is a free log retrieval operation binding the contract event 0xdb6c994f490543a0786e32e55707cbdba4ced511c54b42ef571b510e78c07798.
 //
-// Solidity: event DisputerAddressUpdated(address newDisputer)
-func (_AIConfig *AIConfigFilterer) FilterDisputerAddressUpdated(opts *bind.FilterOpts) (*AIConfigDisputerAddressUpdatedIterator, error) {
+// Solidity: event DisputerAddressUpdated(address indexed newDisputer)
+func (_AIConfig *AIConfigFilterer) FilterDisputerAddressUpdated(opts *bind.FilterOpts, newDisputer []common.Address) (*AIConfigDisputerAddressUpdatedIterator, error) {
 
-	logs, sub, err := _AIConfig.contract.FilterLogs(opts, "DisputerAddressUpdated")
+	var newDisputerRule []interface{}
+	for _, newDisputerItem := range newDisputer {
+		newDisputerRule = append(newDisputerRule, newDisputerItem)
+	}
+
+	logs, sub, err := _AIConfig.contract.FilterLogs(opts, "DisputerAddressUpdated", newDisputerRule)
 	if err != nil {
 		return nil, err
 	}
@@ -2348,10 +2268,15 @@ func (_AIConfig *AIConfigFilterer) FilterDisputerAddressUpdated(opts *bind.Filte
 
 // WatchDisputerAddressUpdated is a free log subscription operation binding the contract event 0xdb6c994f490543a0786e32e55707cbdba4ced511c54b42ef571b510e78c07798.
 //
-// Solidity: event DisputerAddressUpdated(address newDisputer)
-func (_AIConfig *AIConfigFilterer) WatchDisputerAddressUpdated(opts *bind.WatchOpts, sink chan<- *AIConfigDisputerAddressUpdated) (event.Subscription, error) {
+// Solidity: event DisputerAddressUpdated(address indexed newDisputer)
+func (_AIConfig *AIConfigFilterer) WatchDisputerAddressUpdated(opts *bind.WatchOpts, sink chan<- *AIConfigDisputerAddressUpdated, newDisputer []common.Address) (event.Subscription, error) {
 
-	logs, sub, err := _AIConfig.contract.WatchLogs(opts, "DisputerAddressUpdated")
+	var newDisputerRule []interface{}
+	for _, newDisputerItem := range newDisputer {
+		newDisputerRule = append(newDisputerRule, newDisputerItem)
+	}
+
+	logs, sub, err := _AIConfig.contract.WatchLogs(opts, "DisputerAddressUpdated", newDisputerRule)
 	if err != nil {
 		return nil, err
 	}
@@ -2385,7 +2310,7 @@ func (_AIConfig *AIConfigFilterer) WatchDisputerAddressUpdated(opts *bind.WatchO
 
 // ParseDisputerAddressUpdated is a log parse operation binding the contract event 0xdb6c994f490543a0786e32e55707cbdba4ced511c54b42ef571b510e78c07798.
 //
-// Solidity: event DisputerAddressUpdated(address newDisputer)
+// Solidity: event DisputerAddressUpdated(address indexed newDisputer)
 func (_AIConfig *AIConfigFilterer) ParseDisputerAddressUpdated(log types.Log) (*AIConfigDisputerAddressUpdated, error) {
 	event := new(AIConfigDisputerAddressUpdated)
 	if err := _AIConfig.contract.UnpackLog(event, "DisputerAddressUpdated", log); err != nil {
@@ -3004,15 +2929,14 @@ func (it *AIConfigModelConfigUpdatedIterator) Close() error {
 // AIConfigModelConfigUpdated represents a ModelConfigUpdated event raised by the AIConfig contract.
 type AIConfigModelConfigUpdated struct {
 	ModelId         [32]byte
-	BaseFee         *big.Int
-	PerByteRate     *big.Int
+	Fee             *big.Int
 	MaxOutputTokens *big.Int
 	Raw             types.Log // Blockchain specific contextual infos
 }
 
-// FilterModelConfigUpdated is a free log retrieval operation binding the contract event 0x20ac22d1326aef94164c24437ffbd750aa92a5a4bc1563a2dd59e5def1533073.
+// FilterModelConfigUpdated is a free log retrieval operation binding the contract event 0xb50c3aa7ade2043984058e30b86b019e7e60ba9a147fd7405b7845093bb5d9c9.
 //
-// Solidity: event ModelConfigUpdated(bytes32 indexed modelId, uint256 baseFee, uint256 perByteRate, uint256 maxOutputTokens)
+// Solidity: event ModelConfigUpdated(bytes32 indexed modelId, uint256 fee, uint256 maxOutputTokens)
 func (_AIConfig *AIConfigFilterer) FilterModelConfigUpdated(opts *bind.FilterOpts, modelId [][32]byte) (*AIConfigModelConfigUpdatedIterator, error) {
 
 	var modelIdRule []interface{}
@@ -3027,9 +2951,9 @@ func (_AIConfig *AIConfigFilterer) FilterModelConfigUpdated(opts *bind.FilterOpt
 	return &AIConfigModelConfigUpdatedIterator{contract: _AIConfig.contract, event: "ModelConfigUpdated", logs: logs, sub: sub}, nil
 }
 
-// WatchModelConfigUpdated is a free log subscription operation binding the contract event 0x20ac22d1326aef94164c24437ffbd750aa92a5a4bc1563a2dd59e5def1533073.
+// WatchModelConfigUpdated is a free log subscription operation binding the contract event 0xb50c3aa7ade2043984058e30b86b019e7e60ba9a147fd7405b7845093bb5d9c9.
 //
-// Solidity: event ModelConfigUpdated(bytes32 indexed modelId, uint256 baseFee, uint256 perByteRate, uint256 maxOutputTokens)
+// Solidity: event ModelConfigUpdated(bytes32 indexed modelId, uint256 fee, uint256 maxOutputTokens)
 func (_AIConfig *AIConfigFilterer) WatchModelConfigUpdated(opts *bind.WatchOpts, sink chan<- *AIConfigModelConfigUpdated, modelId [][32]byte) (event.Subscription, error) {
 
 	var modelIdRule []interface{}
@@ -3069,9 +2993,9 @@ func (_AIConfig *AIConfigFilterer) WatchModelConfigUpdated(opts *bind.WatchOpts,
 	}), nil
 }
 
-// ParseModelConfigUpdated is a log parse operation binding the contract event 0x20ac22d1326aef94164c24437ffbd750aa92a5a4bc1563a2dd59e5def1533073.
+// ParseModelConfigUpdated is a log parse operation binding the contract event 0xb50c3aa7ade2043984058e30b86b019e7e60ba9a147fd7405b7845093bb5d9c9.
 //
-// Solidity: event ModelConfigUpdated(bytes32 indexed modelId, uint256 baseFee, uint256 perByteRate, uint256 maxOutputTokens)
+// Solidity: event ModelConfigUpdated(bytes32 indexed modelId, uint256 fee, uint256 maxOutputTokens)
 func (_AIConfig *AIConfigFilterer) ParseModelConfigUpdated(log types.Log) (*AIConfigModelConfigUpdated, error) {
 	event := new(AIConfigModelConfigUpdated)
 	if err := _AIConfig.contract.UnpackLog(event, "ModelConfigUpdated", log); err != nil {
@@ -3439,15 +3363,14 @@ func (it *AIConfigModelRegisteredIterator) Close() error {
 // AIConfigModelRegistered represents a ModelRegistered event raised by the AIConfig contract.
 type AIConfigModelRegistered struct {
 	ModelId         [32]byte
-	BaseFee         *big.Int
-	PerByteRate     *big.Int
+	Fee             *big.Int
 	MaxOutputTokens *big.Int
 	Raw             types.Log // Blockchain specific contextual infos
 }
 
-// FilterModelRegistered is a free log retrieval operation binding the contract event 0x5371fa91c4b6da17c45ca08dcaf9af100cd5f8af1267743ab82c7e474a7a82e3.
+// FilterModelRegistered is a free log retrieval operation binding the contract event 0xae5a0d3a38bdeab8d8f9d4543bc9c4d389acc41ea1a7f9aa5d9effbfcc024462.
 //
-// Solidity: event ModelRegistered(bytes32 indexed modelId, uint256 baseFee, uint256 perByteRate, uint256 maxOutputTokens)
+// Solidity: event ModelRegistered(bytes32 indexed modelId, uint256 fee, uint256 maxOutputTokens)
 func (_AIConfig *AIConfigFilterer) FilterModelRegistered(opts *bind.FilterOpts, modelId [][32]byte) (*AIConfigModelRegisteredIterator, error) {
 
 	var modelIdRule []interface{}
@@ -3462,9 +3385,9 @@ func (_AIConfig *AIConfigFilterer) FilterModelRegistered(opts *bind.FilterOpts, 
 	return &AIConfigModelRegisteredIterator{contract: _AIConfig.contract, event: "ModelRegistered", logs: logs, sub: sub}, nil
 }
 
-// WatchModelRegistered is a free log subscription operation binding the contract event 0x5371fa91c4b6da17c45ca08dcaf9af100cd5f8af1267743ab82c7e474a7a82e3.
+// WatchModelRegistered is a free log subscription operation binding the contract event 0xae5a0d3a38bdeab8d8f9d4543bc9c4d389acc41ea1a7f9aa5d9effbfcc024462.
 //
-// Solidity: event ModelRegistered(bytes32 indexed modelId, uint256 baseFee, uint256 perByteRate, uint256 maxOutputTokens)
+// Solidity: event ModelRegistered(bytes32 indexed modelId, uint256 fee, uint256 maxOutputTokens)
 func (_AIConfig *AIConfigFilterer) WatchModelRegistered(opts *bind.WatchOpts, sink chan<- *AIConfigModelRegistered, modelId [][32]byte) (event.Subscription, error) {
 
 	var modelIdRule []interface{}
@@ -3504,9 +3427,9 @@ func (_AIConfig *AIConfigFilterer) WatchModelRegistered(opts *bind.WatchOpts, si
 	}), nil
 }
 
-// ParseModelRegistered is a log parse operation binding the contract event 0x5371fa91c4b6da17c45ca08dcaf9af100cd5f8af1267743ab82c7e474a7a82e3.
+// ParseModelRegistered is a log parse operation binding the contract event 0xae5a0d3a38bdeab8d8f9d4543bc9c4d389acc41ea1a7f9aa5d9effbfcc024462.
 //
-// Solidity: event ModelRegistered(bytes32 indexed modelId, uint256 baseFee, uint256 perByteRate, uint256 maxOutputTokens)
+// Solidity: event ModelRegistered(bytes32 indexed modelId, uint256 fee, uint256 maxOutputTokens)
 func (_AIConfig *AIConfigFilterer) ParseModelRegistered(log types.Log) (*AIConfigModelRegistered, error) {
 	event := new(AIConfigModelRegistered)
 	if err := _AIConfig.contract.UnpackLog(event, "ModelRegistered", log); err != nil {

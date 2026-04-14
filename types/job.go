@@ -64,14 +64,10 @@ type Job struct {
 	State JobState
 	// EscrowedFee is the amount (in wei) locked on-chain until the job is settled.
 	EscrowedFee *big.Int
-	// PromptBlobHashes are the EIP-4844 blob hashes containing the input prompt data.
-	PromptBlobHashes [][32]byte
-	// ResponseBlobHashes are the EIP-4844 blob hashes containing the worker's response.
-	ResponseBlobHashes [][32]byte
-	// ResponseCiphertextHash is keccak256 of the full encrypted response payload.
-	ResponseCiphertextHash [32]byte
-	// DataLength is the byte length of the prompt payload.
-	DataLength uint64
+	// PromptBlobHash is the EIP-4844 blob hash containing the input prompt data.
+	PromptBlobHash [32]byte
+	// ResponseBlobHash is the EIP-4844 blob hash containing the worker's response.
+	ResponseBlobHash [32]byte
 	// SubmittedAt is the Unix timestamp when the job was submitted on-chain.
 	SubmittedAt uint64
 	// AckTimestamp is the Unix timestamp when the worker acknowledged the job.
@@ -80,6 +76,18 @@ type Job struct {
 	CompletedAt uint64
 	// Deadline is the Unix timestamp by which the worker must complete the job.
 	Deadline uint64
+	// DisputeFiler is the address of the party that filed a dispute, if any.
+	DisputeFiler WorkerAddr
+	// DisputeBond is the bond amount (in wei) posted by the dispute filer.
+	DisputeBond *big.Int
+	// ReExecutionBlobHash is the EIP-4844 blob hash of the disputer's re-execution result.
+	ReExecutionBlobHash [32]byte
+	// SimilarityScore is the similarity score computed during dispute resolution.
+	SimilarityScore uint64
+	// DisputeCreatedAt is the Unix timestamp when the dispute was created.
+	DisputeCreatedAt uint64
+	// ResponseCiphertextHash is keccak256 of the full encrypted response payload.
+	ResponseCiphertextHash [32]byte
 	// SubmitBlockNumber is the EL block number when the job was submitted.
 	SubmitBlockNumber uint64
 	// CompletionBlockNumber is the EL block number when the job was completed.
