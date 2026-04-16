@@ -1,1 +1,1712 @@
-[{"type": "constructor", "inputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "UPGRADE_INTERFACE_VERSION", "inputs": [], "outputs": [{"name": "", "type": "string", "internalType": "string"}], "stateMutability": "view"}, {"type": "function", "name": "acknowledgeJob", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "claimRefund", "inputs": [], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "claimTimeout", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "closeSession", "inputs": [{"name": "sessionId", "type": "uint256", "internalType": "uint256"}], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "completeJob", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}, {"name": "responseBlobHash", "type": "bytes32", "internalType": "bytes32"}, {"name": "responseCiphertextHash", "type": "bytes32", "internalType": "bytes32"}], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "createSession", "inputs": [{"name": "modelId", "type": "bytes32", "internalType": "bytes32"}, {"name": "worker", "type": "address", "internalType": "address"}, {"name": "encWorkerKey", "type": "bytes", "internalType": "bytes"}, {"name": "encDisputerKey", "type": "bytes", "internalType": "bytes"}, {"name": "dispatcherSignature", "type": "bytes", "internalType": "bytes"}, {"name": "expiry", "type": "uint256", "internalType": "uint256"}], "outputs": [{"name": "sessionId", "type": "uint256", "internalType": "uint256"}], "stateMutability": "payable"}, {"type": "function", "name": "disputeJob", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}], "outputs": [], "stateMutability": "payable"}, {"type": "function", "name": "disputeResponseMismatch", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}, {"name": "ciphertext", "type": "bytes", "internalType": "bytes"}, {"name": "signature", "type": "bytes", "internalType": "bytes"}], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "getJob", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}], "outputs": [{"name": "", "type": "tuple", "internalType": "struct IJobRegistry.Job", "components": [{"name": "sessionId", "type": "uint256", "internalType": "uint256"}, {"name": "worker", "type": "address", "internalType": "address"}, {"name": "state", "type": "uint8", "internalType": "enum IJobRegistry.JobState"}, {"name": "escrowedFee", "type": "uint256", "internalType": "uint256"}, {"name": "promptBlobHash", "type": "bytes32", "internalType": "bytes32"}, {"name": "responseBlobHash", "type": "bytes32", "internalType": "bytes32"}, {"name": "submittedAt", "type": "uint256", "internalType": "uint256"}, {"name": "ackTimestamp", "type": "uint256", "internalType": "uint256"}, {"name": "completedAt", "type": "uint256", "internalType": "uint256"}, {"name": "deadline", "type": "uint256", "internalType": "uint256"}, {"name": "disputeFiler", "type": "address", "internalType": "address"}, {"name": "disputeBond", "type": "uint256", "internalType": "uint256"}, {"name": "reExecutionBlobHash", "type": "bytes32", "internalType": "bytes32"}, {"name": "similarityScore", "type": "uint256", "internalType": "uint256"}, {"name": "disputeCreatedAt", "type": "uint256", "internalType": "uint256"}, {"name": "responseCiphertextHash", "type": "bytes32", "internalType": "bytes32"}, {"name": "submitBlockNumber", "type": "uint256", "internalType": "uint256"}, {"name": "completionBlockNumber", "type": "uint256", "internalType": "uint256"}]}], "stateMutability": "view"}, {"type": "function", "name": "getSession", "inputs": [{"name": "sessionId", "type": "uint256", "internalType": "uint256"}], "outputs": [{"name": "", "type": "tuple", "internalType": "struct IJobRegistry.Session", "components": [{"name": "user", "type": "address", "internalType": "address"}, {"name": "modelId", "type": "bytes32", "internalType": "bytes32"}, {"name": "worker", "type": "address", "internalType": "address"}, {"name": "status", "type": "uint8", "internalType": "enum IJobRegistry.SessionStatus"}, {"name": "encWorkerKey", "type": "bytes", "internalType": "bytes"}, {"name": "encDisputerKey", "type": "bytes", "internalType": "bytes"}, {"name": "jobCount", "type": "uint256", "internalType": "uint256"}, {"name": "lastActivityAt", "type": "uint256", "internalType": "uint256"}, {"name": "reassignCount", "type": "uint256", "internalType": "uint256"}, {"name": "deposit", "type": "uint256", "internalType": "uint256"}, {"name": "excludedWorkers", "type": "address[]", "internalType": "address[]"}]}], "stateMutability": "view"}, {"type": "function", "name": "guardian", "inputs": [], "outputs": [{"name": "", "type": "address", "internalType": "address"}], "stateMutability": "view"}, {"type": "function", "name": "initialize", "inputs": [{"name": "_initialOwner", "type": "address", "internalType": "address"}, {"name": "_workerRegistry", "type": "address", "internalType": "address"}, {"name": "_aiConfig", "type": "address", "internalType": "address"}, {"name": "_treasury", "type": "address", "internalType": "address"}, {"name": "_guardian", "type": "address", "internalType": "address"}], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "nonce", "inputs": [{"name": "account", "type": "address", "internalType": "address"}], "outputs": [{"name": "", "type": "uint256", "internalType": "uint256"}], "stateMutability": "view"}, {"type": "function", "name": "owner", "inputs": [], "outputs": [{"name": "", "type": "address", "internalType": "address"}], "stateMutability": "view"}, {"type": "function", "name": "pause", "inputs": [], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "paused", "inputs": [], "outputs": [{"name": "", "type": "bool", "internalType": "bool"}], "stateMutability": "view"}, {"type": "function", "name": "pendingRefund", "inputs": [{"name": "account", "type": "address", "internalType": "address"}], "outputs": [{"name": "", "type": "uint256", "internalType": "uint256"}], "stateMutability": "view"}, {"type": "function", "name": "proxiableUUID", "inputs": [], "outputs": [{"name": "", "type": "bytes32", "internalType": "bytes32"}], "stateMutability": "view"}, {"type": "function", "name": "reassignSession", "inputs": [{"name": "sessionId", "type": "uint256", "internalType": "uint256"}], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "releaseJob", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "releaseJobs", "inputs": [{"name": "jobIds", "type": "uint256[]", "internalType": "uint256[]"}], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "renounceOwnership", "inputs": [], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "resolveDispute", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}, {"name": "workerGuilty", "type": "bool", "internalType": "bool"}, {"name": "reExecutionBlobHash", "type": "bytes32", "internalType": "bytes32"}, {"name": "_similarityScore", "type": "uint256", "internalType": "uint256"}], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "submitJob", "inputs": [{"name": "sessionId", "type": "uint256", "internalType": "uint256"}, {"name": "blobHash", "type": "bytes32", "internalType": "bytes32"}], "outputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}], "stateMutability": "payable"}, {"type": "function", "name": "sunsetGuardian", "inputs": [], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "transferOwnership", "inputs": [{"name": "newOwner", "type": "address", "internalType": "address"}], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "unpause", "inputs": [], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "updateSessionKey", "inputs": [{"name": "sessionId", "type": "uint256", "internalType": "uint256"}, {"name": "encWorkerKey", "type": "bytes", "internalType": "bytes"}, {"name": "encDisputerKey", "type": "bytes", "internalType": "bytes"}, {"name": "dispatcherSignature", "type": "bytes", "internalType": "bytes"}, {"name": "expiry", "type": "uint256", "internalType": "uint256"}], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "upgradeToAndCall", "inputs": [{"name": "newImplementation", "type": "address", "internalType": "address"}, {"name": "data", "type": "bytes", "internalType": "bytes"}], "outputs": [], "stateMutability": "payable"}, {"type": "function", "name": "withdraw", "inputs": [], "outputs": [], "stateMutability": "nonpayable"}, {"type": "function", "name": "workerBalance", "inputs": [{"name": "worker", "type": "address", "internalType": "address"}], "outputs": [{"name": "", "type": "uint256", "internalType": "uint256"}], "stateMutability": "view"}, {"type": "event", "name": "DisputeCreated", "inputs": [{"name": "jobId", "type": "uint256", "indexed": true, "internalType": "uint256"}, {"name": "disputer", "type": "address", "indexed": true, "internalType": "address"}], "anonymous": false}, {"type": "event", "name": "DisputeResolved", "inputs": [{"name": "jobId", "type": "uint256", "indexed": true, "internalType": "uint256"}, {"name": "workerGuilty", "type": "bool", "indexed": false, "internalType": "bool"}, {"name": "similarityScore", "type": "uint256", "indexed": false, "internalType": "uint256"}], "anonymous": false}, {"type": "event", "name": "FeeDistributed", "inputs": [{"name": "jobId", "type": "uint256", "indexed": true, "internalType": "uint256"}, {"name": "workerShare", "type": "uint256", "indexed": false, "internalType": "uint256"}, {"name": "protocolShare", "type": "uint256", "indexed": false, "internalType": "uint256"}, {"name": "burnShare", "type": "uint256", "indexed": false, "internalType": "uint256"}], "anonymous": false}, {"type": "event", "name": "GuardianUpdated", "inputs": [{"name": "oldGuardian", "type": "address", "indexed": true, "internalType": "address"}, {"name": "newGuardian", "type": "address", "indexed": true, "internalType": "address"}], "anonymous": false}, {"type": "event", "name": "Initialized", "inputs": [{"name": "version", "type": "uint64", "indexed": false, "internalType": "uint64"}], "anonymous": false}, {"type": "event", "name": "JobAcknowledged", "inputs": [{"name": "jobId", "type": "uint256", "indexed": true, "internalType": "uint256"}, {"name": "worker", "type": "address", "indexed": true, "internalType": "address"}], "anonymous": false}, {"type": "event", "name": "JobCompleted", "inputs": [{"name": "jobId", "type": "uint256", "indexed": true, "internalType": "uint256"}, {"name": "worker", "type": "address", "indexed": true, "internalType": "address"}, {"name": "responseBlobHash", "type": "bytes32", "indexed": false, "internalType": "bytes32"}, {"name": "responseCiphertextHash", "type": "bytes32", "indexed": false, "internalType": "bytes32"}], "anonymous": false}, {"type": "event", "name": "JobReleased", "inputs": [{"name": "jobId", "type": "uint256", "indexed": true, "internalType": "uint256"}, {"name": "workerShare", "type": "uint256", "indexed": false, "internalType": "uint256"}, {"name": "protocolShare", "type": "uint256", "indexed": false, "internalType": "uint256"}, {"name": "burnShare", "type": "uint256", "indexed": false, "internalType": "uint256"}], "anonymous": false}, {"type": "event", "name": "JobSubmitted", "inputs": [{"name": "jobId", "type": "uint256", "indexed": true, "internalType": "uint256"}, {"name": "sessionId", "type": "uint256", "indexed": true, "internalType": "uint256"}, {"name": "worker", "type": "address", "indexed": false, "internalType": "address"}], "anonymous": false}, {"type": "event", "name": "JobTimedOut", "inputs": [{"name": "jobId", "type": "uint256", "indexed": true, "internalType": "uint256"}, {"name": "worker", "type": "address", "indexed": true, "internalType": "address"}, {"name": "slashAmount", "type": "uint256", "indexed": false, "internalType": "uint256"}], "anonymous": false}, {"type": "event", "name": "OwnershipTransferred", "inputs": [{"name": "previousOwner", "type": "address", "indexed": true, "internalType": "address"}, {"name": "newOwner", "type": "address", "indexed": true, "internalType": "address"}], "anonymous": false}, {"type": "event", "name": "Paused", "inputs": [{"name": "account", "type": "address", "indexed": false, "internalType": "address"}], "anonymous": false}, {"type": "event", "name": "RefundClaimed", "inputs": [{"name": "recipient", "type": "address", "indexed": true, "internalType": "address"}, {"name": "amount", "type": "uint256", "indexed": false, "internalType": "uint256"}], "anonymous": false}, {"type": "event", "name": "RefundEscrowed", "inputs": [{"name": "recipient", "type": "address", "indexed": true, "internalType": "address"}, {"name": "amount", "type": "uint256", "indexed": false, "internalType": "uint256"}], "anonymous": false}, {"type": "event", "name": "SessionClosed", "inputs": [{"name": "sessionId", "type": "uint256", "indexed": true, "internalType": "uint256"}], "anonymous": false}, {"type": "event", "name": "SessionCreated", "inputs": [{"name": "sessionId", "type": "uint256", "indexed": true, "internalType": "uint256"}, {"name": "user", "type": "address", "indexed": true, "internalType": "address"}, {"name": "modelId", "type": "bytes32", "indexed": true, "internalType": "bytes32"}, {"name": "worker", "type": "address", "indexed": false, "internalType": "address"}, {"name": "encWorkerKey", "type": "bytes", "indexed": false, "internalType": "bytes"}, {"name": "encDisputerKey", "type": "bytes", "indexed": false, "internalType": "bytes"}], "anonymous": false}, {"type": "event", "name": "SessionKeyUpdated", "inputs": [{"name": "sessionId", "type": "uint256", "indexed": true, "internalType": "uint256"}, {"name": "encWorkerKey", "type": "bytes", "indexed": false, "internalType": "bytes"}, {"name": "encDisputerKey", "type": "bytes", "indexed": false, "internalType": "bytes"}], "anonymous": false}, {"type": "event", "name": "SessionReassigned", "inputs": [{"name": "sessionId", "type": "uint256", "indexed": true, "internalType": "uint256"}, {"name": "newWorker", "type": "address", "indexed": false, "internalType": "address"}], "anonymous": false}, {"type": "event", "name": "TransferFailed", "inputs": [{"name": "to", "type": "address", "indexed": true, "internalType": "address"}, {"name": "amount", "type": "uint256", "indexed": false, "internalType": "uint256"}], "anonymous": false}, {"type": "event", "name": "Unpaused", "inputs": [{"name": "account", "type": "address", "indexed": false, "internalType": "address"}], "anonymous": false}, {"type": "event", "name": "Upgraded", "inputs": [{"name": "implementation", "type": "address", "indexed": true, "internalType": "address"}], "anonymous": false}, {"type": "event", "name": "WorkerWithdrawal", "inputs": [{"name": "worker", "type": "address", "indexed": true, "internalType": "address"}, {"name": "amount", "type": "uint256", "indexed": false, "internalType": "uint256"}], "anonymous": false}, {"type": "error", "name": "AddressEmptyCode", "inputs": [{"name": "target", "type": "address", "internalType": "address"}]}, {"type": "error", "name": "DeadlineExceeded", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}, {"name": "deadline", "type": "uint256", "internalType": "uint256"}, {"name": "currentTime", "type": "uint256", "internalType": "uint256"}]}, {"type": "error", "name": "DisputeResolutionNotTimedOut", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}, {"name": "deadline", "type": "uint256", "internalType": "uint256"}, {"name": "currentTime", "type": "uint256", "internalType": "uint256"}]}, {"type": "error", "name": "DisputeWindowExpired", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}, {"name": "windowEnd", "type": "uint256", "internalType": "uint256"}, {"name": "currentTime", "type": "uint256", "internalType": "uint256"}]}, {"type": "error", "name": "DisputeWindowNotElapsed", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}, {"name": "windowEnd", "type": "uint256", "internalType": "uint256"}, {"name": "currentTime", "type": "uint256", "internalType": "uint256"}]}, {"type": "error", "name": "ECDSAInvalidSignature", "inputs": []}, {"type": "error", "name": "ECDSAInvalidSignatureLength", "inputs": [{"name": "length", "type": "uint256", "internalType": "uint256"}]}, {"type": "error", "name": "ECDSAInvalidSignatureS", "inputs": [{"name": "s", "type": "bytes32", "internalType": "bytes32"}]}, {"type": "error", "name": "ERC1967InvalidImplementation", "inputs": [{"name": "implementation", "type": "address", "internalType": "address"}]}, {"type": "error", "name": "ERC1967NonPayable", "inputs": []}, {"type": "error", "name": "EnforcedPause", "inputs": []}, {"type": "error", "name": "EtherTransferFailed", "inputs": []}, {"type": "error", "name": "ExpectedPause", "inputs": []}, {"type": "error", "name": "FailedCall", "inputs": []}, {"type": "error", "name": "GuardianAlreadySunset", "inputs": []}, {"type": "error", "name": "InsufficientDisputeBond", "inputs": [{"name": "required", "type": "uint256", "internalType": "uint256"}, {"name": "provided", "type": "uint256", "internalType": "uint256"}]}, {"type": "error", "name": "InsufficientFee", "inputs": [{"name": "required", "type": "uint256", "internalType": "uint256"}, {"name": "provided", "type": "uint256", "internalType": "uint256"}]}, {"type": "error", "name": "InvalidDispatcherSignature", "inputs": []}, {"type": "error", "name": "InvalidInitialization", "inputs": []}, {"type": "error", "name": "InvalidResponseCiphertextHash", "inputs": []}, {"type": "error", "name": "InvalidSessionKey", "inputs": []}, {"type": "error", "name": "InvalidWorkerSignature", "inputs": []}, {"type": "error", "name": "JobNotFound", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}]}, {"type": "error", "name": "JobNotInState", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}, {"name": "expected", "type": "uint8", "internalType": "uint8"}, {"name": "actual", "type": "uint8", "internalType": "uint8"}]}, {"type": "error", "name": "MaxReassignmentsExceeded", "inputs": [{"name": "sessionId", "type": "uint256", "internalType": "uint256"}, {"name": "max", "type": "uint256", "internalType": "uint256"}]}, {"type": "error", "name": "ModelDisabled", "inputs": [{"name": "modelId", "type": "bytes32", "internalType": "bytes32"}]}, {"type": "error", "name": "NoAvailableWorker", "inputs": [{"name": "modelId", "type": "bytes32", "internalType": "bytes32"}]}, {"type": "error", "name": "NoBalanceToWithdraw", "inputs": [{"name": "worker", "type": "address", "internalType": "address"}]}, {"type": "error", "name": "NoBlobMismatch", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}]}, {"type": "error", "name": "NoPendingRefund", "inputs": [{"name": "account", "type": "address", "internalType": "address"}]}, {"type": "error", "name": "NotDisputer", "inputs": [{"name": "caller", "type": "address", "internalType": "address"}, {"name": "expected", "type": "address", "internalType": "address"}]}, {"type": "error", "name": "NotGuardianOrOwner", "inputs": [{"name": "caller", "type": "address", "internalType": "address"}]}, {"type": "error", "name": "NotInitializing", "inputs": []}, {"type": "error", "name": "NotJobWorker", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}, {"name": "caller", "type": "address", "internalType": "address"}, {"name": "worker", "type": "address", "internalType": "address"}]}, {"type": "error", "name": "NotSessionOwner", "inputs": [{"name": "sessionId", "type": "uint256", "internalType": "uint256"}, {"name": "caller", "type": "address", "internalType": "address"}, {"name": "owner", "type": "address", "internalType": "address"}]}, {"type": "error", "name": "NotTimedOut", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}, {"name": "deadline", "type": "uint256", "internalType": "uint256"}, {"name": "currentTime", "type": "uint256", "internalType": "uint256"}]}, {"type": "error", "name": "OwnableInvalidOwner", "inputs": [{"name": "owner", "type": "address", "internalType": "address"}]}, {"type": "error", "name": "OwnableUnauthorizedAccount", "inputs": [{"name": "account", "type": "address", "internalType": "address"}]}, {"type": "error", "name": "ReentrancyGuardReentrantCall", "inputs": []}, {"type": "error", "name": "SessionNotActive", "inputs": [{"name": "sessionId", "type": "uint256", "internalType": "uint256"}]}, {"type": "error", "name": "SessionNotFound", "inputs": [{"name": "sessionId", "type": "uint256", "internalType": "uint256"}]}, {"type": "error", "name": "SessionNotReassigning", "inputs": [{"name": "sessionId", "type": "uint256", "internalType": "uint256"}]}, {"type": "error", "name": "SignatureExpired", "inputs": [{"name": "expiry", "type": "uint256", "internalType": "uint256"}, {"name": "currentTime", "type": "uint256", "internalType": "uint256"}]}, {"type": "error", "name": "UUPSUnauthorizedCallContext", "inputs": []}, {"type": "error", "name": "UUPSUnsupportedProxiableUUID", "inputs": [{"name": "slot", "type": "bytes32", "internalType": "bytes32"}]}, {"type": "error", "name": "UnauthorizedDisputeCaller", "inputs": [{"name": "jobId", "type": "uint256", "internalType": "uint256"}, {"name": "caller", "type": "address", "internalType": "address"}]}, {"type": "error", "name": "UnexpectedETH", "inputs": []}, {"type": "error", "name": "WorkerNotEligible", "inputs": [{"name": "worker", "type": "address", "internalType": "address"}, {"name": "modelId", "type": "bytes32", "internalType": "bytes32"}]}, {"type": "error", "name": "ZeroAddress", "inputs": []}]
+[
+  {
+    "type": "constructor",
+    "inputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "UPGRADE_INTERFACE_VERSION",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "acknowledgeJob",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "claimRefund",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "claimTimeout",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "closeSession",
+    "inputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "completeJob",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "responseBlobHash",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "responseCiphertextHash",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "createSession",
+    "inputs": [
+      {
+        "name": "modelId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "encWorkerKey",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "encDisputerKey",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "dispatcherSignature",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "expiry",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "payable"
+  },
+  {
+    "type": "function",
+    "name": "disputeJob",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "payable"
+  },
+  {
+    "type": "function",
+    "name": "disputeResponseMismatch",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "ciphertext",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "signature",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "getJob",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct IJobRegistry.Job",
+        "components": [
+          {
+            "name": "sessionId",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "worker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "state",
+            "type": "uint8",
+            "internalType": "enum IJobRegistry.JobState"
+          },
+          {
+            "name": "escrowedFee",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "promptBlobHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "responseBlobHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "submittedAt",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "ackTimestamp",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "completedAt",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "deadline",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "disputeFiler",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "disputeBond",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "reExecutionBlobHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "similarityScore",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "disputeCreatedAt",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "responseCiphertextHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "submitBlockNumber",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "completionBlockNumber",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getSession",
+    "inputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct IJobRegistry.Session",
+        "components": [
+          {
+            "name": "user",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "modelId",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "worker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "status",
+            "type": "uint8",
+            "internalType": "enum IJobRegistry.SessionStatus"
+          },
+          {
+            "name": "encWorkerKey",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "encDisputerKey",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "jobCount",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "lastActivityAt",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "reassignCount",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "deposit",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "excludedWorkers",
+            "type": "address[]",
+            "internalType": "address[]"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "guardian",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "initialize",
+    "inputs": [
+      {
+        "name": "_initialOwner",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_workerRegistry",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_aiConfig",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_treasury",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_guardian",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "nonce",
+    "inputs": [
+      {
+        "name": "account",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "owner",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "pause",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "paused",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "pendingRefund",
+    "inputs": [
+      {
+        "name": "account",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "proxiableUUID",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "reassignSession",
+    "inputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "releaseJob",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "releaseJobs",
+    "inputs": [
+      {
+        "name": "jobIds",
+        "type": "uint256[]",
+        "internalType": "uint256[]"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "renounceOwnership",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "resolveDispute",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "workerGuilty",
+        "type": "bool",
+        "internalType": "bool"
+      },
+      {
+        "name": "reExecutionBlobHash",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "_similarityScore",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "submitJob",
+    "inputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "blobHash",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "payable"
+  },
+  {
+    "type": "function",
+    "name": "sunsetGuardian",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "transferOwnership",
+    "inputs": [
+      {
+        "name": "newOwner",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "unpause",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "updateSessionKey",
+    "inputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "encWorkerKey",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "encDisputerKey",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "dispatcherSignature",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "expiry",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "upgradeToAndCall",
+    "inputs": [
+      {
+        "name": "newImplementation",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "data",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "payable"
+  },
+  {
+    "type": "function",
+    "name": "withdraw",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "workerBalance",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "event",
+    "name": "DisputeCreated",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "disputer",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "DisputeResolved",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "workerGuilty",
+        "type": "bool",
+        "indexed": false,
+        "internalType": "bool"
+      },
+      {
+        "name": "similarityScore",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "FeeDistributed",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "workerShare",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "protocolShare",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "feePoolShare",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "GuardianUpdated",
+    "inputs": [
+      {
+        "name": "oldGuardian",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "newGuardian",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Initialized",
+    "inputs": [
+      {
+        "name": "version",
+        "type": "uint64",
+        "indexed": false,
+        "internalType": "uint64"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "JobAcknowledged",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "worker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "JobCompleted",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "worker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "responseBlobHash",
+        "type": "bytes32",
+        "indexed": false,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "responseCiphertextHash",
+        "type": "bytes32",
+        "indexed": false,
+        "internalType": "bytes32"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "JobReleased",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "workerShare",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "protocolShare",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "feePoolShare",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "JobSubmitted",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "worker",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "JobTimedOut",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "worker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "slashAmount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "OwnershipTransferred",
+    "inputs": [
+      {
+        "name": "previousOwner",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "newOwner",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Paused",
+    "inputs": [
+      {
+        "name": "account",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "RefundClaimed",
+    "inputs": [
+      {
+        "name": "recipient",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "RefundEscrowed",
+    "inputs": [
+      {
+        "name": "recipient",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "SessionClosed",
+    "inputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "SessionCreated",
+    "inputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "user",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "modelId",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "worker",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      },
+      {
+        "name": "encWorkerKey",
+        "type": "bytes",
+        "indexed": false,
+        "internalType": "bytes"
+      },
+      {
+        "name": "encDisputerKey",
+        "type": "bytes",
+        "indexed": false,
+        "internalType": "bytes"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "SessionKeyUpdated",
+    "inputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "encWorkerKey",
+        "type": "bytes",
+        "indexed": false,
+        "internalType": "bytes"
+      },
+      {
+        "name": "encDisputerKey",
+        "type": "bytes",
+        "indexed": false,
+        "internalType": "bytes"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "SessionReassigned",
+    "inputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "newWorker",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "TransferFailed",
+    "inputs": [
+      {
+        "name": "to",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Unpaused",
+    "inputs": [
+      {
+        "name": "account",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Upgraded",
+    "inputs": [
+      {
+        "name": "implementation",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "WorkerWithdrawal",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "error",
+    "name": "AddressEmptyCode",
+    "inputs": [
+      {
+        "name": "target",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "DeadlineExceeded",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "deadline",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "currentTime",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "DisputeResolutionNotTimedOut",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "deadline",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "currentTime",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "DisputeWindowExpired",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "windowEnd",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "currentTime",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "DisputeWindowNotElapsed",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "windowEnd",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "currentTime",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ECDSAInvalidSignature",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ECDSAInvalidSignatureLength",
+    "inputs": [
+      {
+        "name": "length",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ECDSAInvalidSignatureS",
+    "inputs": [
+      {
+        "name": "s",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ERC1967InvalidImplementation",
+    "inputs": [
+      {
+        "name": "implementation",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ERC1967NonPayable",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "EnforcedPause",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "EtherTransferFailed",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ExpectedPause",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "FailedCall",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "GuardianAlreadySunset",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InsufficientDisputeBond",
+    "inputs": [
+      {
+        "name": "required",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "provided",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InsufficientFee",
+    "inputs": [
+      {
+        "name": "required",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "provided",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidDispatcherSignature",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidInitialization",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidResponseCiphertextHash",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidSessionKey",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidWorkerSignature",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "JobNotFound",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "JobNotInState",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "expected",
+        "type": "uint8",
+        "internalType": "uint8"
+      },
+      {
+        "name": "actual",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "MaxReassignmentsExceeded",
+    "inputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "max",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ModelDisabled",
+    "inputs": [
+      {
+        "name": "modelId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NoAvailableWorker",
+    "inputs": [
+      {
+        "name": "modelId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NoBalanceToWithdraw",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NoBlobMismatch",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NoPendingRefund",
+    "inputs": [
+      {
+        "name": "account",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotDisputer",
+    "inputs": [
+      {
+        "name": "caller",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "expected",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotGuardianOrOwner",
+    "inputs": [
+      {
+        "name": "caller",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotInitializing",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NotJobWorker",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "caller",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotSessionOwner",
+    "inputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "caller",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "owner",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotTimedOut",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "deadline",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "currentTime",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "OwnableInvalidOwner",
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "OwnableUnauthorizedAccount",
+    "inputs": [
+      {
+        "name": "account",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ReentrancyGuardReentrantCall",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "SessionNotActive",
+    "inputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "SessionNotFound",
+    "inputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "SessionNotReassigning",
+    "inputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "SignatureExpired",
+    "inputs": [
+      {
+        "name": "expiry",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "currentTime",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "UUPSUnauthorizedCallContext",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "UUPSUnsupportedProxiableUUID",
+    "inputs": [
+      {
+        "name": "slot",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "UnauthorizedDisputeCaller",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "caller",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "UnexpectedETH",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "WorkerNotEligible",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "modelId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ZeroAddress",
+    "inputs": []
+  }
+]

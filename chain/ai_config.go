@@ -61,8 +61,8 @@ type AIConfig interface {
 	// GetProtocolFeeBps returns the protocol's share of job fees in basis points.
 	GetProtocolFeeBps(ctx context.Context) (*big.Int, error)
 
-	// GetBurnFeeBps returns the burn share of job fees in basis points.
-	GetBurnFeeBps(ctx context.Context) (*big.Int, error)
+	// GetFeePoolBps returns the FeePool share of job fees in basis points.
+	GetFeePoolBps(ctx context.Context) (*big.Int, error)
 
 	// --- Slashing ---
 
