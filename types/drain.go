@@ -36,8 +36,15 @@ const DrainMarkerValue = "1"
 // Drain TTL must outlive the on-chain dispute window plus operator slack
 // (see docs/worker-drain-plan.md). Compute it at the call site;
 // pkg/types intentionally does not depend on contract bindings.
+//
+// Returns an error if ttl is non-positive. The underlying redis SET would
+// otherwise create a sticky marker (zero or some negative durations strip
+// the TTL), which can only be cleared by explicit Undrain.
 func SetDraining(ctx context.Context, rdb *redis.Client, addr string, ttl time.Duration) error {
 	key := DrainRedisKey(addr)
+	if ttl <= 0 {
+		return fmt.Errorf("set drain %s: ttl must be > 0, got %s", key, ttl)
+	}
 	if err := rdb.Set(ctx, key, DrainMarkerValue, ttl).Err(); err != nil {
 		return fmt.Errorf("set drain %s: %w", key, err)
 	}

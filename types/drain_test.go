@@ -73,6 +73,31 @@ func TestSetDraining_writesMarkerWithTTL(t *testing.T) {
 	assert.LessOrEqual(t, ttl, time.Hour)
 }
 
+func TestSetDraining_rejectsNonPositiveTTL(t *testing.T) {
+	t.Parallel()
+	rdb, mr := newDrainTestRedis(t)
+	ctx := context.Background()
+
+	cases := []struct {
+		name string
+		ttl  time.Duration
+	}{
+		{name: "zero", ttl: 0},
+		{name: "negative", ttl: -time.Second},
+		{name: "redis_KeepTTL_sentinel", ttl: -1},
+	}
+
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			err := types.SetDraining(ctx, rdb, testWorkerAddr, tc.ttl)
+			require.Error(t, err)
+			assert.Contains(t, err.Error(), "ttl must be > 0")
+			assert.False(t, mr.Exists(types.DrainRedisKey(testWorkerAddr)),
+				"no drain key must be written when validation fails")
+		})
+	}
+}
+
 func TestSetDraining_isIdempotentAndRefreshesTTL(t *testing.T) {
 	t.Parallel()
 	rdb, mr := newDrainTestRedis(t)
