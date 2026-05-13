@@ -20,11 +20,6 @@
         "name": "modelId",
         "type": "bytes32",
         "internalType": "bytes32"
-      },
-      {
-        "name": "inputBytes",
-        "type": "uint256",
-        "internalType": "uint256"
       }
     ],
     "outputs": [
@@ -78,19 +73,6 @@
   {
     "type": "function",
     "name": "getBlobRetentionPeriod",
-    "inputs": [],
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ],
-    "stateMutability": "view"
-  },
-  {
-    "type": "function",
-    "name": "getBurnFeeBps",
     "inputs": [],
     "outputs": [
       {
@@ -207,7 +189,7 @@
   },
   {
     "type": "function",
-    "name": "getMaxBlobsPerJob",
+    "name": "getFeePoolBps",
     "inputs": [],
     "outputs": [
       {
@@ -298,7 +280,7 @@
   },
   {
     "type": "function",
-    "name": "getModelBaseFee",
+    "name": "getModelFee",
     "inputs": [
       {
         "name": "modelId",
@@ -318,25 +300,6 @@
   {
     "type": "function",
     "name": "getModelMaxOutputTokens",
-    "inputs": [
-      {
-        "name": "modelId",
-        "type": "bytes32",
-        "internalType": "bytes32"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ],
-    "stateMutability": "view"
-  },
-  {
-    "type": "function",
-    "name": "getModelPerByteRate",
     "inputs": [
       {
         "name": "modelId",
@@ -548,12 +511,7 @@
         "internalType": "bytes32"
       },
       {
-        "name": "baseFee",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "perByteRate",
+        "name": "fee",
         "type": "uint256",
         "internalType": "uint256"
       },
@@ -718,20 +676,7 @@
         "internalType": "uint256"
       },
       {
-        "name": "burnBps",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ],
-    "outputs": [],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "function",
-    "name": "setMaxBlobsPerJob",
-    "inputs": [
-      {
-        "name": "max",
+        "name": "feePoolBps",
         "type": "uint256",
         "internalType": "uint256"
       }
@@ -819,7 +764,7 @@
   },
   {
     "type": "function",
-    "name": "setModelBaseFee",
+    "name": "setModelFee",
     "inputs": [
       {
         "name": "modelId",
@@ -846,24 +791,6 @@
       },
       {
         "name": "tokens",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ],
-    "outputs": [],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "function",
-    "name": "setModelPerByteRate",
-    "inputs": [
-      {
-        "name": "modelId",
-        "type": "bytes32",
-        "internalType": "bytes32"
-      },
-      {
-        "name": "rate",
         "type": "uint256",
         "internalType": "uint256"
       }
@@ -1000,7 +927,7 @@
       {
         "name": "newDispatcher",
         "type": "address",
-        "indexed": false,
+        "indexed": true,
         "internalType": "address"
       }
     ],
@@ -1038,7 +965,7 @@
       {
         "name": "newDisputer",
         "type": "address",
-        "indexed": false,
+        "indexed": true,
         "internalType": "address"
       }
     ],
@@ -1061,7 +988,7 @@
         "internalType": "uint256"
       },
       {
-        "name": "burnBps",
+        "name": "feePoolBps",
         "type": "uint256",
         "indexed": false,
         "internalType": "uint256"
@@ -1125,13 +1052,7 @@
         "internalType": "bytes32"
       },
       {
-        "name": "baseFee",
-        "type": "uint256",
-        "indexed": false,
-        "internalType": "uint256"
-      },
-      {
-        "name": "perByteRate",
+        "name": "fee",
         "type": "uint256",
         "indexed": false,
         "internalType": "uint256"
@@ -1182,13 +1103,7 @@
         "internalType": "bytes32"
       },
       {
-        "name": "baseFee",
-        "type": "uint256",
-        "indexed": false,
-        "internalType": "uint256"
-      },
-      {
-        "name": "perByteRate",
+        "name": "fee",
         "type": "uint256",
         "indexed": false,
         "internalType": "uint256"

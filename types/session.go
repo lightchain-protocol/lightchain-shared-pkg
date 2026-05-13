@@ -60,4 +60,7 @@ type Session struct {
 	ReassignCount uint64
 	// Deposit is the escrowed amount (in wei) held for this session.
 	Deposit *big.Int
+	// ExcludedWorkers is the list of worker addresses that may not be assigned
+	// to this session (e.g. previously deregistered or reassigned workers).
+	ExcludedWorkers []WorkerAddr
 }

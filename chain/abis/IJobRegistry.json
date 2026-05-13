@@ -32,6 +32,13 @@
   },
   {
     "type": "function",
+    "name": "claimRefund",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "claimTimeout",
     "inputs": [
       {
@@ -66,9 +73,9 @@
         "internalType": "uint256"
       },
       {
-        "name": "responseBlobHashes",
-        "type": "bytes32[]",
-        "internalType": "bytes32[]"
+        "name": "responseBlobHash",
+        "type": "bytes32",
+        "internalType": "bytes32"
       },
       {
         "name": "responseCiphertextHash",
@@ -196,19 +203,14 @@
             "internalType": "uint256"
           },
           {
-            "name": "promptBlobHashes",
-            "type": "bytes32[]",
-            "internalType": "bytes32[]"
+            "name": "promptBlobHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
           },
           {
-            "name": "responseBlobHashes",
-            "type": "bytes32[]",
-            "internalType": "bytes32[]"
-          },
-          {
-            "name": "dataLength",
-            "type": "uint256",
-            "internalType": "uint256"
+            "name": "responseBlobHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
           },
           {
             "name": "submittedAt",
@@ -241,9 +243,9 @@
             "internalType": "uint256"
           },
           {
-            "name": "reExecutionBlobHashes",
-            "type": "bytes32[]",
-            "internalType": "bytes32[]"
+            "name": "reExecutionBlobHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
           },
           {
             "name": "similarityScore",
@@ -340,6 +342,11 @@
             "name": "deposit",
             "type": "uint256",
             "internalType": "uint256"
+          },
+          {
+            "name": "excludedWorkers",
+            "type": "address[]",
+            "internalType": "address[]"
           }
         ]
       }
@@ -375,16 +382,6 @@
       },
       {
         "name": "_aiConfig",
-        "type": "address",
-        "internalType": "address"
-      },
-      {
-        "name": "_dispatcher",
-        "type": "address",
-        "internalType": "address"
-      },
-      {
-        "name": "_disputer",
         "type": "address",
         "internalType": "address"
       },
@@ -450,6 +447,25 @@
         "name": "",
         "type": "bool",
         "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "pendingRefund",
+    "inputs": [
+      {
+        "name": "account",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
       }
     ],
     "stateMutability": "view"
@@ -528,9 +544,9 @@
         "internalType": "bool"
       },
       {
-        "name": "reExecutionBlobHashes",
-        "type": "bytes32[]",
-        "internalType": "bytes32[]"
+        "name": "reExecutionBlobHash",
+        "type": "bytes32",
+        "internalType": "bytes32"
       },
       {
         "name": "_similarityScore",
@@ -551,14 +567,9 @@
         "internalType": "uint256"
       },
       {
-        "name": "blobHashes",
-        "type": "bytes32[]",
-        "internalType": "bytes32[]"
-      },
-      {
-        "name": "dataLength",
-        "type": "uint256",
-        "internalType": "uint256"
+        "name": "blobHash",
+        "type": "bytes32",
+        "internalType": "bytes32"
       }
     ],
     "outputs": [
@@ -615,6 +626,16 @@
         "name": "encDisputerKey",
         "type": "bytes",
         "internalType": "bytes"
+      },
+      {
+        "name": "dispatcherSignature",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "expiry",
+        "type": "uint256",
+        "internalType": "uint256"
       }
     ],
     "outputs": [],
@@ -644,6 +665,25 @@
     "inputs": [],
     "outputs": [],
     "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "workerBalance",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
   },
   {
     "type": "event",
@@ -712,7 +752,7 @@
         "internalType": "uint256"
       },
       {
-        "name": "burnShare",
+        "name": "feePoolShare",
         "type": "uint256",
         "indexed": false,
         "internalType": "uint256"
@@ -788,10 +828,10 @@
         "internalType": "address"
       },
       {
-        "name": "responseBlobHashes",
-        "type": "bytes32[]",
+        "name": "responseBlobHash",
+        "type": "bytes32",
         "indexed": false,
-        "internalType": "bytes32[]"
+        "internalType": "bytes32"
       },
       {
         "name": "responseCiphertextHash",
@@ -825,7 +865,7 @@
         "internalType": "uint256"
       },
       {
-        "name": "burnShare",
+        "name": "feePoolShare",
         "type": "uint256",
         "indexed": false,
         "internalType": "uint256"
@@ -911,6 +951,44 @@
         "type": "address",
         "indexed": false,
         "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "RefundClaimed",
+    "inputs": [
+      {
+        "name": "recipient",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "RefundEscrowed",
+    "inputs": [
+      {
+        "name": "recipient",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
       }
     ],
     "anonymous": false
@@ -1219,11 +1297,6 @@
   },
   {
     "type": "error",
-    "name": "EmptyEncryptionKey",
-    "inputs": []
-  },
-  {
-    "type": "error",
     "name": "EnforcedPause",
     "inputs": []
   },
@@ -1281,11 +1354,6 @@
   },
   {
     "type": "error",
-    "name": "InvalidBlobHashes",
-    "inputs": []
-  },
-  {
-    "type": "error",
     "name": "InvalidDispatcherSignature",
     "inputs": []
   },
@@ -1297,6 +1365,11 @@
   {
     "type": "error",
     "name": "InvalidResponseCiphertextHash",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidSessionKey",
     "inputs": []
   },
   {
@@ -1354,6 +1427,17 @@
   },
   {
     "type": "error",
+    "name": "ModelDisabled",
+    "inputs": [
+      {
+        "name": "modelId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
     "name": "NoAvailableWorker",
     "inputs": [
       {
@@ -1382,6 +1466,17 @@
         "name": "jobId",
         "type": "uint256",
         "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NoPendingRefund",
+    "inputs": [
+      {
+        "name": "account",
+        "type": "address",
+        "internalType": "address"
       }
     ]
   },

@@ -54,13 +54,13 @@ type WorkerRegistry interface {
 	// Solidity: slash(address, uint256).
 	Slash(ctx context.Context, worker types.WorkerAddr, bps *big.Int) error
 
-	// IncrementActiveJobs increments the active job count for a worker.
-	// Solidity: incrementActiveJobs(address).
-	IncrementActiveJobs(ctx context.Context, worker types.WorkerAddr) error
+	// IncrementActiveJobs increments the per-model active job count for a worker.
+	// Solidity: incrementActiveJobs(address, bytes32).
+	IncrementActiveJobs(ctx context.Context, worker types.WorkerAddr, modelID types.ModelID) error
 
-	// DecrementActiveJobs decrements the active job count for a worker.
-	// Solidity: decrementActiveJobs(address).
-	DecrementActiveJobs(ctx context.Context, worker types.WorkerAddr) error
+	// DecrementActiveJobs decrements the per-model active job count for a worker.
+	// Solidity: decrementActiveJobs(address, bytes32).
+	DecrementActiveJobs(ctx context.Context, worker types.WorkerAddr, modelID types.ModelID) error
 
 	// IsWorkerRegistered returns whether a worker is registered.
 	// Solidity: isWorkerRegistered(address) view returns (bool).
@@ -79,4 +79,9 @@ type WorkerRegistry interface {
 	// GetWorkerEncryptionKey returns the ECDH public key for a worker.
 	// Solidity: getWorkerEncryptionKey(address) view returns (bytes).
 	GetWorkerEncryptionKey(ctx context.Context, worker types.WorkerAddr) ([]byte, error)
+
+	// SelectEligibleWorker selects a pseudo-random eligible worker for a model,
+	// excluding the given set of addresses. Used by the dispatcher for reassignment.
+	// Solidity: selectEligibleWorker(bytes32, address[], uint256) view returns (address).
+	SelectEligibleWorker(ctx context.Context, modelID types.ModelID, excluded []types.WorkerAddr, seed *big.Int) (types.WorkerAddr, error)
 }
