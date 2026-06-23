@@ -7,6 +7,7 @@ const (
 	MessageTypeChunk    MessageType = "chunk"
 	MessageTypeComplete MessageType = "complete"
 	MessageTypeError    MessageType = "error"
+	MessageTypeMetadata MessageType = "metadata"
 )
 
 // PubSubMessage is the envelope workers publish to Redis for relay fan-out.

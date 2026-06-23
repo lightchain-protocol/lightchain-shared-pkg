@@ -31,6 +31,7 @@ const (
 	HBFieldModels        = "models"        // JSON-encoded []string
 	HBFieldOllamaStatus  = "ollamaStatus"  // "ready" | "unreachable"
 	HBFieldUptime        = "uptimeSeconds" // int64
+	HBFieldCapabilities  = "capabilities"  // JSON-encoded []string (e.g. ["search"])
 )
 
 // HeartbeatStatusActive is the value for a healthy, job-accepting worker.
