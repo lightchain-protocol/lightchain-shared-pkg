@@ -1,6 +1,7 @@
 package searchaug
 
 import (
+	"encoding/json"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -31,6 +32,20 @@ func TestDecode_LegacyRawBytes(t *testing.T) {
 	env := DecodeResponse([]byte("just a worker answer"))
 	assert.Equal(t, "just a worker answer", env.Answer)
 	assert.Nil(t, env.SearchContext)
+}
+
+func TestDecode_V2EnvelopeEmptyAnswerNotMisdecoded(t *testing.T) {
+	b, err := json.Marshal(ResponseEnvelope{V: ResponseEnvelopeVersion, Answer: "", TemplateVersion: 1})
+	require.NoError(t, err)
+	env := DecodeResponse(b)
+	assert.Equal(t, ResponseEnvelopeVersion, env.V) // NOT treated as raw
+	assert.Equal(t, "", env.Answer)
+}
+
+func TestDecode_NonEnvelopeJSONFallsBack(t *testing.T) {
+	env := DecodeResponse([]byte(`{"foo":1}`))
+	assert.Equal(t, 0, env.V)
+	assert.Equal(t, `{"foo":1}`, env.Answer)
 }
 
 func TestBuildAugmentedPrompt_Deterministic_NoPreface(t *testing.T) {

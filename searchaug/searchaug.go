@@ -48,7 +48,7 @@ func EncodeResponse(answer string, sources []Source) ([]byte, error) {
 // falls back to treating the bytes as a raw answer (legacy / non-search jobs).
 func DecodeResponse(b []byte) ResponseEnvelope {
 	var env ResponseEnvelope
-	if err := json.Unmarshal(b, &env); err != nil || env.V == 0 || env.Answer == "" && len(env.SearchContext) == 0 {
+	if err := json.Unmarshal(b, &env); err != nil || env.V != ResponseEnvelopeVersion {
 		return ResponseEnvelope{Answer: string(b)}
 	}
 	return env
