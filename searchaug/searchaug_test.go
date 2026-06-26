@@ -57,3 +57,48 @@ func TestBuildAugmentedPrompt_Deterministic_NoPreface(t *testing.T) {
 	assert.Contains(t, out, "Do NOT mention this context")
 	assert.Equal(t, out, BuildAugmentedPrompt(CurrentTemplateVersion, "original question", srcs))
 }
+
+func TestDecodePrompt_LegacyRawText(t *testing.T) {
+	prompt, search, err := DecodePrompt([]byte("hello world"))
+	if err != nil {
+		t.Fatalf("unexpected err: %v", err)
+	}
+	if prompt != "hello world" || search {
+		t.Fatalf("got (%q, %v), want (hello world, false)", prompt, search)
+	}
+}
+
+func TestEncodeDecodePrompt_RoundTripSearch(t *testing.T) {
+	enc := EncodePrompt("what is the weather?", true)
+	if len(enc) == 0 || enc[0] != 0x00 {
+		t.Fatalf("search envelope must start with 0x00 sentinel, got %v", enc[:1])
+	}
+	prompt, search, err := DecodePrompt(enc)
+	if err != nil {
+		t.Fatalf("unexpected err: %v", err)
+	}
+	if prompt != "what is the weather?" || !search {
+		t.Fatalf("got (%q, %v), want (what is the weather?, true)", prompt, search)
+	}
+}
+
+func TestEncodePrompt_NoSearchIsRawBytes(t *testing.T) {
+	enc := EncodePrompt("plain prompt", false)
+	if string(enc) != "plain prompt" {
+		t.Fatalf("non-search EncodePrompt must be raw bytes, got %q", enc)
+	}
+}
+
+func TestDecodePrompt_SentinelButBadJSON(t *testing.T) {
+	_, _, err := DecodePrompt([]byte{0x00, '{', 'n', 'o'})
+	if err == nil {
+		t.Fatal("expected hard error for 0x00-prefixed unparseable payload")
+	}
+}
+
+func TestDecodePrompt_Empty(t *testing.T) {
+	prompt, search, err := DecodePrompt(nil)
+	if err != nil || prompt != "" || search {
+		t.Fatalf("got (%q, %v, %v), want empty/false/nil", prompt, search, err)
+	}
+}

@@ -22,17 +22,23 @@ func HeartbeatRedisKey(addr string) string {
 // Heartbeat HSET field names — shared contract between worker and dispatcher.
 // Worker writes these fields via HSET; dispatcher reads them via HGETALL/HMGET.
 const (
-	HBFieldLastHeartbeat = "lastHeartbeat" // Unix seconds (int64)
-	HBFieldActiveJobs    = "activeJobs"    // int
-	HBFieldMaxJobs       = "maxJobs"       // int
-	HBFieldLatencyMs     = "latencyMs"     // int (0 until instrumented)
-	HBFieldGPUUtil       = "gpuUtil"       // float64 as string (0 until instrumented)
-	HBFieldStatus        = "status"        // "active" | "stale" | "draining"
-	HBFieldModels        = "models"        // JSON-encoded []string
-	HBFieldOllamaStatus  = "ollamaStatus"  // "ready" | "unreachable"
-	HBFieldUptime        = "uptimeSeconds" // int64
-	HBFieldCapabilities  = "capabilities"  // JSON-encoded []string (e.g. ["search"])
+	HBFieldLastHeartbeat   = "lastHeartbeat"   // Unix seconds (int64)
+	HBFieldActiveJobs      = "activeJobs"      // int
+	HBFieldMaxJobs         = "maxJobs"         // int
+	HBFieldLatencyMs       = "latencyMs"       // int (0 until instrumented)
+	HBFieldGPUUtil         = "gpuUtil"         // float64 as string (0 until instrumented)
+	HBFieldStatus          = "status"          // "active" | "stale" | "draining"
+	HBFieldModels          = "models"          // JSON-encoded []string
+	HBFieldOllamaStatus    = "ollamaStatus"    // "ready" | "unreachable"
+	HBFieldUptime          = "uptimeSeconds"   // int64
+	HBFieldCapabilities    = "capabilities"    // JSON-encoded []string (e.g. ["search"])
+	HBFieldProtocolVersion = "protocolVersion" // int — worker wire-protocol generation
 )
+
+// WorkerProtocolVersion is the prompt-blob wire-protocol generation this build
+// of the worker speaks. Bump it whenever the prompt envelope (pkg/searchaug)
+// changes shape so the dispatcher can gate routing on parser compatibility.
+const WorkerProtocolVersion = 2
 
 // HeartbeatStatusActive is the value for a healthy, job-accepting worker.
 const HeartbeatStatusActive = "active"
