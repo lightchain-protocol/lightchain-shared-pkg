@@ -68,7 +68,7 @@ type IJobRegistrySession struct {
 
 // JobRegistryMetaData contains all meta data concerning the JobRegistry contract.
 var JobRegistryMetaData = &bind.MetaData{
-	ABI: "[{\"type\":\"constructor\",\"inputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"UPGRADE_INTERFACE_VERSION\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"internalType\":\"string\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"acknowledgeJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"claimRefund\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"claimTimeout\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"closeSession\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"completeJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"responseBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"responseCiphertextHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createSession\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"dispatcherSignature\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"disputeJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"disputeResponseMismatch\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ciphertext\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"signature\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"getJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"tuple\",\"internalType\":\"structIJobRegistry.Job\",\"components\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"state\",\"type\":\"uint8\",\"internalType\":\"enumIJobRegistry.JobState\"},{\"name\":\"escrowedFee\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"promptBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"responseBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"submittedAt\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ackTimestamp\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"completedAt\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"deadline\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"disputeFiler\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"disputeBond\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"reExecutionBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"similarityScore\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"disputeCreatedAt\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"responseCiphertextHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"submitBlockNumber\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"completionBlockNumber\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSession\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"tuple\",\"internalType\":\"structIJobRegistry.Session\",\"components\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"status\",\"type\":\"uint8\",\"internalType\":\"enumIJobRegistry.SessionStatus\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"jobCount\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"lastActivityAt\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"reassignCount\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"deposit\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"excludedWorkers\",\"type\":\"address[]\",\"internalType\":\"address[]\"}]}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"guardian\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"initialize\",\"inputs\":[{\"name\":\"_initialOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_workerRegistry\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_aiConfig\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_treasury\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_guardian\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"nonce\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"owner\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"pause\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"paused\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"pendingRefund\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"proxiableUUID\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"reassignSession\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"releaseJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"releaseJobs\",\"inputs\":[{\"name\":\"jobIds\",\"type\":\"uint256[]\",\"internalType\":\"uint256[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"renounceOwnership\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"resolveDispute\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"workerGuilty\",\"type\":\"bool\",\"internalType\":\"bool\"},{\"name\":\"reExecutionBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"_similarityScore\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"submitJob\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"blobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"sunsetGuardian\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferOwnership\",\"inputs\":[{\"name\":\"newOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unpause\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"updateSessionKey\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"dispatcherSignature\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"upgradeToAndCall\",\"inputs\":[{\"name\":\"newImplementation\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"withdraw\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"workerBalance\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"event\",\"name\":\"DisputeCreated\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"disputer\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DisputeResolved\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"workerGuilty\",\"type\":\"bool\",\"indexed\":false,\"internalType\":\"bool\"},{\"name\":\"similarityScore\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"FeeDistributed\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"workerShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"protocolShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"feePoolShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"GuardianUpdated\",\"inputs\":[{\"name\":\"oldGuardian\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newGuardian\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Initialized\",\"inputs\":[{\"name\":\"version\",\"type\":\"uint64\",\"indexed\":false,\"internalType\":\"uint64\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobAcknowledged\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobCompleted\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"responseBlobHash\",\"type\":\"bytes32\",\"indexed\":false,\"internalType\":\"bytes32\"},{\"name\":\"responseCiphertextHash\",\"type\":\"bytes32\",\"indexed\":false,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobReleased\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"workerShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"protocolShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"feePoolShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobSubmitted\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobTimedOut\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"slashAmount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"OwnershipTransferred\",\"inputs\":[{\"name\":\"previousOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Paused\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"RefundClaimed\",\"inputs\":[{\"name\":\"recipient\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"RefundEscrowed\",\"inputs\":[{\"name\":\"recipient\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionClosed\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionCreated\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionKeyUpdated\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionReassigned\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"newWorker\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"TransferFailed\",\"inputs\":[{\"name\":\"to\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Unpaused\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Upgraded\",\"inputs\":[{\"name\":\"implementation\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerWithdrawal\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false}]",
+	ABI: "[{\"type\":\"constructor\",\"inputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"UPGRADE_INTERFACE_VERSION\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"internalType\":\"string\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"acknowledgeJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"claimRefund\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"claimTimeout\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"closeSession\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"completeJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"responseBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"responseCiphertextHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createSession\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"dispatcherSignature\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"delegateAllowance\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"delegate\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"deposit\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"depositAndAuthorize\",\"inputs\":[{\"name\":\"delegate\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"disputeJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"disputeResponseMismatch\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ciphertext\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"signature\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"getJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"tuple\",\"internalType\":\"structIJobRegistry.Job\",\"components\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"state\",\"type\":\"uint8\",\"internalType\":\"enumIJobRegistry.JobState\"},{\"name\":\"escrowedFee\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"promptBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"responseBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"submittedAt\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ackTimestamp\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"completedAt\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"deadline\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"disputeFiler\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"disputeBond\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"reExecutionBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"similarityScore\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"disputeCreatedAt\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"responseCiphertextHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"submitBlockNumber\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"completionBlockNumber\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSession\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"tuple\",\"internalType\":\"structIJobRegistry.Session\",\"components\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"status\",\"type\":\"uint8\",\"internalType\":\"enumIJobRegistry.SessionStatus\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"jobCount\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"lastActivityAt\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"reassignCount\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"deposit\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"excludedWorkers\",\"type\":\"address[]\",\"internalType\":\"address[]\"}]}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"guardian\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"initialize\",\"inputs\":[{\"name\":\"_initialOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_workerRegistry\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_aiConfig\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_treasury\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_feePool\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_guardian\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"isDelegateAuthorized\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"delegate\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"nonce\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"owner\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"pause\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"paused\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"pendingRefund\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"prepaidBalanceOf\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"proxiableUUID\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"reassignSession\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"releaseJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"releaseJobs\",\"inputs\":[{\"name\":\"jobIds\",\"type\":\"uint256[]\",\"internalType\":\"uint256[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"renounceOwnership\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"resolveDispute\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"workerGuilty\",\"type\":\"bool\",\"internalType\":\"bool\"},{\"name\":\"reExecutionBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"_similarityScore\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDelegateAllowance\",\"inputs\":[{\"name\":\"delegate\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"allowance\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDelegateAuthorization\",\"inputs\":[{\"name\":\"delegate\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"authorized\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"submitJob\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"blobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"submitJobOnBehalf\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"blobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"sunsetGuardian\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferOwnership\",\"inputs\":[{\"name\":\"newOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unpause\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"updateSessionKey\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"dispatcherSignature\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"upgradeToAndCall\",\"inputs\":[{\"name\":\"newImplementation\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"withdraw\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"withdrawBalance\",\"inputs\":[{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"workerBalance\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"event\",\"name\":\"DelegateAllowanceSet\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"delegate\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"allowance\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DelegateAuthorizationSet\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"delegate\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"authorized\",\"type\":\"bool\",\"indexed\":false,\"internalType\":\"bool\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Deposited\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"newBalance\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DisputeCreated\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"disputer\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DisputeResolved\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"workerGuilty\",\"type\":\"bool\",\"indexed\":false,\"internalType\":\"bool\"},{\"name\":\"similarityScore\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"FeeDistributed\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"workerShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"protocolShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"feePoolShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"GuardianUpdated\",\"inputs\":[{\"name\":\"oldGuardian\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newGuardian\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Initialized\",\"inputs\":[{\"name\":\"version\",\"type\":\"uint64\",\"indexed\":false,\"internalType\":\"uint64\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobAcknowledged\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobCompleted\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"responseBlobHash\",\"type\":\"bytes32\",\"indexed\":false,\"internalType\":\"bytes32\"},{\"name\":\"responseCiphertextHash\",\"type\":\"bytes32\",\"indexed\":false,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobReleased\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"workerShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"protocolShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"feePoolShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobSubmitted\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobTimedOut\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"slashAmount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"OwnershipTransferred\",\"inputs\":[{\"name\":\"previousOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Paused\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"RefundClaimed\",\"inputs\":[{\"name\":\"recipient\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"RefundCreditedToBalance\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"RefundEscrowed\",\"inputs\":[{\"name\":\"recipient\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionClosed\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionCreated\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionKeyUpdated\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionReassigned\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"newWorker\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"TransferFailed\",\"inputs\":[{\"name\":\"to\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Unpaused\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Upgraded\",\"inputs\":[{\"name\":\"implementation\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Withdrew\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"newBalance\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerWithdrawal\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false}]",
 }
 
 // JobRegistryABI is the input ABI used to generate the binding from.
@@ -248,6 +248,37 @@ func (_JobRegistry *JobRegistryCallerSession) UPGRADEINTERFACEVERSION() (string,
 	return _JobRegistry.Contract.UPGRADEINTERFACEVERSION(&_JobRegistry.CallOpts)
 }
 
+// DelegateAllowance is a free data retrieval call binding the contract method 0x09ab8bba.
+//
+// Solidity: function delegateAllowance(address user, address delegate) view returns(uint256)
+func (_JobRegistry *JobRegistryCaller) DelegateAllowance(opts *bind.CallOpts, user common.Address, delegate common.Address) (*big.Int, error) {
+	var out []interface{}
+	err := _JobRegistry.contract.Call(opts, &out, "delegateAllowance", user, delegate)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// DelegateAllowance is a free data retrieval call binding the contract method 0x09ab8bba.
+//
+// Solidity: function delegateAllowance(address user, address delegate) view returns(uint256)
+func (_JobRegistry *JobRegistrySession) DelegateAllowance(user common.Address, delegate common.Address) (*big.Int, error) {
+	return _JobRegistry.Contract.DelegateAllowance(&_JobRegistry.CallOpts, user, delegate)
+}
+
+// DelegateAllowance is a free data retrieval call binding the contract method 0x09ab8bba.
+//
+// Solidity: function delegateAllowance(address user, address delegate) view returns(uint256)
+func (_JobRegistry *JobRegistryCallerSession) DelegateAllowance(user common.Address, delegate common.Address) (*big.Int, error) {
+	return _JobRegistry.Contract.DelegateAllowance(&_JobRegistry.CallOpts, user, delegate)
+}
+
 // GetJob is a free data retrieval call binding the contract method 0xbf22c457.
 //
 // Solidity: function getJob(uint256 jobId) view returns((uint256,address,uint8,uint256,bytes32,bytes32,uint256,uint256,uint256,uint256,address,uint256,bytes32,uint256,uint256,bytes32,uint256,uint256))
@@ -339,6 +370,37 @@ func (_JobRegistry *JobRegistrySession) Guardian() (common.Address, error) {
 // Solidity: function guardian() view returns(address)
 func (_JobRegistry *JobRegistryCallerSession) Guardian() (common.Address, error) {
 	return _JobRegistry.Contract.Guardian(&_JobRegistry.CallOpts)
+}
+
+// IsDelegateAuthorized is a free data retrieval call binding the contract method 0xed45975d.
+//
+// Solidity: function isDelegateAuthorized(address user, address delegate) view returns(bool)
+func (_JobRegistry *JobRegistryCaller) IsDelegateAuthorized(opts *bind.CallOpts, user common.Address, delegate common.Address) (bool, error) {
+	var out []interface{}
+	err := _JobRegistry.contract.Call(opts, &out, "isDelegateAuthorized", user, delegate)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// IsDelegateAuthorized is a free data retrieval call binding the contract method 0xed45975d.
+//
+// Solidity: function isDelegateAuthorized(address user, address delegate) view returns(bool)
+func (_JobRegistry *JobRegistrySession) IsDelegateAuthorized(user common.Address, delegate common.Address) (bool, error) {
+	return _JobRegistry.Contract.IsDelegateAuthorized(&_JobRegistry.CallOpts, user, delegate)
+}
+
+// IsDelegateAuthorized is a free data retrieval call binding the contract method 0xed45975d.
+//
+// Solidity: function isDelegateAuthorized(address user, address delegate) view returns(bool)
+func (_JobRegistry *JobRegistryCallerSession) IsDelegateAuthorized(user common.Address, delegate common.Address) (bool, error) {
+	return _JobRegistry.Contract.IsDelegateAuthorized(&_JobRegistry.CallOpts, user, delegate)
 }
 
 // Nonce is a free data retrieval call binding the contract method 0x70ae92d2.
@@ -463,6 +525,37 @@ func (_JobRegistry *JobRegistrySession) PendingRefund(account common.Address) (*
 // Solidity: function pendingRefund(address account) view returns(uint256)
 func (_JobRegistry *JobRegistryCallerSession) PendingRefund(account common.Address) (*big.Int, error) {
 	return _JobRegistry.Contract.PendingRefund(&_JobRegistry.CallOpts, account)
+}
+
+// PrepaidBalanceOf is a free data retrieval call binding the contract method 0xf990c29b.
+//
+// Solidity: function prepaidBalanceOf(address user) view returns(uint256)
+func (_JobRegistry *JobRegistryCaller) PrepaidBalanceOf(opts *bind.CallOpts, user common.Address) (*big.Int, error) {
+	var out []interface{}
+	err := _JobRegistry.contract.Call(opts, &out, "prepaidBalanceOf", user)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// PrepaidBalanceOf is a free data retrieval call binding the contract method 0xf990c29b.
+//
+// Solidity: function prepaidBalanceOf(address user) view returns(uint256)
+func (_JobRegistry *JobRegistrySession) PrepaidBalanceOf(user common.Address) (*big.Int, error) {
+	return _JobRegistry.Contract.PrepaidBalanceOf(&_JobRegistry.CallOpts, user)
+}
+
+// PrepaidBalanceOf is a free data retrieval call binding the contract method 0xf990c29b.
+//
+// Solidity: function prepaidBalanceOf(address user) view returns(uint256)
+func (_JobRegistry *JobRegistryCallerSession) PrepaidBalanceOf(user common.Address) (*big.Int, error) {
+	return _JobRegistry.Contract.PrepaidBalanceOf(&_JobRegistry.CallOpts, user)
 }
 
 // ProxiableUUID is a free data retrieval call binding the contract method 0x52d1902d.
@@ -653,6 +746,48 @@ func (_JobRegistry *JobRegistryTransactorSession) CreateSession(modelId [32]byte
 	return _JobRegistry.Contract.CreateSession(&_JobRegistry.TransactOpts, modelId, worker, encWorkerKey, encDisputerKey, dispatcherSignature, expiry)
 }
 
+// Deposit is a paid mutator transaction binding the contract method 0xd0e30db0.
+//
+// Solidity: function deposit() payable returns()
+func (_JobRegistry *JobRegistryTransactor) Deposit(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _JobRegistry.contract.Transact(opts, "deposit")
+}
+
+// Deposit is a paid mutator transaction binding the contract method 0xd0e30db0.
+//
+// Solidity: function deposit() payable returns()
+func (_JobRegistry *JobRegistrySession) Deposit() (*types.Transaction, error) {
+	return _JobRegistry.Contract.Deposit(&_JobRegistry.TransactOpts)
+}
+
+// Deposit is a paid mutator transaction binding the contract method 0xd0e30db0.
+//
+// Solidity: function deposit() payable returns()
+func (_JobRegistry *JobRegistryTransactorSession) Deposit() (*types.Transaction, error) {
+	return _JobRegistry.Contract.Deposit(&_JobRegistry.TransactOpts)
+}
+
+// DepositAndAuthorize is a paid mutator transaction binding the contract method 0x882fe3c9.
+//
+// Solidity: function depositAndAuthorize(address delegate) payable returns()
+func (_JobRegistry *JobRegistryTransactor) DepositAndAuthorize(opts *bind.TransactOpts, delegate common.Address) (*types.Transaction, error) {
+	return _JobRegistry.contract.Transact(opts, "depositAndAuthorize", delegate)
+}
+
+// DepositAndAuthorize is a paid mutator transaction binding the contract method 0x882fe3c9.
+//
+// Solidity: function depositAndAuthorize(address delegate) payable returns()
+func (_JobRegistry *JobRegistrySession) DepositAndAuthorize(delegate common.Address) (*types.Transaction, error) {
+	return _JobRegistry.Contract.DepositAndAuthorize(&_JobRegistry.TransactOpts, delegate)
+}
+
+// DepositAndAuthorize is a paid mutator transaction binding the contract method 0x882fe3c9.
+//
+// Solidity: function depositAndAuthorize(address delegate) payable returns()
+func (_JobRegistry *JobRegistryTransactorSession) DepositAndAuthorize(delegate common.Address) (*types.Transaction, error) {
+	return _JobRegistry.Contract.DepositAndAuthorize(&_JobRegistry.TransactOpts, delegate)
+}
+
 // DisputeJob is a paid mutator transaction binding the contract method 0xd93d9beb.
 //
 // Solidity: function disputeJob(uint256 jobId) payable returns()
@@ -695,25 +830,25 @@ func (_JobRegistry *JobRegistryTransactorSession) DisputeResponseMismatch(jobId 
 	return _JobRegistry.Contract.DisputeResponseMismatch(&_JobRegistry.TransactOpts, jobId, ciphertext, signature)
 }
 
-// Initialize is a paid mutator transaction binding the contract method 0x1459457a.
+// Initialize is a paid mutator transaction binding the contract method 0xcc2a9a5b.
 //
-// Solidity: function initialize(address _initialOwner, address _workerRegistry, address _aiConfig, address _treasury, address _guardian) returns()
-func (_JobRegistry *JobRegistryTransactor) Initialize(opts *bind.TransactOpts, _initialOwner common.Address, _workerRegistry common.Address, _aiConfig common.Address, _treasury common.Address, _guardian common.Address) (*types.Transaction, error) {
-	return _JobRegistry.contract.Transact(opts, "initialize", _initialOwner, _workerRegistry, _aiConfig, _treasury, _guardian)
+// Solidity: function initialize(address _initialOwner, address _workerRegistry, address _aiConfig, address _treasury, address _feePool, address _guardian) returns()
+func (_JobRegistry *JobRegistryTransactor) Initialize(opts *bind.TransactOpts, _initialOwner common.Address, _workerRegistry common.Address, _aiConfig common.Address, _treasury common.Address, _feePool common.Address, _guardian common.Address) (*types.Transaction, error) {
+	return _JobRegistry.contract.Transact(opts, "initialize", _initialOwner, _workerRegistry, _aiConfig, _treasury, _feePool, _guardian)
 }
 
-// Initialize is a paid mutator transaction binding the contract method 0x1459457a.
+// Initialize is a paid mutator transaction binding the contract method 0xcc2a9a5b.
 //
-// Solidity: function initialize(address _initialOwner, address _workerRegistry, address _aiConfig, address _treasury, address _guardian) returns()
-func (_JobRegistry *JobRegistrySession) Initialize(_initialOwner common.Address, _workerRegistry common.Address, _aiConfig common.Address, _treasury common.Address, _guardian common.Address) (*types.Transaction, error) {
-	return _JobRegistry.Contract.Initialize(&_JobRegistry.TransactOpts, _initialOwner, _workerRegistry, _aiConfig, _treasury, _guardian)
+// Solidity: function initialize(address _initialOwner, address _workerRegistry, address _aiConfig, address _treasury, address _feePool, address _guardian) returns()
+func (_JobRegistry *JobRegistrySession) Initialize(_initialOwner common.Address, _workerRegistry common.Address, _aiConfig common.Address, _treasury common.Address, _feePool common.Address, _guardian common.Address) (*types.Transaction, error) {
+	return _JobRegistry.Contract.Initialize(&_JobRegistry.TransactOpts, _initialOwner, _workerRegistry, _aiConfig, _treasury, _feePool, _guardian)
 }
 
-// Initialize is a paid mutator transaction binding the contract method 0x1459457a.
+// Initialize is a paid mutator transaction binding the contract method 0xcc2a9a5b.
 //
-// Solidity: function initialize(address _initialOwner, address _workerRegistry, address _aiConfig, address _treasury, address _guardian) returns()
-func (_JobRegistry *JobRegistryTransactorSession) Initialize(_initialOwner common.Address, _workerRegistry common.Address, _aiConfig common.Address, _treasury common.Address, _guardian common.Address) (*types.Transaction, error) {
-	return _JobRegistry.Contract.Initialize(&_JobRegistry.TransactOpts, _initialOwner, _workerRegistry, _aiConfig, _treasury, _guardian)
+// Solidity: function initialize(address _initialOwner, address _workerRegistry, address _aiConfig, address _treasury, address _feePool, address _guardian) returns()
+func (_JobRegistry *JobRegistryTransactorSession) Initialize(_initialOwner common.Address, _workerRegistry common.Address, _aiConfig common.Address, _treasury common.Address, _feePool common.Address, _guardian common.Address) (*types.Transaction, error) {
+	return _JobRegistry.Contract.Initialize(&_JobRegistry.TransactOpts, _initialOwner, _workerRegistry, _aiConfig, _treasury, _feePool, _guardian)
 }
 
 // Pause is a paid mutator transaction binding the contract method 0x8456cb59.
@@ -842,6 +977,48 @@ func (_JobRegistry *JobRegistryTransactorSession) ResolveDispute(jobId *big.Int,
 	return _JobRegistry.Contract.ResolveDispute(&_JobRegistry.TransactOpts, jobId, workerGuilty, reExecutionBlobHash, _similarityScore)
 }
 
+// SetDelegateAllowance is a paid mutator transaction binding the contract method 0xd0ffe1cb.
+//
+// Solidity: function setDelegateAllowance(address delegate, uint256 allowance) returns()
+func (_JobRegistry *JobRegistryTransactor) SetDelegateAllowance(opts *bind.TransactOpts, delegate common.Address, allowance *big.Int) (*types.Transaction, error) {
+	return _JobRegistry.contract.Transact(opts, "setDelegateAllowance", delegate, allowance)
+}
+
+// SetDelegateAllowance is a paid mutator transaction binding the contract method 0xd0ffe1cb.
+//
+// Solidity: function setDelegateAllowance(address delegate, uint256 allowance) returns()
+func (_JobRegistry *JobRegistrySession) SetDelegateAllowance(delegate common.Address, allowance *big.Int) (*types.Transaction, error) {
+	return _JobRegistry.Contract.SetDelegateAllowance(&_JobRegistry.TransactOpts, delegate, allowance)
+}
+
+// SetDelegateAllowance is a paid mutator transaction binding the contract method 0xd0ffe1cb.
+//
+// Solidity: function setDelegateAllowance(address delegate, uint256 allowance) returns()
+func (_JobRegistry *JobRegistryTransactorSession) SetDelegateAllowance(delegate common.Address, allowance *big.Int) (*types.Transaction, error) {
+	return _JobRegistry.Contract.SetDelegateAllowance(&_JobRegistry.TransactOpts, delegate, allowance)
+}
+
+// SetDelegateAuthorization is a paid mutator transaction binding the contract method 0xa6e4e43f.
+//
+// Solidity: function setDelegateAuthorization(address delegate, bool authorized) returns()
+func (_JobRegistry *JobRegistryTransactor) SetDelegateAuthorization(opts *bind.TransactOpts, delegate common.Address, authorized bool) (*types.Transaction, error) {
+	return _JobRegistry.contract.Transact(opts, "setDelegateAuthorization", delegate, authorized)
+}
+
+// SetDelegateAuthorization is a paid mutator transaction binding the contract method 0xa6e4e43f.
+//
+// Solidity: function setDelegateAuthorization(address delegate, bool authorized) returns()
+func (_JobRegistry *JobRegistrySession) SetDelegateAuthorization(delegate common.Address, authorized bool) (*types.Transaction, error) {
+	return _JobRegistry.Contract.SetDelegateAuthorization(&_JobRegistry.TransactOpts, delegate, authorized)
+}
+
+// SetDelegateAuthorization is a paid mutator transaction binding the contract method 0xa6e4e43f.
+//
+// Solidity: function setDelegateAuthorization(address delegate, bool authorized) returns()
+func (_JobRegistry *JobRegistryTransactorSession) SetDelegateAuthorization(delegate common.Address, authorized bool) (*types.Transaction, error) {
+	return _JobRegistry.Contract.SetDelegateAuthorization(&_JobRegistry.TransactOpts, delegate, authorized)
+}
+
 // SubmitJob is a paid mutator transaction binding the contract method 0xe3f4f3e9.
 //
 // Solidity: function submitJob(uint256 sessionId, bytes32 blobHash) payable returns(uint256 jobId)
@@ -861,6 +1038,27 @@ func (_JobRegistry *JobRegistrySession) SubmitJob(sessionId *big.Int, blobHash [
 // Solidity: function submitJob(uint256 sessionId, bytes32 blobHash) payable returns(uint256 jobId)
 func (_JobRegistry *JobRegistryTransactorSession) SubmitJob(sessionId *big.Int, blobHash [32]byte) (*types.Transaction, error) {
 	return _JobRegistry.Contract.SubmitJob(&_JobRegistry.TransactOpts, sessionId, blobHash)
+}
+
+// SubmitJobOnBehalf is a paid mutator transaction binding the contract method 0xfb811755.
+//
+// Solidity: function submitJobOnBehalf(address user, uint256 sessionId, bytes32 blobHash) returns(uint256 jobId)
+func (_JobRegistry *JobRegistryTransactor) SubmitJobOnBehalf(opts *bind.TransactOpts, user common.Address, sessionId *big.Int, blobHash [32]byte) (*types.Transaction, error) {
+	return _JobRegistry.contract.Transact(opts, "submitJobOnBehalf", user, sessionId, blobHash)
+}
+
+// SubmitJobOnBehalf is a paid mutator transaction binding the contract method 0xfb811755.
+//
+// Solidity: function submitJobOnBehalf(address user, uint256 sessionId, bytes32 blobHash) returns(uint256 jobId)
+func (_JobRegistry *JobRegistrySession) SubmitJobOnBehalf(user common.Address, sessionId *big.Int, blobHash [32]byte) (*types.Transaction, error) {
+	return _JobRegistry.Contract.SubmitJobOnBehalf(&_JobRegistry.TransactOpts, user, sessionId, blobHash)
+}
+
+// SubmitJobOnBehalf is a paid mutator transaction binding the contract method 0xfb811755.
+//
+// Solidity: function submitJobOnBehalf(address user, uint256 sessionId, bytes32 blobHash) returns(uint256 jobId)
+func (_JobRegistry *JobRegistryTransactorSession) SubmitJobOnBehalf(user common.Address, sessionId *big.Int, blobHash [32]byte) (*types.Transaction, error) {
+	return _JobRegistry.Contract.SubmitJobOnBehalf(&_JobRegistry.TransactOpts, user, sessionId, blobHash)
 }
 
 // SunsetGuardian is a paid mutator transaction binding the contract method 0xec096db0.
@@ -987,6 +1185,481 @@ func (_JobRegistry *JobRegistrySession) Withdraw() (*types.Transaction, error) {
 // Solidity: function withdraw() returns()
 func (_JobRegistry *JobRegistryTransactorSession) Withdraw() (*types.Transaction, error) {
 	return _JobRegistry.Contract.Withdraw(&_JobRegistry.TransactOpts)
+}
+
+// WithdrawBalance is a paid mutator transaction binding the contract method 0xda76d5cd.
+//
+// Solidity: function withdrawBalance(uint256 amount) returns()
+func (_JobRegistry *JobRegistryTransactor) WithdrawBalance(opts *bind.TransactOpts, amount *big.Int) (*types.Transaction, error) {
+	return _JobRegistry.contract.Transact(opts, "withdrawBalance", amount)
+}
+
+// WithdrawBalance is a paid mutator transaction binding the contract method 0xda76d5cd.
+//
+// Solidity: function withdrawBalance(uint256 amount) returns()
+func (_JobRegistry *JobRegistrySession) WithdrawBalance(amount *big.Int) (*types.Transaction, error) {
+	return _JobRegistry.Contract.WithdrawBalance(&_JobRegistry.TransactOpts, amount)
+}
+
+// WithdrawBalance is a paid mutator transaction binding the contract method 0xda76d5cd.
+//
+// Solidity: function withdrawBalance(uint256 amount) returns()
+func (_JobRegistry *JobRegistryTransactorSession) WithdrawBalance(amount *big.Int) (*types.Transaction, error) {
+	return _JobRegistry.Contract.WithdrawBalance(&_JobRegistry.TransactOpts, amount)
+}
+
+// JobRegistryDelegateAllowanceSetIterator is returned from FilterDelegateAllowanceSet and is used to iterate over the raw logs and unpacked data for DelegateAllowanceSet events raised by the JobRegistry contract.
+type JobRegistryDelegateAllowanceSetIterator struct {
+	Event *JobRegistryDelegateAllowanceSet // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *JobRegistryDelegateAllowanceSetIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(JobRegistryDelegateAllowanceSet)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(JobRegistryDelegateAllowanceSet)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *JobRegistryDelegateAllowanceSetIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *JobRegistryDelegateAllowanceSetIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// JobRegistryDelegateAllowanceSet represents a DelegateAllowanceSet event raised by the JobRegistry contract.
+type JobRegistryDelegateAllowanceSet struct {
+	User      common.Address
+	Delegate  common.Address
+	Allowance *big.Int
+	Raw       types.Log // Blockchain specific contextual infos
+}
+
+// FilterDelegateAllowanceSet is a free log retrieval operation binding the contract event 0x0a92c71d37967e95ab74942290d3af32f58045aa7f0533d676a1bac4a9f839dc.
+//
+// Solidity: event DelegateAllowanceSet(address indexed user, address indexed delegate, uint256 allowance)
+func (_JobRegistry *JobRegistryFilterer) FilterDelegateAllowanceSet(opts *bind.FilterOpts, user []common.Address, delegate []common.Address) (*JobRegistryDelegateAllowanceSetIterator, error) {
+
+	var userRule []interface{}
+	for _, userItem := range user {
+		userRule = append(userRule, userItem)
+	}
+	var delegateRule []interface{}
+	for _, delegateItem := range delegate {
+		delegateRule = append(delegateRule, delegateItem)
+	}
+
+	logs, sub, err := _JobRegistry.contract.FilterLogs(opts, "DelegateAllowanceSet", userRule, delegateRule)
+	if err != nil {
+		return nil, err
+	}
+	return &JobRegistryDelegateAllowanceSetIterator{contract: _JobRegistry.contract, event: "DelegateAllowanceSet", logs: logs, sub: sub}, nil
+}
+
+// WatchDelegateAllowanceSet is a free log subscription operation binding the contract event 0x0a92c71d37967e95ab74942290d3af32f58045aa7f0533d676a1bac4a9f839dc.
+//
+// Solidity: event DelegateAllowanceSet(address indexed user, address indexed delegate, uint256 allowance)
+func (_JobRegistry *JobRegistryFilterer) WatchDelegateAllowanceSet(opts *bind.WatchOpts, sink chan<- *JobRegistryDelegateAllowanceSet, user []common.Address, delegate []common.Address) (event.Subscription, error) {
+
+	var userRule []interface{}
+	for _, userItem := range user {
+		userRule = append(userRule, userItem)
+	}
+	var delegateRule []interface{}
+	for _, delegateItem := range delegate {
+		delegateRule = append(delegateRule, delegateItem)
+	}
+
+	logs, sub, err := _JobRegistry.contract.WatchLogs(opts, "DelegateAllowanceSet", userRule, delegateRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(JobRegistryDelegateAllowanceSet)
+				if err := _JobRegistry.contract.UnpackLog(event, "DelegateAllowanceSet", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseDelegateAllowanceSet is a log parse operation binding the contract event 0x0a92c71d37967e95ab74942290d3af32f58045aa7f0533d676a1bac4a9f839dc.
+//
+// Solidity: event DelegateAllowanceSet(address indexed user, address indexed delegate, uint256 allowance)
+func (_JobRegistry *JobRegistryFilterer) ParseDelegateAllowanceSet(log types.Log) (*JobRegistryDelegateAllowanceSet, error) {
+	event := new(JobRegistryDelegateAllowanceSet)
+	if err := _JobRegistry.contract.UnpackLog(event, "DelegateAllowanceSet", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// JobRegistryDelegateAuthorizationSetIterator is returned from FilterDelegateAuthorizationSet and is used to iterate over the raw logs and unpacked data for DelegateAuthorizationSet events raised by the JobRegistry contract.
+type JobRegistryDelegateAuthorizationSetIterator struct {
+	Event *JobRegistryDelegateAuthorizationSet // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *JobRegistryDelegateAuthorizationSetIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(JobRegistryDelegateAuthorizationSet)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(JobRegistryDelegateAuthorizationSet)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *JobRegistryDelegateAuthorizationSetIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *JobRegistryDelegateAuthorizationSetIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// JobRegistryDelegateAuthorizationSet represents a DelegateAuthorizationSet event raised by the JobRegistry contract.
+type JobRegistryDelegateAuthorizationSet struct {
+	User       common.Address
+	Delegate   common.Address
+	Authorized bool
+	Raw        types.Log // Blockchain specific contextual infos
+}
+
+// FilterDelegateAuthorizationSet is a free log retrieval operation binding the contract event 0x9755c2a3048b679844f90739c00e9c3cb2e66b722ce7a0797e4d5d2efb5981d3.
+//
+// Solidity: event DelegateAuthorizationSet(address indexed user, address indexed delegate, bool authorized)
+func (_JobRegistry *JobRegistryFilterer) FilterDelegateAuthorizationSet(opts *bind.FilterOpts, user []common.Address, delegate []common.Address) (*JobRegistryDelegateAuthorizationSetIterator, error) {
+
+	var userRule []interface{}
+	for _, userItem := range user {
+		userRule = append(userRule, userItem)
+	}
+	var delegateRule []interface{}
+	for _, delegateItem := range delegate {
+		delegateRule = append(delegateRule, delegateItem)
+	}
+
+	logs, sub, err := _JobRegistry.contract.FilterLogs(opts, "DelegateAuthorizationSet", userRule, delegateRule)
+	if err != nil {
+		return nil, err
+	}
+	return &JobRegistryDelegateAuthorizationSetIterator{contract: _JobRegistry.contract, event: "DelegateAuthorizationSet", logs: logs, sub: sub}, nil
+}
+
+// WatchDelegateAuthorizationSet is a free log subscription operation binding the contract event 0x9755c2a3048b679844f90739c00e9c3cb2e66b722ce7a0797e4d5d2efb5981d3.
+//
+// Solidity: event DelegateAuthorizationSet(address indexed user, address indexed delegate, bool authorized)
+func (_JobRegistry *JobRegistryFilterer) WatchDelegateAuthorizationSet(opts *bind.WatchOpts, sink chan<- *JobRegistryDelegateAuthorizationSet, user []common.Address, delegate []common.Address) (event.Subscription, error) {
+
+	var userRule []interface{}
+	for _, userItem := range user {
+		userRule = append(userRule, userItem)
+	}
+	var delegateRule []interface{}
+	for _, delegateItem := range delegate {
+		delegateRule = append(delegateRule, delegateItem)
+	}
+
+	logs, sub, err := _JobRegistry.contract.WatchLogs(opts, "DelegateAuthorizationSet", userRule, delegateRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(JobRegistryDelegateAuthorizationSet)
+				if err := _JobRegistry.contract.UnpackLog(event, "DelegateAuthorizationSet", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseDelegateAuthorizationSet is a log parse operation binding the contract event 0x9755c2a3048b679844f90739c00e9c3cb2e66b722ce7a0797e4d5d2efb5981d3.
+//
+// Solidity: event DelegateAuthorizationSet(address indexed user, address indexed delegate, bool authorized)
+func (_JobRegistry *JobRegistryFilterer) ParseDelegateAuthorizationSet(log types.Log) (*JobRegistryDelegateAuthorizationSet, error) {
+	event := new(JobRegistryDelegateAuthorizationSet)
+	if err := _JobRegistry.contract.UnpackLog(event, "DelegateAuthorizationSet", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// JobRegistryDepositedIterator is returned from FilterDeposited and is used to iterate over the raw logs and unpacked data for Deposited events raised by the JobRegistry contract.
+type JobRegistryDepositedIterator struct {
+	Event *JobRegistryDeposited // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *JobRegistryDepositedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(JobRegistryDeposited)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(JobRegistryDeposited)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *JobRegistryDepositedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *JobRegistryDepositedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// JobRegistryDeposited represents a Deposited event raised by the JobRegistry contract.
+type JobRegistryDeposited struct {
+	User       common.Address
+	Amount     *big.Int
+	NewBalance *big.Int
+	Raw        types.Log // Blockchain specific contextual infos
+}
+
+// FilterDeposited is a free log retrieval operation binding the contract event 0x73a19dd210f1a7f902193214c0ee91dd35ee5b4d920cba8d519eca65a7b488ca.
+//
+// Solidity: event Deposited(address indexed user, uint256 amount, uint256 newBalance)
+func (_JobRegistry *JobRegistryFilterer) FilterDeposited(opts *bind.FilterOpts, user []common.Address) (*JobRegistryDepositedIterator, error) {
+
+	var userRule []interface{}
+	for _, userItem := range user {
+		userRule = append(userRule, userItem)
+	}
+
+	logs, sub, err := _JobRegistry.contract.FilterLogs(opts, "Deposited", userRule)
+	if err != nil {
+		return nil, err
+	}
+	return &JobRegistryDepositedIterator{contract: _JobRegistry.contract, event: "Deposited", logs: logs, sub: sub}, nil
+}
+
+// WatchDeposited is a free log subscription operation binding the contract event 0x73a19dd210f1a7f902193214c0ee91dd35ee5b4d920cba8d519eca65a7b488ca.
+//
+// Solidity: event Deposited(address indexed user, uint256 amount, uint256 newBalance)
+func (_JobRegistry *JobRegistryFilterer) WatchDeposited(opts *bind.WatchOpts, sink chan<- *JobRegistryDeposited, user []common.Address) (event.Subscription, error) {
+
+	var userRule []interface{}
+	for _, userItem := range user {
+		userRule = append(userRule, userItem)
+	}
+
+	logs, sub, err := _JobRegistry.contract.WatchLogs(opts, "Deposited", userRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(JobRegistryDeposited)
+				if err := _JobRegistry.contract.UnpackLog(event, "Deposited", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseDeposited is a log parse operation binding the contract event 0x73a19dd210f1a7f902193214c0ee91dd35ee5b4d920cba8d519eca65a7b488ca.
+//
+// Solidity: event Deposited(address indexed user, uint256 amount, uint256 newBalance)
+func (_JobRegistry *JobRegistryFilterer) ParseDeposited(log types.Log) (*JobRegistryDeposited, error) {
+	event := new(JobRegistryDeposited)
+	if err := _JobRegistry.contract.UnpackLog(event, "Deposited", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
 }
 
 // JobRegistryDisputeCreatedIterator is returned from FilterDisputeCreated and is used to iterate over the raw logs and unpacked data for DisputeCreated events raised by the JobRegistry contract.
@@ -2917,6 +3590,160 @@ func (_JobRegistry *JobRegistryFilterer) ParseRefundClaimed(log types.Log) (*Job
 	return event, nil
 }
 
+// JobRegistryRefundCreditedToBalanceIterator is returned from FilterRefundCreditedToBalance and is used to iterate over the raw logs and unpacked data for RefundCreditedToBalance events raised by the JobRegistry contract.
+type JobRegistryRefundCreditedToBalanceIterator struct {
+	Event *JobRegistryRefundCreditedToBalance // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *JobRegistryRefundCreditedToBalanceIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(JobRegistryRefundCreditedToBalance)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(JobRegistryRefundCreditedToBalance)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *JobRegistryRefundCreditedToBalanceIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *JobRegistryRefundCreditedToBalanceIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// JobRegistryRefundCreditedToBalance represents a RefundCreditedToBalance event raised by the JobRegistry contract.
+type JobRegistryRefundCreditedToBalance struct {
+	User   common.Address
+	JobId  *big.Int
+	Amount *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
+}
+
+// FilterRefundCreditedToBalance is a free log retrieval operation binding the contract event 0x05fb0485772e72ba2f031e5e64c7502f931bb9579a4093d7734d85c5f0b05617.
+//
+// Solidity: event RefundCreditedToBalance(address indexed user, uint256 indexed jobId, uint256 amount)
+func (_JobRegistry *JobRegistryFilterer) FilterRefundCreditedToBalance(opts *bind.FilterOpts, user []common.Address, jobId []*big.Int) (*JobRegistryRefundCreditedToBalanceIterator, error) {
+
+	var userRule []interface{}
+	for _, userItem := range user {
+		userRule = append(userRule, userItem)
+	}
+	var jobIdRule []interface{}
+	for _, jobIdItem := range jobId {
+		jobIdRule = append(jobIdRule, jobIdItem)
+	}
+
+	logs, sub, err := _JobRegistry.contract.FilterLogs(opts, "RefundCreditedToBalance", userRule, jobIdRule)
+	if err != nil {
+		return nil, err
+	}
+	return &JobRegistryRefundCreditedToBalanceIterator{contract: _JobRegistry.contract, event: "RefundCreditedToBalance", logs: logs, sub: sub}, nil
+}
+
+// WatchRefundCreditedToBalance is a free log subscription operation binding the contract event 0x05fb0485772e72ba2f031e5e64c7502f931bb9579a4093d7734d85c5f0b05617.
+//
+// Solidity: event RefundCreditedToBalance(address indexed user, uint256 indexed jobId, uint256 amount)
+func (_JobRegistry *JobRegistryFilterer) WatchRefundCreditedToBalance(opts *bind.WatchOpts, sink chan<- *JobRegistryRefundCreditedToBalance, user []common.Address, jobId []*big.Int) (event.Subscription, error) {
+
+	var userRule []interface{}
+	for _, userItem := range user {
+		userRule = append(userRule, userItem)
+	}
+	var jobIdRule []interface{}
+	for _, jobIdItem := range jobId {
+		jobIdRule = append(jobIdRule, jobIdItem)
+	}
+
+	logs, sub, err := _JobRegistry.contract.WatchLogs(opts, "RefundCreditedToBalance", userRule, jobIdRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(JobRegistryRefundCreditedToBalance)
+				if err := _JobRegistry.contract.UnpackLog(event, "RefundCreditedToBalance", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseRefundCreditedToBalance is a log parse operation binding the contract event 0x05fb0485772e72ba2f031e5e64c7502f931bb9579a4093d7734d85c5f0b05617.
+//
+// Solidity: event RefundCreditedToBalance(address indexed user, uint256 indexed jobId, uint256 amount)
+func (_JobRegistry *JobRegistryFilterer) ParseRefundCreditedToBalance(log types.Log) (*JobRegistryRefundCreditedToBalance, error) {
+	event := new(JobRegistryRefundCreditedToBalance)
+	if err := _JobRegistry.contract.UnpackLog(event, "RefundCreditedToBalance", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
 // JobRegistryRefundEscrowedIterator is returned from FilterRefundEscrowed and is used to iterate over the raw logs and unpacked data for RefundEscrowed events raised by the JobRegistry contract.
 type JobRegistryRefundEscrowedIterator struct {
 	Event *JobRegistryRefundEscrowed // Event containing the contract specifics and raw log
@@ -4079,6 +4906,152 @@ func (_JobRegistry *JobRegistryFilterer) WatchUpgraded(opts *bind.WatchOpts, sin
 func (_JobRegistry *JobRegistryFilterer) ParseUpgraded(log types.Log) (*JobRegistryUpgraded, error) {
 	event := new(JobRegistryUpgraded)
 	if err := _JobRegistry.contract.UnpackLog(event, "Upgraded", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// JobRegistryWithdrewIterator is returned from FilterWithdrew and is used to iterate over the raw logs and unpacked data for Withdrew events raised by the JobRegistry contract.
+type JobRegistryWithdrewIterator struct {
+	Event *JobRegistryWithdrew // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *JobRegistryWithdrewIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(JobRegistryWithdrew)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(JobRegistryWithdrew)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *JobRegistryWithdrewIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *JobRegistryWithdrewIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// JobRegistryWithdrew represents a Withdrew event raised by the JobRegistry contract.
+type JobRegistryWithdrew struct {
+	User       common.Address
+	Amount     *big.Int
+	NewBalance *big.Int
+	Raw        types.Log // Blockchain specific contextual infos
+}
+
+// FilterWithdrew is a free log retrieval operation binding the contract event 0xadec52fcd1408589179b85e44b434374db078b4eaf793e7d1a1bb0ae4ecfeee5.
+//
+// Solidity: event Withdrew(address indexed user, uint256 amount, uint256 newBalance)
+func (_JobRegistry *JobRegistryFilterer) FilterWithdrew(opts *bind.FilterOpts, user []common.Address) (*JobRegistryWithdrewIterator, error) {
+
+	var userRule []interface{}
+	for _, userItem := range user {
+		userRule = append(userRule, userItem)
+	}
+
+	logs, sub, err := _JobRegistry.contract.FilterLogs(opts, "Withdrew", userRule)
+	if err != nil {
+		return nil, err
+	}
+	return &JobRegistryWithdrewIterator{contract: _JobRegistry.contract, event: "Withdrew", logs: logs, sub: sub}, nil
+}
+
+// WatchWithdrew is a free log subscription operation binding the contract event 0xadec52fcd1408589179b85e44b434374db078b4eaf793e7d1a1bb0ae4ecfeee5.
+//
+// Solidity: event Withdrew(address indexed user, uint256 amount, uint256 newBalance)
+func (_JobRegistry *JobRegistryFilterer) WatchWithdrew(opts *bind.WatchOpts, sink chan<- *JobRegistryWithdrew, user []common.Address) (event.Subscription, error) {
+
+	var userRule []interface{}
+	for _, userItem := range user {
+		userRule = append(userRule, userItem)
+	}
+
+	logs, sub, err := _JobRegistry.contract.WatchLogs(opts, "Withdrew", userRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(JobRegistryWithdrew)
+				if err := _JobRegistry.contract.UnpackLog(event, "Withdrew", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseWithdrew is a log parse operation binding the contract event 0xadec52fcd1408589179b85e44b434374db078b4eaf793e7d1a1bb0ae4ecfeee5.
+//
+// Solidity: event Withdrew(address indexed user, uint256 amount, uint256 newBalance)
+func (_JobRegistry *JobRegistryFilterer) ParseWithdrew(log types.Log) (*JobRegistryWithdrew, error) {
+	event := new(JobRegistryWithdrew)
+	if err := _JobRegistry.contract.UnpackLog(event, "Withdrew", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
