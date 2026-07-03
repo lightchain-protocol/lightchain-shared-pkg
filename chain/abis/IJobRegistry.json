@@ -32,6 +32,45 @@
   },
   {
     "type": "function",
+    "name": "adoptSession",
+    "inputs": [
+      {
+        "name": "user",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "modelId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "encWorkerKey",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "encDisputerKey",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "claimRefund",
     "inputs": [],
     "outputs": [],
@@ -1304,6 +1343,31 @@
   },
   {
     "type": "event",
+    "name": "SessionAdopted",
+    "inputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "user",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "worker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
     "name": "SessionClosed",
     "inputs": [
       {
@@ -1932,6 +1996,11 @@
   },
   {
     "type": "error",
+    "name": "NotSessionManager",
+    "inputs": []
+  },
+  {
+    "type": "error",
     "name": "NotSessionOwner",
     "inputs": [
       {
@@ -2047,6 +2116,11 @@
         "internalType": "uint256"
       }
     ]
+  },
+  {
+    "type": "error",
+    "name": "SortitionDisabled",
+    "inputs": []
   },
   {
     "type": "error",
