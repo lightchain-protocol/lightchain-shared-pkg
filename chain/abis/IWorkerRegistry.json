@@ -494,6 +494,19 @@
   },
   {
     "type": "function",
+    "name": "resetOffenses",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "selectEligibleWorker",
     "inputs": [
       {
@@ -727,6 +740,25 @@
         "type": "bytes32",
         "indexed": true,
         "internalType": "bytes32"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "OffensesReset",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "previousCount",
+        "type": "uint32",
+        "indexed": false,
+        "internalType": "uint32"
       }
     ],
     "anonymous": false

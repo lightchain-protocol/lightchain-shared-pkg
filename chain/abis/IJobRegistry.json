@@ -752,6 +752,19 @@
   },
   {
     "type": "function",
+    "name": "settleStuckJob",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "submitJob",
     "inputs": [
       {
@@ -1016,6 +1029,19 @@
   },
   {
     "type": "event",
+    "name": "DisputeDefaulted",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
     "name": "DisputeResolved",
     "inputs": [
       {
@@ -1176,6 +1202,25 @@
       },
       {
         "name": "feePoolShare",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "JobSettledNoFault",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "refundAmount",
         "type": "uint256",
         "indexed": false,
         "internalType": "uint256"
@@ -1909,6 +1954,27 @@
     "inputs": [
       {
         "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NoFaultWindowNotReached",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "availableAt",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "currentTime",
         "type": "uint256",
         "internalType": "uint256"
       }
