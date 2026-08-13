@@ -31,7 +31,7 @@ var (
 
 // WorkerRegistryMetaData contains all meta data concerning the WorkerRegistry contract.
 var WorkerRegistryMetaData = &bind.MetaData{
-	ABI: "[{\"type\":\"function\",\"name\":\"UPGRADE_INTERFACE_VERSION\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"internalType\":\"string\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"addSupportedModel\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"addWhitelistedModel\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"aiConfig\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"decrementActiveJobs\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"deregisterWorker\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"getActiveJobCount\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getEligibleWorkers\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"address[]\",\"internalType\":\"address[]\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getOffenseCount\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSlashedFunds\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSuspendedUntil\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getTotalStaked\",\"inputs\":[{\"name\":\"blockNumber\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getTreasury\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getWorkerEncryptionKey\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getWorkerStake\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"guardian\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"incrementActiveJobs\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"initialize\",\"inputs\":[{\"name\":\"_initialOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_aiConfig\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_jobRegistry\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_treasury\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_guardian\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"isEligible\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"isModelWhitelisted\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"isWorkerRegistered\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"isWorkerSuspended\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"jobRegistry\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"owner\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"pause\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"paused\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"proxiableUUID\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"registerWorker\",\"inputs\":[{\"name\":\"encryptionPubKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"reinstate\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"removeSupportedModel\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"removeWhitelistedModel\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"renounceOwnership\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"resetOffenses\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"selectEligibleWorker\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"excluded\",\"type\":\"address[]\",\"internalType\":\"address[]\"},{\"name\":\"seed\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"slash\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"sunsetGuardian\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"topUpStake\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"transferOwnership\",\"inputs\":[{\"name\":\"newOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unpause\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"upgradeToAndCall\",\"inputs\":[{\"name\":\"newImplementation\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"withdrawSlashedFunds\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"withdrawStake\",\"inputs\":[{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"workerSupportsModel\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"event\",\"name\":\"GuardianUpdated\",\"inputs\":[{\"name\":\"oldGuardian\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newGuardian\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Initialized\",\"inputs\":[{\"name\":\"version\",\"type\":\"uint64\",\"indexed\":false,\"internalType\":\"uint64\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ModelAdded\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ModelDelisted\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ModelRemoved\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ModelWhitelisted\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"OffensesReset\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"previousCount\",\"type\":\"uint32\",\"indexed\":false,\"internalType\":\"uint32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"OwnershipTransferred\",\"inputs\":[{\"name\":\"previousOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Paused\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SlashedFundsWithdrawn\",\"inputs\":[{\"name\":\"to\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"StakeTopUp\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"newStake\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"StakeWithdrawn\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"newStake\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Unpaused\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Upgraded\",\"inputs\":[{\"name\":\"implementation\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerDeactivated\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerDeregistered\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerRegistered\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"encryptionPubKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerReinstated\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerSlashed\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"newStake\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerSuspended\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"until\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false}]",
+	ABI: "[{\"type\":\"function\",\"name\":\"UPGRADE_INTERFACE_VERSION\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"internalType\":\"string\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"addSupportedModel\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"addWhitelistedModel\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"aiConfig\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"decrementActiveJobs\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"deregisterWorker\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"getActiveJobCount\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getCapabilityCount\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint16\",\"internalType\":\"uint16\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getCapabilityMask\",\"inputs\":[{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getCapabilityName\",\"inputs\":[{\"name\":\"bit\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"internalType\":\"string\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getEligibleWorkers\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"address[]\",\"internalType\":\"address[]\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getOffenseCount\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSlashedFunds\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSuspendedUntil\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getTotalStaked\",\"inputs\":[{\"name\":\"blockNumber\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getTreasury\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getWorkerCapabilities\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getWorkerEncryptionKey\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getWorkerStake\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"guardian\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"incrementActiveJobs\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"initialize\",\"inputs\":[{\"name\":\"_initialOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_aiConfig\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_jobRegistry\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_treasury\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_guardian\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"isEligible\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"isModelWhitelisted\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"isWorkerRegistered\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"isWorkerSuspended\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"jobRegistry\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"owner\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"pause\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"paused\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"proxiableUUID\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"registerCapability\",\"inputs\":[{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[{\"name\":\"bit\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerWorker\",\"inputs\":[{\"name\":\"encryptionPubKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"reinstate\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"removeSupportedModel\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"removeWhitelistedModel\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"renounceOwnership\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"resetOffenses\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"selectEligibleWorker\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"excluded\",\"type\":\"address[]\",\"internalType\":\"address[]\"},{\"name\":\"seed\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"setCapabilities\",\"inputs\":[{\"name\":\"mask\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"slash\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"sunsetGuardian\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"topUpStake\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"transferOwnership\",\"inputs\":[{\"name\":\"newOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unpause\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"upgradeToAndCall\",\"inputs\":[{\"name\":\"newImplementation\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"withdrawSlashedFunds\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"withdrawStake\",\"inputs\":[{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"workerSupportsModel\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"event\",\"name\":\"CapabilityRegistered\",\"inputs\":[{\"name\":\"bit\",\"type\":\"uint8\",\"indexed\":true,\"internalType\":\"uint8\"},{\"name\":\"name\",\"type\":\"string\",\"indexed\":false,\"internalType\":\"string\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"GuardianUpdated\",\"inputs\":[{\"name\":\"oldGuardian\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newGuardian\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Initialized\",\"inputs\":[{\"name\":\"version\",\"type\":\"uint64\",\"indexed\":false,\"internalType\":\"uint64\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ModelAdded\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ModelDelisted\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ModelRemoved\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ModelWhitelisted\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"OffensesReset\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"previousCount\",\"type\":\"uint32\",\"indexed\":false,\"internalType\":\"uint32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"OwnershipTransferred\",\"inputs\":[{\"name\":\"previousOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Paused\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SlashedFundsWithdrawn\",\"inputs\":[{\"name\":\"to\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"StakeTopUp\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"newStake\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"StakeWithdrawn\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"newStake\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Unpaused\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Upgraded\",\"inputs\":[{\"name\":\"implementation\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerCapabilitiesSet\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"mask\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerDeactivated\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerDeregistered\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerRegistered\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"encryptionPubKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerReinstated\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerSlashed\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"newStake\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerSuspended\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"until\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false}]",
 }
 
 // WorkerRegistryABI is the input ABI used to generate the binding from.
@@ -273,6 +273,99 @@ func (_WorkerRegistry *WorkerRegistryCallerSession) GetActiveJobCount(worker com
 	return _WorkerRegistry.Contract.GetActiveJobCount(&_WorkerRegistry.CallOpts, worker)
 }
 
+// GetCapabilityCount is a free data retrieval call binding the contract method 0xb036fe7e.
+//
+// Solidity: function getCapabilityCount() view returns(uint16)
+func (_WorkerRegistry *WorkerRegistryCaller) GetCapabilityCount(opts *bind.CallOpts) (uint16, error) {
+	var out []interface{}
+	err := _WorkerRegistry.contract.Call(opts, &out, "getCapabilityCount")
+
+	if err != nil {
+		return *new(uint16), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(uint16)).(*uint16)
+
+	return out0, err
+
+}
+
+// GetCapabilityCount is a free data retrieval call binding the contract method 0xb036fe7e.
+//
+// Solidity: function getCapabilityCount() view returns(uint16)
+func (_WorkerRegistry *WorkerRegistrySession) GetCapabilityCount() (uint16, error) {
+	return _WorkerRegistry.Contract.GetCapabilityCount(&_WorkerRegistry.CallOpts)
+}
+
+// GetCapabilityCount is a free data retrieval call binding the contract method 0xb036fe7e.
+//
+// Solidity: function getCapabilityCount() view returns(uint16)
+func (_WorkerRegistry *WorkerRegistryCallerSession) GetCapabilityCount() (uint16, error) {
+	return _WorkerRegistry.Contract.GetCapabilityCount(&_WorkerRegistry.CallOpts)
+}
+
+// GetCapabilityMask is a free data retrieval call binding the contract method 0xd3d6402a.
+//
+// Solidity: function getCapabilityMask(string name) view returns(uint256)
+func (_WorkerRegistry *WorkerRegistryCaller) GetCapabilityMask(opts *bind.CallOpts, name string) (*big.Int, error) {
+	var out []interface{}
+	err := _WorkerRegistry.contract.Call(opts, &out, "getCapabilityMask", name)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// GetCapabilityMask is a free data retrieval call binding the contract method 0xd3d6402a.
+//
+// Solidity: function getCapabilityMask(string name) view returns(uint256)
+func (_WorkerRegistry *WorkerRegistrySession) GetCapabilityMask(name string) (*big.Int, error) {
+	return _WorkerRegistry.Contract.GetCapabilityMask(&_WorkerRegistry.CallOpts, name)
+}
+
+// GetCapabilityMask is a free data retrieval call binding the contract method 0xd3d6402a.
+//
+// Solidity: function getCapabilityMask(string name) view returns(uint256)
+func (_WorkerRegistry *WorkerRegistryCallerSession) GetCapabilityMask(name string) (*big.Int, error) {
+	return _WorkerRegistry.Contract.GetCapabilityMask(&_WorkerRegistry.CallOpts, name)
+}
+
+// GetCapabilityName is a free data retrieval call binding the contract method 0x61568e08.
+//
+// Solidity: function getCapabilityName(uint8 bit) view returns(string)
+func (_WorkerRegistry *WorkerRegistryCaller) GetCapabilityName(opts *bind.CallOpts, bit uint8) (string, error) {
+	var out []interface{}
+	err := _WorkerRegistry.contract.Call(opts, &out, "getCapabilityName", bit)
+
+	if err != nil {
+		return *new(string), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(string)).(*string)
+
+	return out0, err
+
+}
+
+// GetCapabilityName is a free data retrieval call binding the contract method 0x61568e08.
+//
+// Solidity: function getCapabilityName(uint8 bit) view returns(string)
+func (_WorkerRegistry *WorkerRegistrySession) GetCapabilityName(bit uint8) (string, error) {
+	return _WorkerRegistry.Contract.GetCapabilityName(&_WorkerRegistry.CallOpts, bit)
+}
+
+// GetCapabilityName is a free data retrieval call binding the contract method 0x61568e08.
+//
+// Solidity: function getCapabilityName(uint8 bit) view returns(string)
+func (_WorkerRegistry *WorkerRegistryCallerSession) GetCapabilityName(bit uint8) (string, error) {
+	return _WorkerRegistry.Contract.GetCapabilityName(&_WorkerRegistry.CallOpts, bit)
+}
+
 // GetEligibleWorkers is a free data retrieval call binding the contract method 0xf88cca87.
 //
 // Solidity: function getEligibleWorkers(bytes32 modelId) view returns(address[])
@@ -457,6 +550,37 @@ func (_WorkerRegistry *WorkerRegistrySession) GetTreasury() (common.Address, err
 // Solidity: function getTreasury() view returns(address)
 func (_WorkerRegistry *WorkerRegistryCallerSession) GetTreasury() (common.Address, error) {
 	return _WorkerRegistry.Contract.GetTreasury(&_WorkerRegistry.CallOpts)
+}
+
+// GetWorkerCapabilities is a free data retrieval call binding the contract method 0x0dd1e8e0.
+//
+// Solidity: function getWorkerCapabilities(address worker) view returns(uint256)
+func (_WorkerRegistry *WorkerRegistryCaller) GetWorkerCapabilities(opts *bind.CallOpts, worker common.Address) (*big.Int, error) {
+	var out []interface{}
+	err := _WorkerRegistry.contract.Call(opts, &out, "getWorkerCapabilities", worker)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// GetWorkerCapabilities is a free data retrieval call binding the contract method 0x0dd1e8e0.
+//
+// Solidity: function getWorkerCapabilities(address worker) view returns(uint256)
+func (_WorkerRegistry *WorkerRegistrySession) GetWorkerCapabilities(worker common.Address) (*big.Int, error) {
+	return _WorkerRegistry.Contract.GetWorkerCapabilities(&_WorkerRegistry.CallOpts, worker)
+}
+
+// GetWorkerCapabilities is a free data retrieval call binding the contract method 0x0dd1e8e0.
+//
+// Solidity: function getWorkerCapabilities(address worker) view returns(uint256)
+func (_WorkerRegistry *WorkerRegistryCallerSession) GetWorkerCapabilities(worker common.Address) (*big.Int, error) {
+	return _WorkerRegistry.Contract.GetWorkerCapabilities(&_WorkerRegistry.CallOpts, worker)
 }
 
 // GetWorkerEncryptionKey is a free data retrieval call binding the contract method 0x80034cc7.
@@ -1009,6 +1133,27 @@ func (_WorkerRegistry *WorkerRegistryTransactorSession) Pause() (*types.Transact
 	return _WorkerRegistry.Contract.Pause(&_WorkerRegistry.TransactOpts)
 }
 
+// RegisterCapability is a paid mutator transaction binding the contract method 0x39441388.
+//
+// Solidity: function registerCapability(string name) returns(uint8 bit)
+func (_WorkerRegistry *WorkerRegistryTransactor) RegisterCapability(opts *bind.TransactOpts, name string) (*types.Transaction, error) {
+	return _WorkerRegistry.contract.Transact(opts, "registerCapability", name)
+}
+
+// RegisterCapability is a paid mutator transaction binding the contract method 0x39441388.
+//
+// Solidity: function registerCapability(string name) returns(uint8 bit)
+func (_WorkerRegistry *WorkerRegistrySession) RegisterCapability(name string) (*types.Transaction, error) {
+	return _WorkerRegistry.Contract.RegisterCapability(&_WorkerRegistry.TransactOpts, name)
+}
+
+// RegisterCapability is a paid mutator transaction binding the contract method 0x39441388.
+//
+// Solidity: function registerCapability(string name) returns(uint8 bit)
+func (_WorkerRegistry *WorkerRegistryTransactorSession) RegisterCapability(name string) (*types.Transaction, error) {
+	return _WorkerRegistry.Contract.RegisterCapability(&_WorkerRegistry.TransactOpts, name)
+}
+
 // RegisterWorker is a paid mutator transaction binding the contract method 0xee066b4d.
 //
 // Solidity: function registerWorker(bytes encryptionPubKey) payable returns()
@@ -1133,6 +1278,27 @@ func (_WorkerRegistry *WorkerRegistrySession) ResetOffenses(worker common.Addres
 // Solidity: function resetOffenses(address worker) returns()
 func (_WorkerRegistry *WorkerRegistryTransactorSession) ResetOffenses(worker common.Address) (*types.Transaction, error) {
 	return _WorkerRegistry.Contract.ResetOffenses(&_WorkerRegistry.TransactOpts, worker)
+}
+
+// SetCapabilities is a paid mutator transaction binding the contract method 0x38bbddd9.
+//
+// Solidity: function setCapabilities(uint256 mask) returns()
+func (_WorkerRegistry *WorkerRegistryTransactor) SetCapabilities(opts *bind.TransactOpts, mask *big.Int) (*types.Transaction, error) {
+	return _WorkerRegistry.contract.Transact(opts, "setCapabilities", mask)
+}
+
+// SetCapabilities is a paid mutator transaction binding the contract method 0x38bbddd9.
+//
+// Solidity: function setCapabilities(uint256 mask) returns()
+func (_WorkerRegistry *WorkerRegistrySession) SetCapabilities(mask *big.Int) (*types.Transaction, error) {
+	return _WorkerRegistry.Contract.SetCapabilities(&_WorkerRegistry.TransactOpts, mask)
+}
+
+// SetCapabilities is a paid mutator transaction binding the contract method 0x38bbddd9.
+//
+// Solidity: function setCapabilities(uint256 mask) returns()
+func (_WorkerRegistry *WorkerRegistryTransactorSession) SetCapabilities(mask *big.Int) (*types.Transaction, error) {
+	return _WorkerRegistry.Contract.SetCapabilities(&_WorkerRegistry.TransactOpts, mask)
 }
 
 // Slash is a paid mutator transaction binding the contract method 0x02fb4d85.
@@ -1301,6 +1467,151 @@ func (_WorkerRegistry *WorkerRegistrySession) WithdrawStake(amount *big.Int) (*t
 // Solidity: function withdrawStake(uint256 amount) returns()
 func (_WorkerRegistry *WorkerRegistryTransactorSession) WithdrawStake(amount *big.Int) (*types.Transaction, error) {
 	return _WorkerRegistry.Contract.WithdrawStake(&_WorkerRegistry.TransactOpts, amount)
+}
+
+// WorkerRegistryCapabilityRegisteredIterator is returned from FilterCapabilityRegistered and is used to iterate over the raw logs and unpacked data for CapabilityRegistered events raised by the WorkerRegistry contract.
+type WorkerRegistryCapabilityRegisteredIterator struct {
+	Event *WorkerRegistryCapabilityRegistered // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *WorkerRegistryCapabilityRegisteredIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(WorkerRegistryCapabilityRegistered)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(WorkerRegistryCapabilityRegistered)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *WorkerRegistryCapabilityRegisteredIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *WorkerRegistryCapabilityRegisteredIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// WorkerRegistryCapabilityRegistered represents a CapabilityRegistered event raised by the WorkerRegistry contract.
+type WorkerRegistryCapabilityRegistered struct {
+	Bit  uint8
+	Name string
+	Raw  types.Log // Blockchain specific contextual infos
+}
+
+// FilterCapabilityRegistered is a free log retrieval operation binding the contract event 0xda84914123ecd65b01462dd0b3fb0dde2988c2e933595751f7c1c821a182dcc4.
+//
+// Solidity: event CapabilityRegistered(uint8 indexed bit, string name)
+func (_WorkerRegistry *WorkerRegistryFilterer) FilterCapabilityRegistered(opts *bind.FilterOpts, bit []uint8) (*WorkerRegistryCapabilityRegisteredIterator, error) {
+
+	var bitRule []interface{}
+	for _, bitItem := range bit {
+		bitRule = append(bitRule, bitItem)
+	}
+
+	logs, sub, err := _WorkerRegistry.contract.FilterLogs(opts, "CapabilityRegistered", bitRule)
+	if err != nil {
+		return nil, err
+	}
+	return &WorkerRegistryCapabilityRegisteredIterator{contract: _WorkerRegistry.contract, event: "CapabilityRegistered", logs: logs, sub: sub}, nil
+}
+
+// WatchCapabilityRegistered is a free log subscription operation binding the contract event 0xda84914123ecd65b01462dd0b3fb0dde2988c2e933595751f7c1c821a182dcc4.
+//
+// Solidity: event CapabilityRegistered(uint8 indexed bit, string name)
+func (_WorkerRegistry *WorkerRegistryFilterer) WatchCapabilityRegistered(opts *bind.WatchOpts, sink chan<- *WorkerRegistryCapabilityRegistered, bit []uint8) (event.Subscription, error) {
+
+	var bitRule []interface{}
+	for _, bitItem := range bit {
+		bitRule = append(bitRule, bitItem)
+	}
+
+	logs, sub, err := _WorkerRegistry.contract.WatchLogs(opts, "CapabilityRegistered", bitRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(WorkerRegistryCapabilityRegistered)
+				if err := _WorkerRegistry.contract.UnpackLog(event, "CapabilityRegistered", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseCapabilityRegistered is a log parse operation binding the contract event 0xda84914123ecd65b01462dd0b3fb0dde2988c2e933595751f7c1c821a182dcc4.
+//
+// Solidity: event CapabilityRegistered(uint8 indexed bit, string name)
+func (_WorkerRegistry *WorkerRegistryFilterer) ParseCapabilityRegistered(log types.Log) (*WorkerRegistryCapabilityRegistered, error) {
+	event := new(WorkerRegistryCapabilityRegistered)
+	if err := _WorkerRegistry.contract.UnpackLog(event, "CapabilityRegistered", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
 }
 
 // WorkerRegistryGuardianUpdatedIterator is returned from FilterGuardianUpdated and is used to iterate over the raw logs and unpacked data for GuardianUpdated events raised by the WorkerRegistry contract.
@@ -3325,6 +3636,151 @@ func (_WorkerRegistry *WorkerRegistryFilterer) WatchUpgraded(opts *bind.WatchOpt
 func (_WorkerRegistry *WorkerRegistryFilterer) ParseUpgraded(log types.Log) (*WorkerRegistryUpgraded, error) {
 	event := new(WorkerRegistryUpgraded)
 	if err := _WorkerRegistry.contract.UnpackLog(event, "Upgraded", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// WorkerRegistryWorkerCapabilitiesSetIterator is returned from FilterWorkerCapabilitiesSet and is used to iterate over the raw logs and unpacked data for WorkerCapabilitiesSet events raised by the WorkerRegistry contract.
+type WorkerRegistryWorkerCapabilitiesSetIterator struct {
+	Event *WorkerRegistryWorkerCapabilitiesSet // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *WorkerRegistryWorkerCapabilitiesSetIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(WorkerRegistryWorkerCapabilitiesSet)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(WorkerRegistryWorkerCapabilitiesSet)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *WorkerRegistryWorkerCapabilitiesSetIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *WorkerRegistryWorkerCapabilitiesSetIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// WorkerRegistryWorkerCapabilitiesSet represents a WorkerCapabilitiesSet event raised by the WorkerRegistry contract.
+type WorkerRegistryWorkerCapabilitiesSet struct {
+	Worker common.Address
+	Mask   *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
+}
+
+// FilterWorkerCapabilitiesSet is a free log retrieval operation binding the contract event 0xdab16906a519cbc2a53417bb9a1dd8bc2682e01e7d5a615000b83dfd7d9a69e8.
+//
+// Solidity: event WorkerCapabilitiesSet(address indexed worker, uint256 mask)
+func (_WorkerRegistry *WorkerRegistryFilterer) FilterWorkerCapabilitiesSet(opts *bind.FilterOpts, worker []common.Address) (*WorkerRegistryWorkerCapabilitiesSetIterator, error) {
+
+	var workerRule []interface{}
+	for _, workerItem := range worker {
+		workerRule = append(workerRule, workerItem)
+	}
+
+	logs, sub, err := _WorkerRegistry.contract.FilterLogs(opts, "WorkerCapabilitiesSet", workerRule)
+	if err != nil {
+		return nil, err
+	}
+	return &WorkerRegistryWorkerCapabilitiesSetIterator{contract: _WorkerRegistry.contract, event: "WorkerCapabilitiesSet", logs: logs, sub: sub}, nil
+}
+
+// WatchWorkerCapabilitiesSet is a free log subscription operation binding the contract event 0xdab16906a519cbc2a53417bb9a1dd8bc2682e01e7d5a615000b83dfd7d9a69e8.
+//
+// Solidity: event WorkerCapabilitiesSet(address indexed worker, uint256 mask)
+func (_WorkerRegistry *WorkerRegistryFilterer) WatchWorkerCapabilitiesSet(opts *bind.WatchOpts, sink chan<- *WorkerRegistryWorkerCapabilitiesSet, worker []common.Address) (event.Subscription, error) {
+
+	var workerRule []interface{}
+	for _, workerItem := range worker {
+		workerRule = append(workerRule, workerItem)
+	}
+
+	logs, sub, err := _WorkerRegistry.contract.WatchLogs(opts, "WorkerCapabilitiesSet", workerRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(WorkerRegistryWorkerCapabilitiesSet)
+				if err := _WorkerRegistry.contract.UnpackLog(event, "WorkerCapabilitiesSet", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseWorkerCapabilitiesSet is a log parse operation binding the contract event 0xdab16906a519cbc2a53417bb9a1dd8bc2682e01e7d5a615000b83dfd7d9a69e8.
+//
+// Solidity: event WorkerCapabilitiesSet(address indexed worker, uint256 mask)
+func (_WorkerRegistry *WorkerRegistryFilterer) ParseWorkerCapabilitiesSet(log types.Log) (*WorkerRegistryWorkerCapabilitiesSet, error) {
+	event := new(WorkerRegistryWorkerCapabilitiesSet)
+	if err := _WorkerRegistry.contract.UnpackLog(event, "WorkerCapabilitiesSet", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
