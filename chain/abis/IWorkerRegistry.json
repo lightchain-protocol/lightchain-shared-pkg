@@ -656,6 +656,40 @@
   },
   {
     "type": "function",
+    "name": "slashWithBounty",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "bps",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "bountyRecipient",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "slashAmount",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "bountyPaid",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "sunsetGuardian",
     "inputs": [],
     "outputs": [],
