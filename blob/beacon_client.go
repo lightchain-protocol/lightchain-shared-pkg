@@ -21,6 +21,17 @@ import (
 // submitJob TX.
 const SearchWindowBlocks = 100
 
+// MaxMissedSlots bounds how far past the parent beacon block to look for the
+// block that actually carried a payload.
+//
+// EIP-4788 gives an execution block the root of the *parent* beacon block, and
+// the payload normally rides in the very next slot. That only holds when no
+// slot is missed. On a small validator set misses are routine - roughly 8% of
+// slots on this devnet - and every one of them shifts the payload a slot later.
+// Assuming slot+1 made blob fetches fail permanently whenever the intervening
+// slot had no proposer, which surfaced as chat requests hanging forever.
+const MaxMissedSlots = 32
+
 // ELBlockFetcher is the subset of ethclient used to fetch execution-layer blocks.
 // Defined as an interface for testability.
 type ELBlockFetcher interface {
@@ -48,6 +59,18 @@ func NewBeaconClient(beaconURL string, elFetcher ELBlockFetcher, timeout time.Du
 // beaconHeaderResponse is the JSON envelope for GET /eth/v1/beacon/headers/{id}.
 type beaconHeaderResponse struct {
 	Data struct {
+		Header struct {
+			Message struct {
+				Slot string `json:"slot"`
+			} `json:"message"`
+		} `json:"header"`
+	} `json:"data"`
+}
+
+// beaconHeaderListResponse is the envelope for the filtered form of the same
+// endpoint, GET /eth/v1/beacon/headers?parent_root=..., which returns an array.
+type beaconHeaderListResponse struct {
+	Data []struct {
 		Header struct {
 			Message struct {
 				Slot string `json:"slot"`
@@ -131,18 +154,40 @@ func (bc *BeaconClient) fetchBlobAtBlock(ctx context.Context, versionedHash comm
 		return nil, fmt.Errorf("block %d has no parentBeaconBlockRoot (pre-Deneb?)", blockNumber)
 	}
 
-	slot, err := bc.getBeaconSlot(ctx, parentBeaconRoot.Hex())
+	// Ask the beacon directly which block has this parent. That is the block
+	// carrying our payload, in one request, regardless of how many slots were
+	// missed in between.
+	blobSlot, err := bc.childSlotOf(ctx, parentBeaconRoot.Hex())
 	if err != nil {
-		return nil, fmt.Errorf("get beacon slot for block %d: %w", blockNumber, err)
+		// Older or non-conforming beacons may not support the parent_root
+		// filter. Fall back to resolving the parent's slot and walking forward.
+		parentSlot, perr := bc.getBeaconSlot(ctx, parentBeaconRoot.Hex())
+		if perr != nil {
+			return nil, fmt.Errorf("get beacon slot for block %d: %w", blockNumber, perr)
+		}
+		var sidecars []BlobSidecar
+		sidecars, blobSlot, err = bc.sidecarsAfterSlot(ctx, parentSlot)
+		if err != nil {
+			return nil, fmt.Errorf("get blob sidecars after slot %d (block %d): %w", parentSlot, blockNumber, err)
+		}
+		return bc.matchSidecar(sidecars, versionedHash, blobSlot, blockNumber)
 	}
 
-	// Blobs are in the child beacon block (slot+1 relative to parentBeaconBlockRoot).
-	blobSlot := slot + 1
 	sidecars, err := bc.getBlobSidecars(ctx, blobSlot)
 	if err != nil {
-		return nil, fmt.Errorf("get blob sidecars at slot %d: %w", blobSlot, err)
+		return nil, fmt.Errorf("get blob sidecars at slot %d (block %d): %w", blobSlot, blockNumber, err)
 	}
 
+	return bc.matchSidecar(sidecars, versionedHash, blobSlot, blockNumber)
+}
+
+// matchSidecar picks the sidecar carrying versionedHash and decodes it.
+func (bc *BeaconClient) matchSidecar(
+	sidecars []BlobSidecar,
+	versionedHash common.Hash,
+	blobSlot uint64,
+	blockNumber uint64,
+) ([]byte, error) {
 	for _, sc := range sidecars {
 		commitHash := KzgToVersionedHash(sc.KzgCommitment)
 		if commitHash == (common.Hash{}) {
@@ -163,6 +208,93 @@ func (bc *BeaconClient) fetchBlobAtBlock(ctx context.Context, versionedHash comm
 	}
 
 	return nil, fmt.Errorf("blob with versioned hash %s not found in slot %d sidecars (block %d)", versionedHash.Hex(), blobSlot, blockNumber)
+}
+
+// childSlotOf returns the slot of the beacon block whose parent is blockRoot.
+//
+// An execution block carries its *parent* beacon block root (EIP-4788), so this
+// is what turns that into the slot actually holding the payload. Asking the
+// beacon to filter by parent_root costs one request and is exact, which matters
+// because the caller may repeat this for up to SearchWindowBlocks blocks: the
+// previous approach of walking forward slot by slot multiplied out to thousands
+// of requests and made a fetch take a minute.
+func (bc *BeaconClient) childSlotOf(ctx context.Context, blockRoot string) (uint64, error) {
+	url := fmt.Sprintf("%s/eth/v1/beacon/headers?parent_root=%s", bc.beaconURL, blockRoot)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, http.NoBody)
+	if err != nil {
+		return 0, fmt.Errorf("create child header request: %w", err)
+	}
+
+	resp, err := bc.httpClient.Do(req)
+	if err != nil {
+		return 0, fmt.Errorf("child header request: %w", err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return 0, fmt.Errorf("read child header response: %w", err)
+	}
+	if resp.StatusCode != http.StatusOK {
+		return 0, fmt.Errorf("child header returned status %d: %s", resp.StatusCode, string(body))
+	}
+
+	var listResp beaconHeaderListResponse
+	if err := json.Unmarshal(body, &listResp); err != nil {
+		return 0, fmt.Errorf("unmarshal child header: %w", err)
+	}
+	if len(listResp.Data) == 0 {
+		return 0, fmt.Errorf("no beacon block has parent_root %s", blockRoot)
+	}
+
+	var slot uint64
+	if _, err := fmt.Sscanf(listResp.Data[0].Header.Message.Slot, "%d", &slot); err != nil {
+		return 0, fmt.Errorf("parse child slot %q: %w", listResp.Data[0].Header.Message.Slot, err)
+	}
+	return slot, nil
+}
+
+// sidecarsAfterSlot returns the sidecars of the first beacon block found after
+// parentSlot, along with the slot it came from.
+//
+// Missed slots are skipped rather than treated as failures: the beacon replies
+// 404 "no blocks found at slot N" for a slot nobody proposed, which says
+// nothing about whether the payload exists. Only a genuine transport or decode
+// error aborts the walk.
+func (bc *BeaconClient) sidecarsAfterSlot(ctx context.Context, parentSlot uint64) ([]BlobSidecar, uint64, error) {
+	var lastErr error
+	for offset := uint64(1); offset <= MaxMissedSlots; offset++ {
+		slot := parentSlot + offset
+
+		sidecars, err := bc.getBlobSidecars(ctx, slot)
+		if err == nil {
+			return sidecars, slot, nil
+		}
+		if !isMissingSlot(err) {
+			return nil, slot, err
+		}
+		lastErr = err
+
+		if ctx.Err() != nil {
+			return nil, slot, ctx.Err()
+		}
+	}
+
+	return nil, 0, fmt.Errorf("no beacon block in slots %d..%d: %w",
+		parentSlot+1, parentSlot+MaxMissedSlots, lastErr)
+}
+
+// isMissingSlot reports whether the beacon simply had no block at that slot, as
+// opposed to failing to answer. Prysm returns 404 with "no blocks found at
+// slot" for a missed proposal.
+func isMissingSlot(err error) bool {
+	if err == nil {
+		return false
+	}
+	msg := err.Error()
+	return strings.Contains(msg, "status 404") ||
+		strings.Contains(msg, "Block not found") ||
+		strings.Contains(msg, "NOT_FOUND")
 }
 
 func (bc *BeaconClient) getBeaconSlot(ctx context.Context, blockRoot string) (uint64, error) {
@@ -231,11 +363,21 @@ func (bc *BeaconClient) getBlobSidecars(ctx context.Context, slot uint64) ([]Blo
 }
 
 // IsNotFoundError returns true if the error indicates the blob was simply not
-// present at the given slot (expected during backward search). Returns false
+// present for the given block (expected during backward search). Returns false
 // for infrastructure errors (RPC failures, decode errors) that should stop the search.
+//
+// This must recognise a missed slot as well as an absent blob. It previously
+// matched only "not found in slot", so the beacon's 404 for an unproposed slot
+// was classified as infrastructure failure and aborted the entire backward
+// search on the first missed slot - turning a recoverable miss into a permanent
+// job failure.
 func IsNotFoundError(err error) bool {
 	if err == nil {
 		return false
 	}
-	return strings.Contains(err.Error(), "not found in slot")
+	msg := err.Error()
+	return strings.Contains(msg, "not found in slot") ||
+		strings.Contains(msg, "not found in blocks") ||
+		strings.Contains(msg, "no beacon block in slots") ||
+		isMissingSlot(err)
 }
