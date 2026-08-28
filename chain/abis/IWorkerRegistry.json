@@ -638,6 +638,19 @@
   },
   {
     "type": "function",
+    "name": "setGuardian",
+    "inputs": [
+      {
+        "name": "newGuardian",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "slash",
     "inputs": [
       {
@@ -665,6 +678,45 @@
       },
       {
         "name": "bps",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "bountyRecipient",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "slashAmount",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "bountyPaid",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "slashWithBountyBps",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "bps",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "bountyBps",
         "type": "uint256",
         "internalType": "uint256"
       },

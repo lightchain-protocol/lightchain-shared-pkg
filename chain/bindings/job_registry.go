@@ -68,7 +68,7 @@ type IJobRegistrySession struct {
 
 // JobRegistryMetaData contains all meta data concerning the JobRegistry contract.
 var JobRegistryMetaData = &bind.MetaData{
-	ABI: "[{\"type\":\"constructor\",\"inputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"UPGRADE_INTERFACE_VERSION\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"internalType\":\"string\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"acknowledgeJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"adoptSession\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"claimRefund\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"claimTimeout\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"closeSession\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"completeJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"responseBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"responseCiphertextHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createSession\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"dispatcherSignature\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"delegateAllowance\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"delegate\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"deposit\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"depositAndAuthorize\",\"inputs\":[{\"name\":\"delegate\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"disputeJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"disputeResponseMismatch\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ciphertext\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"signature\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"getJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"tuple\",\"internalType\":\"structIJobRegistry.Job\",\"components\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"state\",\"type\":\"uint8\",\"internalType\":\"enumIJobRegistry.JobState\"},{\"name\":\"escrowedFee\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"promptBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"responseBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"submittedAt\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ackTimestamp\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"completedAt\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"deadline\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"disputeFiler\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"disputeBond\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"reExecutionBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"similarityScore\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"disputeCreatedAt\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"responseCiphertextHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"submitBlockNumber\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"completionBlockNumber\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSession\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"tuple\",\"internalType\":\"structIJobRegistry.Session\",\"components\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"status\",\"type\":\"uint8\",\"internalType\":\"enumIJobRegistry.SessionStatus\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"jobCount\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"lastActivityAt\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"reassignCount\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"deposit\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"excludedWorkers\",\"type\":\"address[]\",\"internalType\":\"address[]\"}]}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"guardian\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"initialize\",\"inputs\":[{\"name\":\"_initialOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_workerRegistry\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_aiConfig\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_treasury\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_feePool\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_guardian\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"isDelegateAuthorized\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"delegate\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"nonce\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"owner\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"pause\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"paused\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"pendingRefund\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"prepaidBalanceOf\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"proxiableUUID\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"reassignSession\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"releaseJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"releaseJobs\",\"inputs\":[{\"name\":\"jobIds\",\"type\":\"uint256[]\",\"internalType\":\"uint256[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"renounceOwnership\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"reputationRegistry\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"resolveDispute\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"workerGuilty\",\"type\":\"bool\",\"internalType\":\"bool\"},{\"name\":\"reExecutionBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"_similarityScore\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDelegateAllowance\",\"inputs\":[{\"name\":\"delegate\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"allowance\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDelegateAuthorization\",\"inputs\":[{\"name\":\"delegate\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"authorized\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setReputationRegistry\",\"inputs\":[{\"name\":\"registry\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"settleStuckJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"submitJob\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"blobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"submitJobOnBehalf\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"blobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"sunsetGuardian\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferOwnership\",\"inputs\":[{\"name\":\"newOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unpause\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"updateSessionKey\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"dispatcherSignature\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"upgradeToAndCall\",\"inputs\":[{\"name\":\"newImplementation\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"withdraw\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"withdrawBalance\",\"inputs\":[{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"workerBalance\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"event\",\"name\":\"DelegateAllowanceSet\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"delegate\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"allowance\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DelegateAuthorizationSet\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"delegate\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"authorized\",\"type\":\"bool\",\"indexed\":false,\"internalType\":\"bool\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Deposited\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"newBalance\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DisputeCreated\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"disputer\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DisputeDefaulted\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DisputeResolved\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"workerGuilty\",\"type\":\"bool\",\"indexed\":false,\"internalType\":\"bool\"},{\"name\":\"similarityScore\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"FeeDistributed\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"workerShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"protocolShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"feePoolShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"GuardianUpdated\",\"inputs\":[{\"name\":\"oldGuardian\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newGuardian\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Initialized\",\"inputs\":[{\"name\":\"version\",\"type\":\"uint64\",\"indexed\":false,\"internalType\":\"uint64\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobAcknowledged\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobCompleted\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"responseBlobHash\",\"type\":\"bytes32\",\"indexed\":false,\"internalType\":\"bytes32\"},{\"name\":\"responseCiphertextHash\",\"type\":\"bytes32\",\"indexed\":false,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobReleased\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"workerShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"protocolShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"feePoolShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobSettledNoFault\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"refundAmount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobSubmitted\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobTimedOut\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"slashAmount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"KeeperBountyPaid\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"keeper\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"kind\",\"type\":\"uint8\",\"indexed\":false,\"internalType\":\"uint8\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"OwnershipTransferred\",\"inputs\":[{\"name\":\"previousOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Paused\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"RefundClaimed\",\"inputs\":[{\"name\":\"recipient\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"RefundCreditedToBalance\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"RefundEscrowed\",\"inputs\":[{\"name\":\"recipient\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ReputationRegistryUpdated\",\"inputs\":[{\"name\":\"registry\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionAdopted\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionClosed\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionCreated\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionKeyUpdated\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionReassigned\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"newWorker\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"TransferFailed\",\"inputs\":[{\"name\":\"to\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Unpaused\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Upgraded\",\"inputs\":[{\"name\":\"implementation\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Withdrew\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"newBalance\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerWithdrawal\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false}]",
+	ABI: "[{\"type\":\"constructor\",\"inputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"UPGRADE_INTERFACE_VERSION\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"internalType\":\"string\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"acknowledgeJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"adoptSession\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"claimRefund\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"claimTimeout\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"closeSession\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"completeJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"responseBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"responseCiphertextHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createSession\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"dispatcherSignature\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"delegateAllowance\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"delegate\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"deposit\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"depositAndAuthorize\",\"inputs\":[{\"name\":\"delegate\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"disputeJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"disputeJobFromBalance\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"disputeResponseMismatch\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ciphertext\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"signature\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"getJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"tuple\",\"internalType\":\"structIJobRegistry.Job\",\"components\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"state\",\"type\":\"uint8\",\"internalType\":\"enumIJobRegistry.JobState\"},{\"name\":\"escrowedFee\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"promptBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"responseBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"submittedAt\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ackTimestamp\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"completedAt\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"deadline\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"disputeFiler\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"disputeBond\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"reExecutionBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"similarityScore\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"disputeCreatedAt\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"responseCiphertextHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"submitBlockNumber\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"completionBlockNumber\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSession\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"tuple\",\"internalType\":\"structIJobRegistry.Session\",\"components\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"status\",\"type\":\"uint8\",\"internalType\":\"enumIJobRegistry.SessionStatus\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"jobCount\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"lastActivityAt\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"reassignCount\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"deposit\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"excludedWorkers\",\"type\":\"address[]\",\"internalType\":\"address[]\"}]}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getWorkerInFlightJobs\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"guardian\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"initialize\",\"inputs\":[{\"name\":\"_initialOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_workerRegistry\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_aiConfig\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_treasury\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_feePool\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"_guardian\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"isDelegateAuthorized\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"delegate\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"nonce\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"owner\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"pause\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"paused\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"pendingRefund\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"prepaidBalanceOf\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"proxiableUUID\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"reassignSession\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"releaseJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"releaseJobs\",\"inputs\":[{\"name\":\"jobIds\",\"type\":\"uint256[]\",\"internalType\":\"uint256[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"renounceOwnership\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"reputationRegistry\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"resolveDispute\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"workerGuilty\",\"type\":\"bool\",\"internalType\":\"bool\"},{\"name\":\"reExecutionBlobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"_similarityScore\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDelegateAllowance\",\"inputs\":[{\"name\":\"delegate\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"allowance\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDelegateAuthorization\",\"inputs\":[{\"name\":\"delegate\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"authorized\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setGuardian\",\"inputs\":[{\"name\":\"newGuardian\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setReputationRegistry\",\"inputs\":[{\"name\":\"registry\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"settleStuckJob\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"submitJob\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"blobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"submitJobOnBehalf\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"blobHash\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"sunsetGuardian\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferOwnership\",\"inputs\":[{\"name\":\"newOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unpause\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"updateSessionKey\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"dispatcherSignature\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"upgradeToAndCall\",\"inputs\":[{\"name\":\"newImplementation\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"withdraw\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"withdrawBalance\",\"inputs\":[{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"workerBalance\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"event\",\"name\":\"DelegateAllowanceRestored\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"delegate\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DelegateAllowanceSet\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"delegate\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"allowance\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DelegateAuthorizationSet\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"delegate\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"authorized\",\"type\":\"bool\",\"indexed\":false,\"internalType\":\"bool\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Deposited\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"newBalance\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DisputeBondCreditedToBalance\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DisputeBountyPaid\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"disputer\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DisputeCreated\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"disputer\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DisputeDefaulted\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"DisputeResolved\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"workerGuilty\",\"type\":\"bool\",\"indexed\":false,\"internalType\":\"bool\"},{\"name\":\"similarityScore\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"FeeDistributed\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"workerShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"protocolShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"feePoolShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"GuardianUpdated\",\"inputs\":[{\"name\":\"oldGuardian\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newGuardian\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Initialized\",\"inputs\":[{\"name\":\"version\",\"type\":\"uint64\",\"indexed\":false,\"internalType\":\"uint64\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobAcknowledged\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobCompleted\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"responseBlobHash\",\"type\":\"bytes32\",\"indexed\":false,\"internalType\":\"bytes32\"},{\"name\":\"responseCiphertextHash\",\"type\":\"bytes32\",\"indexed\":false,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobReleased\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"workerShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"protocolShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"feePoolShare\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobSettledNoFault\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"refundAmount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobSubmitted\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"JobTimedOut\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"slashAmount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"KeeperBountyPaid\",\"inputs\":[{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"keeper\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"kind\",\"type\":\"uint8\",\"indexed\":false,\"internalType\":\"uint8\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"OwnershipTransferred\",\"inputs\":[{\"name\":\"previousOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Paused\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"RefundClaimed\",\"inputs\":[{\"name\":\"recipient\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"RefundCreditedToBalance\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"jobId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"RefundEscrowed\",\"inputs\":[{\"name\":\"recipient\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ReputationRegistryUpdated\",\"inputs\":[{\"name\":\"registry\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionAdopted\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionClosed\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionCreated\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionKeyUpdated\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionReassigned\",\"inputs\":[{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"newWorker\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"TransferFailed\",\"inputs\":[{\"name\":\"to\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Unpaused\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"indexed\":false,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Upgraded\",\"inputs\":[{\"name\":\"implementation\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Withdrew\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"newBalance\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerWithdrawal\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false}]",
 }
 
 // JobRegistryABI is the input ABI used to generate the binding from.
@@ -339,6 +339,37 @@ func (_JobRegistry *JobRegistrySession) GetSession(sessionId *big.Int) (IJobRegi
 // Solidity: function getSession(uint256 sessionId) view returns((address,bytes32,address,uint8,bytes,bytes,uint256,uint256,uint256,uint256,address[]))
 func (_JobRegistry *JobRegistryCallerSession) GetSession(sessionId *big.Int) (IJobRegistrySession, error) {
 	return _JobRegistry.Contract.GetSession(&_JobRegistry.CallOpts, sessionId)
+}
+
+// GetWorkerInFlightJobs is a free data retrieval call binding the contract method 0x39b25739.
+//
+// Solidity: function getWorkerInFlightJobs(address worker) view returns(uint256)
+func (_JobRegistry *JobRegistryCaller) GetWorkerInFlightJobs(opts *bind.CallOpts, worker common.Address) (*big.Int, error) {
+	var out []interface{}
+	err := _JobRegistry.contract.Call(opts, &out, "getWorkerInFlightJobs", worker)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// GetWorkerInFlightJobs is a free data retrieval call binding the contract method 0x39b25739.
+//
+// Solidity: function getWorkerInFlightJobs(address worker) view returns(uint256)
+func (_JobRegistry *JobRegistrySession) GetWorkerInFlightJobs(worker common.Address) (*big.Int, error) {
+	return _JobRegistry.Contract.GetWorkerInFlightJobs(&_JobRegistry.CallOpts, worker)
+}
+
+// GetWorkerInFlightJobs is a free data retrieval call binding the contract method 0x39b25739.
+//
+// Solidity: function getWorkerInFlightJobs(address worker) view returns(uint256)
+func (_JobRegistry *JobRegistryCallerSession) GetWorkerInFlightJobs(worker common.Address) (*big.Int, error) {
+	return _JobRegistry.Contract.GetWorkerInFlightJobs(&_JobRegistry.CallOpts, worker)
 }
 
 // Guardian is a free data retrieval call binding the contract method 0x452a9320.
@@ -861,6 +892,27 @@ func (_JobRegistry *JobRegistryTransactorSession) DisputeJob(jobId *big.Int) (*t
 	return _JobRegistry.Contract.DisputeJob(&_JobRegistry.TransactOpts, jobId)
 }
 
+// DisputeJobFromBalance is a paid mutator transaction binding the contract method 0x349d05ca.
+//
+// Solidity: function disputeJobFromBalance(uint256 jobId) returns()
+func (_JobRegistry *JobRegistryTransactor) DisputeJobFromBalance(opts *bind.TransactOpts, jobId *big.Int) (*types.Transaction, error) {
+	return _JobRegistry.contract.Transact(opts, "disputeJobFromBalance", jobId)
+}
+
+// DisputeJobFromBalance is a paid mutator transaction binding the contract method 0x349d05ca.
+//
+// Solidity: function disputeJobFromBalance(uint256 jobId) returns()
+func (_JobRegistry *JobRegistrySession) DisputeJobFromBalance(jobId *big.Int) (*types.Transaction, error) {
+	return _JobRegistry.Contract.DisputeJobFromBalance(&_JobRegistry.TransactOpts, jobId)
+}
+
+// DisputeJobFromBalance is a paid mutator transaction binding the contract method 0x349d05ca.
+//
+// Solidity: function disputeJobFromBalance(uint256 jobId) returns()
+func (_JobRegistry *JobRegistryTransactorSession) DisputeJobFromBalance(jobId *big.Int) (*types.Transaction, error) {
+	return _JobRegistry.Contract.DisputeJobFromBalance(&_JobRegistry.TransactOpts, jobId)
+}
+
 // DisputeResponseMismatch is a paid mutator transaction binding the contract method 0x6d3bf718.
 //
 // Solidity: function disputeResponseMismatch(uint256 jobId, bytes ciphertext, bytes signature) returns()
@@ -1069,6 +1121,27 @@ func (_JobRegistry *JobRegistrySession) SetDelegateAuthorization(delegate common
 // Solidity: function setDelegateAuthorization(address delegate, bool authorized) returns()
 func (_JobRegistry *JobRegistryTransactorSession) SetDelegateAuthorization(delegate common.Address, authorized bool) (*types.Transaction, error) {
 	return _JobRegistry.Contract.SetDelegateAuthorization(&_JobRegistry.TransactOpts, delegate, authorized)
+}
+
+// SetGuardian is a paid mutator transaction binding the contract method 0x8a0dac4a.
+//
+// Solidity: function setGuardian(address newGuardian) returns()
+func (_JobRegistry *JobRegistryTransactor) SetGuardian(opts *bind.TransactOpts, newGuardian common.Address) (*types.Transaction, error) {
+	return _JobRegistry.contract.Transact(opts, "setGuardian", newGuardian)
+}
+
+// SetGuardian is a paid mutator transaction binding the contract method 0x8a0dac4a.
+//
+// Solidity: function setGuardian(address newGuardian) returns()
+func (_JobRegistry *JobRegistrySession) SetGuardian(newGuardian common.Address) (*types.Transaction, error) {
+	return _JobRegistry.Contract.SetGuardian(&_JobRegistry.TransactOpts, newGuardian)
+}
+
+// SetGuardian is a paid mutator transaction binding the contract method 0x8a0dac4a.
+//
+// Solidity: function setGuardian(address newGuardian) returns()
+func (_JobRegistry *JobRegistryTransactorSession) SetGuardian(newGuardian common.Address) (*types.Transaction, error) {
+	return _JobRegistry.Contract.SetGuardian(&_JobRegistry.TransactOpts, newGuardian)
 }
 
 // SetReputationRegistry is a paid mutator transaction binding the contract method 0x3f0ce714.
@@ -1300,6 +1373,169 @@ func (_JobRegistry *JobRegistrySession) WithdrawBalance(amount *big.Int) (*types
 // Solidity: function withdrawBalance(uint256 amount) returns()
 func (_JobRegistry *JobRegistryTransactorSession) WithdrawBalance(amount *big.Int) (*types.Transaction, error) {
 	return _JobRegistry.Contract.WithdrawBalance(&_JobRegistry.TransactOpts, amount)
+}
+
+// JobRegistryDelegateAllowanceRestoredIterator is returned from FilterDelegateAllowanceRestored and is used to iterate over the raw logs and unpacked data for DelegateAllowanceRestored events raised by the JobRegistry contract.
+type JobRegistryDelegateAllowanceRestoredIterator struct {
+	Event *JobRegistryDelegateAllowanceRestored // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *JobRegistryDelegateAllowanceRestoredIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(JobRegistryDelegateAllowanceRestored)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(JobRegistryDelegateAllowanceRestored)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *JobRegistryDelegateAllowanceRestoredIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *JobRegistryDelegateAllowanceRestoredIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// JobRegistryDelegateAllowanceRestored represents a DelegateAllowanceRestored event raised by the JobRegistry contract.
+type JobRegistryDelegateAllowanceRestored struct {
+	User     common.Address
+	Delegate common.Address
+	JobId    *big.Int
+	Amount   *big.Int
+	Raw      types.Log // Blockchain specific contextual infos
+}
+
+// FilterDelegateAllowanceRestored is a free log retrieval operation binding the contract event 0xd386552036452ee8c612f57e9a73465fe11332bdf9f5dcb62eda0f60381f30d2.
+//
+// Solidity: event DelegateAllowanceRestored(address indexed user, address indexed delegate, uint256 indexed jobId, uint256 amount)
+func (_JobRegistry *JobRegistryFilterer) FilterDelegateAllowanceRestored(opts *bind.FilterOpts, user []common.Address, delegate []common.Address, jobId []*big.Int) (*JobRegistryDelegateAllowanceRestoredIterator, error) {
+
+	var userRule []interface{}
+	for _, userItem := range user {
+		userRule = append(userRule, userItem)
+	}
+	var delegateRule []interface{}
+	for _, delegateItem := range delegate {
+		delegateRule = append(delegateRule, delegateItem)
+	}
+	var jobIdRule []interface{}
+	for _, jobIdItem := range jobId {
+		jobIdRule = append(jobIdRule, jobIdItem)
+	}
+
+	logs, sub, err := _JobRegistry.contract.FilterLogs(opts, "DelegateAllowanceRestored", userRule, delegateRule, jobIdRule)
+	if err != nil {
+		return nil, err
+	}
+	return &JobRegistryDelegateAllowanceRestoredIterator{contract: _JobRegistry.contract, event: "DelegateAllowanceRestored", logs: logs, sub: sub}, nil
+}
+
+// WatchDelegateAllowanceRestored is a free log subscription operation binding the contract event 0xd386552036452ee8c612f57e9a73465fe11332bdf9f5dcb62eda0f60381f30d2.
+//
+// Solidity: event DelegateAllowanceRestored(address indexed user, address indexed delegate, uint256 indexed jobId, uint256 amount)
+func (_JobRegistry *JobRegistryFilterer) WatchDelegateAllowanceRestored(opts *bind.WatchOpts, sink chan<- *JobRegistryDelegateAllowanceRestored, user []common.Address, delegate []common.Address, jobId []*big.Int) (event.Subscription, error) {
+
+	var userRule []interface{}
+	for _, userItem := range user {
+		userRule = append(userRule, userItem)
+	}
+	var delegateRule []interface{}
+	for _, delegateItem := range delegate {
+		delegateRule = append(delegateRule, delegateItem)
+	}
+	var jobIdRule []interface{}
+	for _, jobIdItem := range jobId {
+		jobIdRule = append(jobIdRule, jobIdItem)
+	}
+
+	logs, sub, err := _JobRegistry.contract.WatchLogs(opts, "DelegateAllowanceRestored", userRule, delegateRule, jobIdRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(JobRegistryDelegateAllowanceRestored)
+				if err := _JobRegistry.contract.UnpackLog(event, "DelegateAllowanceRestored", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseDelegateAllowanceRestored is a log parse operation binding the contract event 0xd386552036452ee8c612f57e9a73465fe11332bdf9f5dcb62eda0f60381f30d2.
+//
+// Solidity: event DelegateAllowanceRestored(address indexed user, address indexed delegate, uint256 indexed jobId, uint256 amount)
+func (_JobRegistry *JobRegistryFilterer) ParseDelegateAllowanceRestored(log types.Log) (*JobRegistryDelegateAllowanceRestored, error) {
+	event := new(JobRegistryDelegateAllowanceRestored)
+	if err := _JobRegistry.contract.UnpackLog(event, "DelegateAllowanceRestored", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
 }
 
 // JobRegistryDelegateAllowanceSetIterator is returned from FilterDelegateAllowanceSet and is used to iterate over the raw logs and unpacked data for DelegateAllowanceSet events raised by the JobRegistry contract.
@@ -1750,6 +1986,314 @@ func (_JobRegistry *JobRegistryFilterer) WatchDeposited(opts *bind.WatchOpts, si
 func (_JobRegistry *JobRegistryFilterer) ParseDeposited(log types.Log) (*JobRegistryDeposited, error) {
 	event := new(JobRegistryDeposited)
 	if err := _JobRegistry.contract.UnpackLog(event, "Deposited", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// JobRegistryDisputeBondCreditedToBalanceIterator is returned from FilterDisputeBondCreditedToBalance and is used to iterate over the raw logs and unpacked data for DisputeBondCreditedToBalance events raised by the JobRegistry contract.
+type JobRegistryDisputeBondCreditedToBalanceIterator struct {
+	Event *JobRegistryDisputeBondCreditedToBalance // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *JobRegistryDisputeBondCreditedToBalanceIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(JobRegistryDisputeBondCreditedToBalance)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(JobRegistryDisputeBondCreditedToBalance)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *JobRegistryDisputeBondCreditedToBalanceIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *JobRegistryDisputeBondCreditedToBalanceIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// JobRegistryDisputeBondCreditedToBalance represents a DisputeBondCreditedToBalance event raised by the JobRegistry contract.
+type JobRegistryDisputeBondCreditedToBalance struct {
+	User   common.Address
+	JobId  *big.Int
+	Amount *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
+}
+
+// FilterDisputeBondCreditedToBalance is a free log retrieval operation binding the contract event 0x0495ecff18798d145e03166f88011bbadfbdbf65a5eb20e440b1944c4b567400.
+//
+// Solidity: event DisputeBondCreditedToBalance(address indexed user, uint256 indexed jobId, uint256 amount)
+func (_JobRegistry *JobRegistryFilterer) FilterDisputeBondCreditedToBalance(opts *bind.FilterOpts, user []common.Address, jobId []*big.Int) (*JobRegistryDisputeBondCreditedToBalanceIterator, error) {
+
+	var userRule []interface{}
+	for _, userItem := range user {
+		userRule = append(userRule, userItem)
+	}
+	var jobIdRule []interface{}
+	for _, jobIdItem := range jobId {
+		jobIdRule = append(jobIdRule, jobIdItem)
+	}
+
+	logs, sub, err := _JobRegistry.contract.FilterLogs(opts, "DisputeBondCreditedToBalance", userRule, jobIdRule)
+	if err != nil {
+		return nil, err
+	}
+	return &JobRegistryDisputeBondCreditedToBalanceIterator{contract: _JobRegistry.contract, event: "DisputeBondCreditedToBalance", logs: logs, sub: sub}, nil
+}
+
+// WatchDisputeBondCreditedToBalance is a free log subscription operation binding the contract event 0x0495ecff18798d145e03166f88011bbadfbdbf65a5eb20e440b1944c4b567400.
+//
+// Solidity: event DisputeBondCreditedToBalance(address indexed user, uint256 indexed jobId, uint256 amount)
+func (_JobRegistry *JobRegistryFilterer) WatchDisputeBondCreditedToBalance(opts *bind.WatchOpts, sink chan<- *JobRegistryDisputeBondCreditedToBalance, user []common.Address, jobId []*big.Int) (event.Subscription, error) {
+
+	var userRule []interface{}
+	for _, userItem := range user {
+		userRule = append(userRule, userItem)
+	}
+	var jobIdRule []interface{}
+	for _, jobIdItem := range jobId {
+		jobIdRule = append(jobIdRule, jobIdItem)
+	}
+
+	logs, sub, err := _JobRegistry.contract.WatchLogs(opts, "DisputeBondCreditedToBalance", userRule, jobIdRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(JobRegistryDisputeBondCreditedToBalance)
+				if err := _JobRegistry.contract.UnpackLog(event, "DisputeBondCreditedToBalance", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseDisputeBondCreditedToBalance is a log parse operation binding the contract event 0x0495ecff18798d145e03166f88011bbadfbdbf65a5eb20e440b1944c4b567400.
+//
+// Solidity: event DisputeBondCreditedToBalance(address indexed user, uint256 indexed jobId, uint256 amount)
+func (_JobRegistry *JobRegistryFilterer) ParseDisputeBondCreditedToBalance(log types.Log) (*JobRegistryDisputeBondCreditedToBalance, error) {
+	event := new(JobRegistryDisputeBondCreditedToBalance)
+	if err := _JobRegistry.contract.UnpackLog(event, "DisputeBondCreditedToBalance", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// JobRegistryDisputeBountyPaidIterator is returned from FilterDisputeBountyPaid and is used to iterate over the raw logs and unpacked data for DisputeBountyPaid events raised by the JobRegistry contract.
+type JobRegistryDisputeBountyPaidIterator struct {
+	Event *JobRegistryDisputeBountyPaid // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *JobRegistryDisputeBountyPaidIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(JobRegistryDisputeBountyPaid)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(JobRegistryDisputeBountyPaid)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *JobRegistryDisputeBountyPaidIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *JobRegistryDisputeBountyPaidIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// JobRegistryDisputeBountyPaid represents a DisputeBountyPaid event raised by the JobRegistry contract.
+type JobRegistryDisputeBountyPaid struct {
+	JobId    *big.Int
+	Disputer common.Address
+	Amount   *big.Int
+	Raw      types.Log // Blockchain specific contextual infos
+}
+
+// FilterDisputeBountyPaid is a free log retrieval operation binding the contract event 0x7bb8157037d9937ca79e2ea1e968013f708628108077cd3faef75aac225e0178.
+//
+// Solidity: event DisputeBountyPaid(uint256 indexed jobId, address indexed disputer, uint256 amount)
+func (_JobRegistry *JobRegistryFilterer) FilterDisputeBountyPaid(opts *bind.FilterOpts, jobId []*big.Int, disputer []common.Address) (*JobRegistryDisputeBountyPaidIterator, error) {
+
+	var jobIdRule []interface{}
+	for _, jobIdItem := range jobId {
+		jobIdRule = append(jobIdRule, jobIdItem)
+	}
+	var disputerRule []interface{}
+	for _, disputerItem := range disputer {
+		disputerRule = append(disputerRule, disputerItem)
+	}
+
+	logs, sub, err := _JobRegistry.contract.FilterLogs(opts, "DisputeBountyPaid", jobIdRule, disputerRule)
+	if err != nil {
+		return nil, err
+	}
+	return &JobRegistryDisputeBountyPaidIterator{contract: _JobRegistry.contract, event: "DisputeBountyPaid", logs: logs, sub: sub}, nil
+}
+
+// WatchDisputeBountyPaid is a free log subscription operation binding the contract event 0x7bb8157037d9937ca79e2ea1e968013f708628108077cd3faef75aac225e0178.
+//
+// Solidity: event DisputeBountyPaid(uint256 indexed jobId, address indexed disputer, uint256 amount)
+func (_JobRegistry *JobRegistryFilterer) WatchDisputeBountyPaid(opts *bind.WatchOpts, sink chan<- *JobRegistryDisputeBountyPaid, jobId []*big.Int, disputer []common.Address) (event.Subscription, error) {
+
+	var jobIdRule []interface{}
+	for _, jobIdItem := range jobId {
+		jobIdRule = append(jobIdRule, jobIdItem)
+	}
+	var disputerRule []interface{}
+	for _, disputerItem := range disputer {
+		disputerRule = append(disputerRule, disputerItem)
+	}
+
+	logs, sub, err := _JobRegistry.contract.WatchLogs(opts, "DisputeBountyPaid", jobIdRule, disputerRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(JobRegistryDisputeBountyPaid)
+				if err := _JobRegistry.contract.UnpackLog(event, "DisputeBountyPaid", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseDisputeBountyPaid is a log parse operation binding the contract event 0x7bb8157037d9937ca79e2ea1e968013f708628108077cd3faef75aac225e0178.
+//
+// Solidity: event DisputeBountyPaid(uint256 indexed jobId, address indexed disputer, uint256 amount)
+func (_JobRegistry *JobRegistryFilterer) ParseDisputeBountyPaid(log types.Log) (*JobRegistryDisputeBountyPaid, error) {
+	event := new(JobRegistryDisputeBountyPaid)
+	if err := _JobRegistry.contract.UnpackLog(event, "DisputeBountyPaid", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
