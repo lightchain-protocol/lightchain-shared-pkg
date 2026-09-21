@@ -46,6 +46,11 @@ func fakeVersionedHash(label string) ([]byte, string, common.Hash) {
 	return commitment, commitmentHex, common.Hash(h)
 }
 
+// canonicalHeader is the /eth/v1/beacon/headers?parent_root= reply for one canonical child at slot.
+func canonicalHeader(slot string) string {
+	return `{"data":[{"canonical":true,"header":{"message":{"slot":"` + slot + `"}}}]}`
+}
+
 // --- tests ---
 
 func TestBeaconClient_FetchBlob_Success(t *testing.T) {
@@ -61,11 +66,47 @@ func TestBeaconClient_FetchBlob_Success(t *testing.T) {
 
 	beacon := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch {
-		case r.URL.Path == "/eth/v1/beacon/headers/"+beaconRoot.Hex():
-			resp := beaconHeaderResponse{}
-			resp.Data.Header.Message.Slot = "100"
-			_ = json.NewEncoder(w).Encode(resp)
+		case r.URL.Path == "/eth/v1/beacon/headers" && r.URL.Query().Get("parent_root") == beaconRoot.Hex():
+			_, _ = fmt.Fprint(w, canonicalHeader("101"))
 		case r.URL.Path == "/eth/v1/beacon/blob_sidecars/101":
+			resp := blobSidecarsResponse{
+				Data: []BlobSidecar{{Index: "0", Blob: blobHex, KzgCommitment: commitmentHex}},
+			}
+			_ = json.NewEncoder(w).Encode(resp)
+		default:
+			http.NotFound(w, r)
+		}
+	}))
+	defer beacon.Close()
+
+	bc := NewBeaconClient(beacon.URL, &mockELFetcher{block: mockELBlock(beaconRoot)}, 5*time.Second, 0)
+	result, err := bc.FetchBlob(context.Background(), expectedHash, 100)
+	require.NoError(t, err)
+	assert.Equal(t, testPayload, result)
+}
+
+// The slot after the parent can be empty (a proposer missed it): the block's
+// beacon block then sits later than parent+1, and its sidecars with it.
+func TestBeaconClient_FetchBlob_EmptySlotAfterParent(t *testing.T) {
+	t.Parallel()
+
+	testPayload := []byte("after an empty slot")
+	blob, err := EncodeBlobData(testPayload)
+	require.NoError(t, err)
+	blobHex := "0x" + hex.EncodeToString(blob[:])
+
+	_, commitmentHex, expectedHash := fakeVersionedHash("empty-slot-commitment")
+	beaconRoot := common.HexToHash("0xbeaconroot")
+
+	// parent at slot 100, slot 101 empty, the block's own beacon block at 102
+	beacon := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch {
+		case r.URL.Path == "/eth/v1/beacon/headers" && r.URL.Query().Get("parent_root") == beaconRoot.Hex():
+			_, _ = fmt.Fprint(w, `{"data":[{"canonical":false,"header":{"message":{"slot":"101"}}},{"canonical":true,"header":{"message":{"slot":"102"}}}]}`)
+		case r.URL.Path == "/eth/v1/beacon/blob_sidecars/101":
+			w.WriteHeader(http.StatusNotFound)
+			_, _ = fmt.Fprint(w, `{"message":"Block not found: no blocks found at slot 101","code":404}`)
+		case r.URL.Path == "/eth/v1/beacon/blob_sidecars/102":
 			resp := blobSidecarsResponse{
 				Data: []BlobSidecar{{Index: "0", Blob: blobHex, KzgCommitment: commitmentHex}},
 			}
@@ -89,10 +130,8 @@ func TestBeaconClient_FetchBlob_NotFound(t *testing.T) {
 
 	beacon := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch {
-		case r.URL.Path == "/eth/v1/beacon/headers/"+beaconRoot.Hex():
-			resp := beaconHeaderResponse{}
-			resp.Data.Header.Message.Slot = "100"
-			_ = json.NewEncoder(w).Encode(resp)
+		case r.URL.Path == "/eth/v1/beacon/headers" && r.URL.Query().Get("parent_root") == beaconRoot.Hex():
+			_, _ = fmt.Fprint(w, canonicalHeader("101"))
 		case r.URL.Path == "/eth/v1/beacon/blob_sidecars/101":
 			resp := blobSidecarsResponse{Data: []BlobSidecar{}}
 			_ = json.NewEncoder(w).Encode(resp)
@@ -148,16 +187,14 @@ func TestBeaconClient_FetchBlob_RetryOnFailure(t *testing.T) {
 	callCount := 0
 	beacon := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch {
-		case r.URL.Path == "/eth/v1/beacon/headers/"+beaconRoot.Hex():
+		case r.URL.Path == "/eth/v1/beacon/headers" && r.URL.Query().Get("parent_root") == beaconRoot.Hex():
 			callCount++
 			if callCount <= 1 {
 				w.WriteHeader(http.StatusInternalServerError)
 				_, _ = fmt.Fprint(w, "temporary error")
 				return
 			}
-			resp := beaconHeaderResponse{}
-			resp.Data.Header.Message.Slot = "50"
-			_ = json.NewEncoder(w).Encode(resp)
+			_, _ = fmt.Fprint(w, canonicalHeader("51"))
 		case r.URL.Path == "/eth/v1/beacon/blob_sidecars/51":
 			resp := blobSidecarsResponse{
 				Data: []BlobSidecar{{Index: "0", Blob: blobHex, KzgCommitment: commitmentHex}},
