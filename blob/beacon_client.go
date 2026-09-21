@@ -45,10 +45,11 @@ func NewBeaconClient(beaconURL string, elFetcher ELBlockFetcher, timeout time.Du
 	}
 }
 
-// beaconHeaderResponse is the JSON envelope for GET /eth/v1/beacon/headers/{id}.
-type beaconHeaderResponse struct {
-	Data struct {
-		Header struct {
+// beaconHeadersResponse is the JSON envelope for GET /eth/v1/beacon/headers?parent_root={root}.
+type beaconHeadersResponse struct {
+	Data []struct {
+		Canonical bool `json:"canonical"`
+		Header    struct {
 			Message struct {
 				Slot string `json:"slot"`
 			} `json:"message"`
@@ -69,7 +70,7 @@ type BlobSidecar struct {
 }
 
 // FetchBlob retrieves blob data for a given versioned hash from the Beacon API.
-// Steps: EL block → parentBeaconBlockRoot → CL header (slot) → blob sidecars → match by versioned hash.
+// Steps: EL block → parentBeaconBlockRoot → the canonical CL header whose parent that is (slot) → blob sidecars → match by versioned hash.
 func (bc *BeaconClient) FetchBlob(ctx context.Context, versionedHash common.Hash, blockNumber uint64) ([]byte, error) {
 	var lastErr error
 	for attempt := 0; attempt <= bc.maxRetries; attempt++ {
@@ -131,13 +132,13 @@ func (bc *BeaconClient) fetchBlobAtBlock(ctx context.Context, versionedHash comm
 		return nil, fmt.Errorf("block %d has no parentBeaconBlockRoot (pre-Deneb?)", blockNumber)
 	}
 
-	slot, err := bc.getBeaconSlot(ctx, parentBeaconRoot.Hex())
+	// Blobs are in this block's own beacon block: the child of parentBeaconBlockRoot.
+	// Its slot is NOT parent+1 when the slots in between were missed, so ask for it.
+	blobSlot, err := bc.getBeaconSlot(ctx, parentBeaconRoot.Hex())
 	if err != nil {
 		return nil, fmt.Errorf("get beacon slot for block %d: %w", blockNumber, err)
 	}
 
-	// Blobs are in the child beacon block (slot+1 relative to parentBeaconBlockRoot).
-	blobSlot := slot + 1
 	sidecars, err := bc.getBlobSidecars(ctx, blobSlot)
 	if err != nil {
 		return nil, fmt.Errorf("get blob sidecars at slot %d: %w", blobSlot, err)
@@ -165,8 +166,9 @@ func (bc *BeaconClient) fetchBlobAtBlock(ctx context.Context, versionedHash comm
 	return nil, fmt.Errorf("blob with versioned hash %s not found in slot %d sidecars (block %d)", versionedHash.Hex(), blobSlot, blockNumber)
 }
 
-func (bc *BeaconClient) getBeaconSlot(ctx context.Context, blockRoot string) (uint64, error) {
-	url := fmt.Sprintf("%s/eth/v1/beacon/headers/%s", bc.beaconURL, blockRoot)
+// getBeaconSlot returns the slot of the canonical beacon block whose parent is parentRoot.
+func (bc *BeaconClient) getBeaconSlot(ctx context.Context, parentRoot string) (uint64, error) {
+	url := fmt.Sprintf("%s/eth/v1/beacon/headers?parent_root=%s", bc.beaconURL, parentRoot)
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, http.NoBody)
 	if err != nil {
 		return 0, fmt.Errorf("create beacon header request: %w", err)
@@ -187,17 +189,23 @@ func (bc *BeaconClient) getBeaconSlot(ctx context.Context, blockRoot string) (ui
 		return 0, fmt.Errorf("beacon header returned status %d: %s", resp.StatusCode, string(body))
 	}
 
-	var headerResp beaconHeaderResponse
-	if err := json.Unmarshal(body, &headerResp); err != nil {
-		return 0, fmt.Errorf("unmarshal beacon header: %w", err)
+	var headersResp beaconHeadersResponse
+	if err := json.Unmarshal(body, &headersResp); err != nil {
+		return 0, fmt.Errorf("unmarshal beacon headers: %w", err)
 	}
 
-	var slot uint64
-	if _, err := fmt.Sscanf(headerResp.Data.Header.Message.Slot, "%d", &slot); err != nil {
-		return 0, fmt.Errorf("parse slot %q: %w", headerResp.Data.Header.Message.Slot, err)
+	for _, h := range headersResp.Data {
+		if !h.Canonical {
+			continue
+		}
+		var slot uint64
+		if _, err := fmt.Sscanf(h.Header.Message.Slot, "%d", &slot); err != nil {
+			return 0, fmt.Errorf("parse slot %q: %w", h.Header.Message.Slot, err)
+		}
+		return slot, nil
 	}
 
-	return slot, nil
+	return 0, fmt.Errorf("no canonical beacon block with parent %s", parentRoot)
 }
 
 func (bc *BeaconClient) getBlobSidecars(ctx context.Context, slot uint64) ([]BlobSidecar, error) {
