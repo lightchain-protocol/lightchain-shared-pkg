@@ -19,8 +19,9 @@ import (
 // envelope is treated as text, so older clients keep working unchanged.
 type Envelope struct {
 	// Version is 1 for the first envelope format, 2 once any voice field is
-	// in use, 3 for a self-contained job (see Messages). Its presence is what distinguishes an envelope from a prompt
-	// that merely happens to be valid JSON. Decode accepts any version >= 1:
+	// in use, 3 for a self-contained job (see Messages). Its presence is
+	// what distinguishes an envelope from a prompt that merely happens to be
+	// valid JSON. Decode accepts any version >= 1:
 	// unknown fields are ignored by encoding/json, so an old worker decoding
 	// a v2 payload simply drops the voice fields (forward compatibility)
 	// instead of rejecting a prompt it could still answer.
@@ -61,7 +62,7 @@ type Envelope struct {
 	// Messages is the whole conversation of a self-contained job (envelope
 	// v3), the last turn the user's. Such a job goes to the model's chat
 	// call with exactly these messages and no history rebuilt from earlier
-	// jobs in its session. Text stays empty; it is text only.
+	// jobs in its session. It is text only and its Text stays empty.
 	Messages []Message `json:"messages,omitempty"`
 }
 
@@ -71,8 +72,8 @@ type Message struct {
 	Content string `json:"content"`
 }
 
-// SelfContainedVersion is the envelope version that carries Messages.
-const SelfContainedVersion = 3
+// selfContainedVersion is the envelope version that carries Messages.
+const selfContainedVersion = 3
 
 // ErrInvalidSelfContained marks a self-contained envelope that must be
 // refused rather than served: serving it with parts dropped or guessed at
@@ -80,8 +81,9 @@ const SelfContainedVersion = 3
 var ErrInvalidSelfContained = errors.New("invalid self-contained prompt")
 
 // SelfContained reports whether the envelope carries its whole conversation.
+// Messages decide it whatever the version, so they are never dropped.
 func (e *Envelope) SelfContained() bool {
-	return e.Version >= SelfContainedVersion
+	return e.Version >= selfContainedVersion || len(e.Messages) > 0
 }
 
 // maxPromptImages bounds how many images one prompt may carry. The prompt
@@ -116,16 +118,18 @@ func Decode(raw []byte) (Envelope, error) {
 	if err := json.Unmarshal(raw, &env); err != nil || env.Version < 1 {
 		return Envelope{Text: string(raw)}, nil
 	}
+	// Checked first: images or audio of any size make a self-contained
+	// prompt one to refuse outright.
+	if env.SelfContained() {
+		if err := checkSelfContained(&env); err != nil {
+			return Envelope{}, err
+		}
+	}
 	if len(env.Images) > maxPromptImages {
 		return Envelope{}, fmt.Errorf("%w: %d > %d", errTooManyImages, len(env.Images), maxPromptImages)
 	}
 	if len(env.Audio) > maxPromptAudioB64 {
 		return Envelope{}, fmt.Errorf("%w: %d > %d base64 chars", errAudioTooLarge, len(env.Audio), maxPromptAudioB64)
-	}
-	if env.SelfContained() {
-		if err := checkSelfContained(&env); err != nil {
-			return Envelope{}, err
-		}
 	}
 	return env, nil
 }
@@ -134,6 +138,8 @@ func checkSelfContained(env *Envelope) error {
 	switch {
 	case len(env.Images) > 0 || env.Audio != "":
 		return fmt.Errorf("%w: carries images or audio", ErrInvalidSelfContained)
+	case env.Text != "":
+		return fmt.Errorf("%w: carries text beside its messages", ErrInvalidSelfContained)
 	case len(env.Messages) == 0:
 		return fmt.Errorf("%w: no messages", ErrInvalidSelfContained)
 	case env.Messages[len(env.Messages)-1].Role != "user":

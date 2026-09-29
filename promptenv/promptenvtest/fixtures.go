@@ -40,9 +40,12 @@ var SelfContained = []Fixture{
 // Refused are version-3 envelopes a worker must refuse rather than serve,
 // keyed by what is wrong with them.
 var Refused = map[string]string{
-	"carries images":        `{"v":3,"text":"","messages":[{"role":"user","content":"what is this?"}],"images":["aGk="]}`,
-	"carries audio":         `{"v":3,"text":"","messages":[{"role":"user","content":"transcribe"}],"audio":"UklGRg=="}`,
-	"no messages":           `{"v":3,"text":"hello"}`,
+	"carries images": `{"v":3,"text":"","messages":[{"role":"user","content":"what is this?"}],"images":["aGk="]}`,
+	"carries audio":  `{"v":3,"text":"","messages":[{"role":"user","content":"transcribe"}],"audio":"UklGRg=="}`,
+	"carries too many images": `{"v":3,"text":"","messages":[{"role":"user","content":"what are these?"}],` +
+		`"images":["aGk=","aGk=","aGk=","aGk=","aGk=","aGk=","aGk=","aGk=","aGk="]}`,
+	"carries text":          `{"v":3,"text":"hello","messages":[{"role":"user","content":"hello"}]}`,
+	"no messages":           `{"v":3,"text":""}`,
 	"last message not user": `{"v":3,"text":"","messages":[{"role":"user","content":"hi"},{"role":"assistant","content":"hello"}]}`,
 	"unknown role":          `{"v":3,"text":"","messages":[{"role":"developer","content":"be brief"},{"role":"user","content":"hi"}]}`,
 }
