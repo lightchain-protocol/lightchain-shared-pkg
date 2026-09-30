@@ -151,7 +151,7 @@ func TestBuild_ReplaysAMultimodalPromptWithItsImages(t *testing.T) {
 	c.add(20, "plain question", "plain answer")
 	c.add(60, `{"v":1,"text":"what is in this picture?","images":["aW1n"]}`, "a cat")
 
-	turns, err := Build(context.Background(), c, c, key, []uint64{20, 60})
+	turns, err := Build(context.Background(), c, c, key, []uint64{20, 60}, 1000)
 
 	require.NoError(t, err)
 	assert.Equal(t, []promptenv.Message{
@@ -160,4 +160,30 @@ func TestBuild_ReplaysAMultimodalPromptWithItsImages(t *testing.T) {
 		{Role: "user", Content: "what is in this picture?", Images: []string{"aW1n"}},
 		{Role: "assistant", Content: "a cat"},
 	}, turns)
+}
+
+// An answer mined after the current job's submit block is left out, though
+// its prompt is replayed: whether the worker saw it on chain depends on when
+// it served the job, so the disputer could not know. An answer mined in that
+// very block is on chain for both.
+func TestBuild_LeavesOutAnAnswerMinedAfterTheJobWasSubmitted(t *testing.T) {
+	t.Parallel()
+	key := bytes.Repeat([]byte{7}, 32)
+	c := &chainJobs{t: t, sessionKey: key, blobs: map[common.Hash][]byte{}, jobs: map[uint64][2]common.Hash{}}
+	c.add(20, "first question", "first answer")   // answer mined in block 201
+	c.add(60, "second question", "second answer") // answer mined in block 601
+
+	turns, err := Build(context.Background(), c, c, key, []uint64{20, 60}, 600)
+
+	require.NoError(t, err)
+	assert.Equal(t, []promptenv.Message{
+		{Role: "user", Content: "first question"},
+		{Role: "assistant", Content: "first answer"},
+		{Role: "user", Content: "second question"},
+	}, turns)
+
+	turns, err = Build(context.Background(), c, c, key, []uint64{20, 60}, 601)
+
+	require.NoError(t, err)
+	assert.Len(t, turns, 4, "an answer mined in the job's own submit block is replayed")
 }

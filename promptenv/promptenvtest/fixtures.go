@@ -74,11 +74,12 @@ var PriorPrompts = []PriorPrompt{
 	{Name: "self-contained", Prompt: SelfContained[1].Envelope, Skipped: true},
 }
 
-// SessionJob is a job as the chain holds it: its JobSubmitted event, and the
-// prompt and answer in its blobs.
+// SessionJob is a job as the chain holds it: its JobSubmitted event, the
+// prompt and answer in its blobs, and AnswerBlock, the block whose
+// completeJob carried the answer.
 type SessionJob struct {
-	ID, SessionID, SubmitBlock uint64
-	Prompt, Answer             string
+	ID, SessionID, SubmitBlock, AnswerBlock uint64
+	Prompt, Answer                          string
 }
 
 // Session is a chat job, Current, that a worker serves and the disputer later
@@ -106,18 +107,23 @@ func (s *Session) JobSubmitted(sessionID, fromBlock, toBlock uint64) []uint64 {
 // BusySession is a session on a busy chain. Current's earlier jobs, one per
 // PriorPrompts shape, all sit more than 50 job ids behind it, other sessions'
 // jobs between: out of reach of a lookup that scans job ids backwards and
-// gives up 50 ids back, as the disputer's once did. The chain also holds
-// session jobs neither side may replay: one just before the look-back window,
-// and two after Current, one of them in Current's own block.
+// gives up 50 ids back, as the disputer's once did. The last of them was
+// answered one block after Current was submitted, so only its prompt is
+// replayed. The chain also holds session jobs neither side may replay: one
+// just before the look-back window, and two after Current, one of them in
+// Current's own block.
 var BusySession = func() Session {
 	const session = 7
-	s := Session{Current: SessionJob{ID: 200, SessionID: session, SubmitBlock: 120000, Prompt: "next question"}}
+	s := Session{Current: SessionJob{
+		ID: 200, SessionID: session, SubmitBlock: 120000, AnswerBlock: 120002, Prompt: "next question",
+	}}
 	windowStart := s.Current.SubmitBlock - sessionhistory.LookbackBlocks
 	for i, p := range PriorPrompts {
 		j := SessionJob{
 			ID: 20 + 40*uint64(i), SessionID: session, SubmitBlock: windowStart + 10000*uint64(i),
 			Prompt: p.Prompt, Answer: fmt.Sprintf("answer %d", i+1),
 		}
+		j.AnswerBlock = j.SubmitBlock + 1
 		s.Chain = append(s.Chain, j)
 		if !p.Skipped {
 			s.History = append(s.History,
@@ -125,8 +131,14 @@ var BusySession = func() Session {
 				promptenv.Message{Role: "assistant", Content: j.Answer})
 		}
 	}
+	late := SessionJob{
+		ID: 145, SessionID: session, SubmitBlock: s.Current.SubmitBlock - 10, AnswerBlock: s.Current.SubmitBlock + 1,
+		Prompt: "asked just before", Answer: "answered just after",
+	}
+	s.History = append(s.History, promptenv.Message{Role: "user", Content: late.Prompt})
 	s.Chain = append(
 		s.Chain,
+		late,
 		SessionJob{ID: 5, SessionID: session, SubmitBlock: windowStart - 1, Prompt: "too old", Answer: "too old to replay"},
 		SessionJob{ID: 150, SessionID: 8, SubmitBlock: 110000, Prompt: "another session", Answer: "not this one"},
 		SessionJob{ID: 199, SessionID: 9, SubmitBlock: s.Current.SubmitBlock, Prompt: "a third session", Answer: "not this one"},

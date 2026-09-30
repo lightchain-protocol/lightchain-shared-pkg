@@ -60,24 +60,34 @@ type Jobs interface {
 	GetJobBlobInfo(ctx context.Context, jobID uint64) (promptHash, responseHash common.Hash, submitBlock, completionBlock uint64, err error)
 }
 
-// Build replays jobIDs, in order, as the turns of a conversation: each job's
-// prompt as a user turn (promptenv.Replay), then its answer, if it has one,
-// as the assistant's. A self-contained job and its answer are left out: it
-// was another conversation in the same session. Any fetch or decrypt failure
+// Build replays jobIDs, in order, as the turns of the conversation that the
+// job submitted in submitBlock continues: each job's prompt as a user turn
+// (promptenv.Replay), then its answer as the assistant's, if that answer was
+// on chain by submitBlock. An answer mined later is left out: whether the
+// worker saw it depends on when it served the job, which the disputer
+// cannot know. A self-contained job and its answer are left out too: it was
+// another conversation in the same session. Any fetch or decrypt failure
 // fails the whole history, so no caller serves or judges a job on part of
 // one.
 //
 // Blobs are decrypted with the current session's key, so a job id from
 // another session fails to decrypt rather than leak into this one.
-func Build(ctx context.Context, jobs Jobs, blobs blob.BlobFetcher, sessionKey []byte, jobIDs []uint64) ([]promptenv.Message, error) {
+func Build(
+	ctx context.Context,
+	jobs Jobs,
+	blobs blob.BlobFetcher,
+	sessionKey []byte,
+	jobIDs []uint64,
+	submitBlock uint64,
+) ([]promptenv.Message, error) {
 	var turns []promptenv.Message
 	for _, jobID := range jobIDs {
-		promptHash, responseHash, submitBlock, completionBlock, err := jobs.GetJobBlobInfo(ctx, jobID)
+		promptHash, responseHash, promptBlock, completionBlock, err := jobs.GetJobBlobInfo(ctx, jobID)
 		if err != nil {
 			return nil, fmt.Errorf("get blob hashes for job %d: %w", jobID, err)
 		}
 		if promptHash != (common.Hash{}) {
-			prompt, err := fetchDecrypt(ctx, blobs, sessionKey, promptHash, submitBlock)
+			prompt, err := fetchDecrypt(ctx, blobs, sessionKey, promptHash, promptBlock)
 			if err != nil {
 				return nil, fmt.Errorf("prompt of job %d: %w", jobID, err)
 			}
@@ -87,7 +97,7 @@ func Build(ctx context.Context, jobs Jobs, blobs blob.BlobFetcher, sessionKey []
 			}
 			turns = append(turns, turn)
 		}
-		if responseHash != (common.Hash{}) {
+		if responseHash != (common.Hash{}) && completionBlock <= submitBlock {
 			response, err := fetchDecrypt(ctx, blobs, sessionKey, responseHash, completionBlock)
 			if err != nil {
 				return nil, fmt.Errorf("response of job %d: %w", jobID, err)
