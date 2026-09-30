@@ -58,12 +58,14 @@ var Refused = map[string]string{
 }
 
 // PriorPrompt is an earlier job's prompt in a session and the user turn it
-// adds to the history rebuilt for a later chat job. Skipped marks a
-// self-contained job, which adds nothing, its answer included.
+// adds to the history rebuilt for a later chat job, its text and images.
+// Skipped marks a self-contained job, which adds nothing, its answer
+// included.
 type PriorPrompt struct {
 	Name    string
 	Prompt  string
 	Turn    string
+	Images  []string
 	Skipped bool
 }
 
@@ -71,7 +73,13 @@ type PriorPrompt struct {
 var PriorPrompts = []PriorPrompt{
 	{Name: "raw text", Prompt: "plain question", Turn: "plain question"},
 	{Name: "search wrapped", Prompt: string(searchaug.EncodePrompt("searched question", true)), Turn: "searched question"},
-	{Name: "multimodal envelope", Prompt: `{"v":1,"text":"envelope question"}`, Turn: "envelope question"},
+	{
+		Name: "multimodal envelope", Prompt: `{"v":1,"text":"envelope question","images":["aGk="]}`,
+		Turn: "envelope question", Images: []string{"aGk="},
+	},
+	// A voice prompt is replayed on its text alone: the transcript the worker
+	// merged into it when serving it is on no chain.
+	{Name: "voice envelope", Prompt: `{"v":2,"text":"typed context","audio":"UklGRg=="}`, Turn: "typed context"},
 	{Name: "self-contained", Prompt: SelfContained[1].Envelope, Skipped: true},
 	{Name: "search-wrapped self-contained", Prompt: string(searchaug.EncodePrompt(SelfContained[0].Envelope, true)), Skipped: true},
 }
@@ -85,12 +93,13 @@ type SessionJob struct {
 }
 
 // Session is a chat job, Current, that a worker serves and the disputer later
-// re-runs, and the other jobs on chain around it. History is the
-// conversation both must rebuild for Current.
+// re-runs, and the other jobs on chain around it. Messages is the model input
+// both must give Current: the conversation they rebuild from its session's
+// earlier jobs, then Current's own turn.
 type Session struct {
-	Current SessionJob
-	Chain   []SessionJob
-	History []promptenv.Message
+	Current  SessionJob
+	Chain    []SessionJob
+	Messages []promptenv.Message
 }
 
 // JobSubmitted returns the ids of sessionID's jobs, Current included, whose
@@ -113,23 +122,25 @@ func (s *Session) JobSubmitted(sessionID, fromBlock, toBlock uint64) []uint64 {
 // answered one block after Current was submitted, so only its prompt is
 // replayed. The chain also holds session jobs neither side may replay: one
 // just before the look-back window, and two after Current, one of them in
-// Current's own block.
+// Current's own block. Current and one earlier job carry an image.
 var BusySession = func() Session {
 	const session = 7
 	s := Session{Current: SessionJob{
-		ID: 200, SessionID: session, SubmitBlock: 120000, AnswerBlock: 120002, Prompt: "next question",
+		ID: 200, SessionID: session, SubmitBlock: 120000, AnswerBlock: 120002,
+		Prompt: `{"v":1,"text":"next question","images":["bmV4dA=="]}`,
 	}}
 	windowStart := s.Current.SubmitBlock - sessionhistory.LookbackBlocks
 	for i, p := range PriorPrompts {
+		// Ids stay below the late job's, added next, so it replays last.
 		j := SessionJob{
-			ID: 20 + 30*uint64(i), SessionID: session, SubmitBlock: windowStart + 10000*uint64(i),
+			ID: 20 + 20*uint64(i), SessionID: session, SubmitBlock: windowStart + 8000*uint64(i),
 			Prompt: p.Prompt, Answer: fmt.Sprintf("answer %d", i+1),
 		}
 		j.AnswerBlock = j.SubmitBlock + 1
 		s.Chain = append(s.Chain, j)
 		if !p.Skipped {
-			s.History = append(s.History,
-				promptenv.Message{Role: "user", Content: p.Turn},
+			s.Messages = append(s.Messages,
+				promptenv.Message{Role: "user", Content: p.Turn, Images: p.Images},
 				promptenv.Message{Role: "assistant", Content: j.Answer})
 		}
 	}
@@ -137,7 +148,9 @@ var BusySession = func() Session {
 		ID: 145, SessionID: session, SubmitBlock: s.Current.SubmitBlock - 10, AnswerBlock: s.Current.SubmitBlock + 1,
 		Prompt: "asked just before", Answer: "answered just after",
 	}
-	s.History = append(s.History, promptenv.Message{Role: "user", Content: late.Prompt})
+	s.Messages = append(s.Messages,
+		promptenv.Message{Role: "user", Content: late.Prompt},
+		promptenv.Message{Role: "user", Content: "next question", Images: []string{"bmV4dA=="}})
 	s.Chain = append(
 		s.Chain,
 		late,

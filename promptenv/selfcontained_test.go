@@ -122,7 +122,7 @@ func TestReplay(t *testing.T) {
 		turn, ok := promptenv.Replay([]byte(f.Prompt))
 		assert.Equal(t, !f.Skipped, ok, f.Name)
 		if ok {
-			assert.Equal(t, promptenv.Message{Role: "user", Content: f.Turn}, turn, f.Name)
+			assert.Equal(t, promptenv.Message{Role: "user", Content: f.Turn, Images: f.Images}, turn, f.Name)
 		}
 	}
 }
