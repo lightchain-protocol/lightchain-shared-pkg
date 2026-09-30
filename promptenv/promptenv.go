@@ -114,9 +114,9 @@ func (e *Envelope) Conversation(history []Message) []Message {
 // Replay is the user turn an earlier job's decrypted prompt adds to the
 // history rebuilt for a later job: a search prompt's question, a multimodal
 // prompt's text and images, raw text as it is. A prompt that fails to decode
-// is replayed raw rather than dropped. ok is false for a self-contained job:
-// it carries its own conversation, so neither it nor its answer belongs in
-// another job's history.
+// is replayed raw rather than dropped. ok is false for a self-contained job,
+// even one in the search wrapper that a worker refuses: it carries its own
+// conversation, so neither it nor its answer belongs in another job's history.
 func Replay(plain []byte) (turn Message, ok bool) {
 	raw := Message{Role: "user", Content: string(plain)}
 	text, _, err := searchaug.DecodePrompt(plain)
@@ -131,6 +131,23 @@ func Replay(plain []byte) (turn Message, ok bool) {
 		return Message{}, false
 	}
 	return Message{Role: "user", Content: env.Text, Images: env.Images}, true
+}
+
+// UnwrapSearch takes a decrypted prompt out of its web-search wrapper
+// (searchaug.DecodePrompt): the text to search on and decode, and whether the
+// job asked for a search. A self-contained envelope inside the wrapper is
+// refused with ErrInvalidSelfContained, its text still returned: the job is
+// text only, and a search would run on and augment the envelope's JSON
+// rather than its conversation.
+func UnwrapSearch(plain []byte) (text string, search bool, err error) {
+	text, search, err = searchaug.DecodePrompt(plain)
+	if err != nil || !search {
+		return text, search, err
+	}
+	if env, decErr := Decode([]byte(text)); env.SelfContained() || errors.Is(decErr, ErrInvalidSelfContained) {
+		return text, search, fmt.Errorf("%w: wrapped for a web search", ErrInvalidSelfContained)
+	}
+	return text, search, nil
 }
 
 // maxPromptImages bounds how many images one prompt may carry. The prompt

@@ -43,8 +43,8 @@ var SelfContained = []Fixture{
 	},
 }
 
-// Refused are version-3 envelopes a worker must refuse rather than serve,
-// keyed by what is wrong with them.
+// Refused are version-3 envelopes, as they travel inside the prompt blob, that
+// a worker must refuse rather than serve, keyed by what is wrong with them.
 var Refused = map[string]string{
 	"carries images": `{"v":3,"text":"","messages":[{"role":"user","content":"what is this?"}],"images":["aGk="]}`,
 	"carries audio":  `{"v":3,"text":"","messages":[{"role":"user","content":"transcribe"}],"audio":"UklGRg=="}`,
@@ -54,6 +54,7 @@ var Refused = map[string]string{
 	"no messages":           `{"v":3,"text":""}`,
 	"last message not user": `{"v":3,"text":"","messages":[{"role":"user","content":"hi"},{"role":"assistant","content":"hello"}]}`,
 	"unknown role":          `{"v":3,"text":"","messages":[{"role":"developer","content":"be brief"},{"role":"user","content":"hi"}]}`,
+	"search wrapped":        string(searchaug.EncodePrompt(SelfContained[0].Envelope, true)),
 }
 
 // PriorPrompt is an earlier job's prompt in a session and the user turn it
@@ -72,6 +73,7 @@ var PriorPrompts = []PriorPrompt{
 	{Name: "search wrapped", Prompt: string(searchaug.EncodePrompt("searched question", true)), Turn: "searched question"},
 	{Name: "multimodal envelope", Prompt: `{"v":1,"text":"envelope question"}`, Turn: "envelope question"},
 	{Name: "self-contained", Prompt: SelfContained[1].Envelope, Skipped: true},
+	{Name: "search-wrapped self-contained", Prompt: string(searchaug.EncodePrompt(SelfContained[0].Envelope, true)), Skipped: true},
 }
 
 // SessionJob is a job as the chain holds it: its JobSubmitted event, the
@@ -120,7 +122,7 @@ var BusySession = func() Session {
 	windowStart := s.Current.SubmitBlock - sessionhistory.LookbackBlocks
 	for i, p := range PriorPrompts {
 		j := SessionJob{
-			ID: 20 + 40*uint64(i), SessionID: session, SubmitBlock: windowStart + 10000*uint64(i),
+			ID: 20 + 30*uint64(i), SessionID: session, SubmitBlock: windowStart + 10000*uint64(i),
 			Prompt: p.Prompt, Answer: fmt.Sprintf("answer %d", i+1),
 		}
 		j.AnswerBlock = j.SubmitBlock + 1

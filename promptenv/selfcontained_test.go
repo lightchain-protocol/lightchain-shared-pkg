@@ -8,6 +8,7 @@ import (
 
 	"github.com/lightchain/pkg/promptenv"
 	"github.com/lightchain/pkg/promptenv/promptenvtest"
+	"github.com/lightchain/pkg/searchaug"
 )
 
 func TestDecode_SelfContainedYieldsItsMessages(t *testing.T) {
@@ -23,14 +24,41 @@ func TestDecode_SelfContainedYieldsItsMessages(t *testing.T) {
 	}
 }
 
-func TestDecode_RefusesMalformedSelfContained(t *testing.T) {
+// A worker takes a prompt out of the search wrapper and then decodes it; one
+// of these is refused on the way.
+func TestUnwrapSearchThenDecode_RefusesMalformedSelfContained(t *testing.T) {
 	t.Parallel()
 
 	for name, raw := range promptenvtest.Refused {
 		t.Run(name, func(t *testing.T) {
-			_, err := promptenv.Decode([]byte(raw))
+			text, _, err := promptenv.UnwrapSearch([]byte(raw))
+			if err == nil {
+				_, err = promptenv.Decode([]byte(text))
+			}
 			require.ErrorIs(t, err, promptenv.ErrInvalidSelfContained)
 		})
+	}
+}
+
+// In the search wrapper a malformed self-contained envelope is refused too,
+// before any search: augmented with results, it would no longer decode as one.
+func TestUnwrapSearch_RefusesAMalformedSelfContainedEnvelope(t *testing.T) {
+	t.Parallel()
+
+	_, _, err := promptenv.UnwrapSearch(searchaug.EncodePrompt(promptenvtest.Refused["carries images"], true))
+	require.ErrorIs(t, err, promptenv.ErrInvalidSelfContained)
+}
+
+// Only a self-contained envelope is refused in the search wrapper: any other
+// searched prompt comes out as it went in.
+func TestUnwrapSearch_PassesOtherSearchedPromptsThrough(t *testing.T) {
+	t.Parallel()
+
+	for _, prompt := range []string{"plain question", `{"v":1,"text":"what is this?","images":["aGk="]}`} {
+		text, search, err := promptenv.UnwrapSearch(searchaug.EncodePrompt(prompt, true))
+		require.NoError(t, err)
+		assert.True(t, search)
+		assert.Equal(t, prompt, text)
 	}
 }
 
