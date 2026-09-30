@@ -21,11 +21,16 @@ import (
 )
 
 // LookbackBlocks is how far before a job's submit block its session's
-// earlier jobs are looked for (~1.15 days at 2 s blocks). It is a protocol
+// earlier jobs are looked for (~27.8 h at 2 s blocks). It is a protocol
 // constant rather than a setting: a worker and the disputer that looked back
 // different distances would rebuild different histories for the same job.
 // It must stay inside the beacon chain's blob retention, or an earlier job's
-// prompt could no longer be fetched.
+// prompt could no longer be fetched. Every network runs 6-slot epochs of 2 s
+// slots (12 s) and keeps blobs for 12288 epochs (73,728 slots, ~41 h):
+//   - mainnet and testnet: MIN_EPOCHS_FOR_BLOB_SIDECARS_REQUESTS in their
+//     beacon chain config;
+//   - devnet: the beacon node's --blob-retention-epochs flag, over the
+//     preset's 4096 epochs (~13.7 h) that its chain config keeps.
 const LookbackBlocks = 50000
 
 // Lister lists a session's jobs from the chain.
