@@ -4,7 +4,10 @@
 // model the same input.
 package promptenvtest
 
-import "github.com/lightchain/pkg/promptenv"
+import (
+	"github.com/lightchain/pkg/promptenv"
+	"github.com/lightchain/pkg/searchaug"
+)
 
 // Fixture is a self-contained envelope as it travels inside the encrypted
 // prompt blob, and the messages the model must be given for it.
@@ -48,4 +51,22 @@ var Refused = map[string]string{
 	"no messages":           `{"v":3,"text":""}`,
 	"last message not user": `{"v":3,"text":"","messages":[{"role":"user","content":"hi"},{"role":"assistant","content":"hello"}]}`,
 	"unknown role":          `{"v":3,"text":"","messages":[{"role":"developer","content":"be brief"},{"role":"user","content":"hi"}]}`,
+}
+
+// PriorPrompt is an earlier job's prompt in a session and the user turn it
+// adds to the history rebuilt for a later chat job. Skipped marks a
+// self-contained job, which adds nothing, its answer included.
+type PriorPrompt struct {
+	Name    string
+	Prompt  string
+	Turn    string
+	Skipped bool
+}
+
+// PriorPrompts covers every prompt shape a session's earlier job can have.
+var PriorPrompts = []PriorPrompt{
+	{Name: "raw text", Prompt: "plain question", Turn: "plain question"},
+	{Name: "search wrapped", Prompt: string(searchaug.EncodePrompt("searched question", true)), Turn: "searched question"},
+	{Name: "multimodal envelope", Prompt: `{"v":1,"text":"envelope question"}`, Turn: "envelope question"},
+	{Name: "self-contained", Prompt: SelfContained[1].Envelope, Skipped: true},
 }

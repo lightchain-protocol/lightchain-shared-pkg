@@ -8,6 +8,9 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"slices"
+
+	"github.com/lightchain/pkg/searchaug"
 )
 
 // Envelope is the decrypted prompt payload.
@@ -21,10 +24,11 @@ type Envelope struct {
 	// Version is 1 for the first envelope format, 2 once any voice field is
 	// in use, 3 for a self-contained job (see Messages). Its presence is
 	// what distinguishes an envelope from a prompt that merely happens to be
-	// valid JSON. Decode accepts any version >= 1:
-	// unknown fields are ignored by encoding/json, so an old worker decoding
-	// a v2 payload simply drops the voice fields (forward compatibility)
-	// instead of rejecting a prompt it could still answer.
+	// valid JSON. Decode accepts any version >= 1: unknown fields are
+	// ignored by encoding/json, so an old worker decoding a v2 payload
+	// simply drops the voice fields (forward compatibility) instead of
+	// rejecting a prompt it could still answer. Messages are the exception:
+	// they are checked whatever the version, and version 3 must carry them.
 	Version int    `json:"v"`
 	Text    string `json:"text"`
 	// Images are base64-encoded, without a data: prefix, in the form Ollama
@@ -66,10 +70,14 @@ type Envelope struct {
 	Messages []Message `json:"messages,omitempty"`
 }
 
-// Message is one turn of a self-contained job's conversation.
+// Message is one turn of a conversation: of a self-contained job's
+// envelope, or of the chat input Conversation builds for any job.
 type Message struct {
 	Role    string `json:"role"`
 	Content string `json:"content"`
+	// Images ride on the user turn of a multimodal job, never on the wire:
+	// a self-contained job is text only.
+	Images []string `json:"-"`
 }
 
 // selfContainedVersion is the envelope version that carries Messages.
@@ -81,9 +89,48 @@ const selfContainedVersion = 3
 var ErrInvalidSelfContained = errors.New("invalid self-contained prompt")
 
 // SelfContained reports whether the envelope carries its whole conversation.
-// Messages decide it whatever the version, so they are never dropped.
+// The messages alone decide it, whatever the version, so they are never
+// dropped.
 func (e *Envelope) SelfContained() bool {
-	return e.Version >= selfContainedVersion || len(e.Messages) > 0
+	return len(e.Messages) > 0
+}
+
+// Conversation is the chat input a job gives the model, or nil when the job
+// goes to the single-prompt generate call with its Text. A self-contained job
+// always chats with exactly its own messages, even a single user turn, and
+// takes no history. Any other job chats when it has history (its session's
+// earlier turns, rebuilt with Replay) or images, its Text and images being
+// the last user turn.
+func (e *Envelope) Conversation(history []Message) []Message {
+	if e.SelfContained() {
+		return e.Messages
+	}
+	if len(history) == 0 && len(e.Images) == 0 {
+		return nil
+	}
+	return append(slices.Clip(history), Message{Role: "user", Content: e.Text, Images: e.Images})
+}
+
+// Replay is the user turn an earlier job's decrypted prompt adds to the
+// history rebuilt for a later job: a search prompt's question, a multimodal
+// prompt's text and images, raw text as it is. A prompt that fails to decode
+// is replayed raw rather than dropped. ok is false for a self-contained job:
+// it carries its own conversation, so neither it nor its answer belongs in
+// another job's history.
+func Replay(plain []byte) (turn Message, ok bool) {
+	raw := Message{Role: "user", Content: string(plain)}
+	text, _, err := searchaug.DecodePrompt(plain)
+	if err != nil {
+		return raw, true
+	}
+	env, err := Decode([]byte(text))
+	if err != nil {
+		return raw, true
+	}
+	if env.SelfContained() {
+		return Message{}, false
+	}
+	return Message{Role: "user", Content: env.Text, Images: env.Images}, true
 }
 
 // maxPromptImages bounds how many images one prompt may carry. The prompt
@@ -120,7 +167,7 @@ func Decode(raw []byte) (Envelope, error) {
 	}
 	// Checked first: images or audio of any size make a self-contained
 	// prompt one to refuse outright.
-	if env.SelfContained() {
+	if env.SelfContained() || env.Version == selfContainedVersion {
 		if err := checkSelfContained(&env); err != nil {
 			return Envelope{}, err
 		}
