@@ -105,9 +105,10 @@ func (s *Session) JobSubmitted(sessionID, fromBlock, toBlock uint64) []uint64 {
 
 // BusySession is a session on a busy chain. Current's earlier jobs, one per
 // PriorPrompts shape, all sit more than 50 job ids behind it, other sessions'
-// jobs between. The chain also holds session jobs neither side may replay:
-// one just before the look-back window, and two after Current, one of them in
-// Current's own block.
+// jobs between: out of reach of a lookup that scans job ids backwards and
+// gives up 50 ids back, as the disputer's once did. The chain also holds
+// session jobs neither side may replay: one just before the look-back window,
+// and two after Current, one of them in Current's own block.
 var BusySession = func() Session {
 	const session = 7
 	s := Session{Current: SessionJob{ID: 200, SessionID: session, SubmitBlock: 120000, Prompt: "next question"}}
