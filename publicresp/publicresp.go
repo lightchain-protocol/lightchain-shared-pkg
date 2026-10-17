@@ -128,6 +128,24 @@ func Decode(b []byte) (Response, error) {
 	return r, nil
 }
 
+// FromEngineText turns what the engine returned into R's output fields, the
+// same way on the worker and on the disputer. With a format, text that parses
+// as a JSON object or array is the output and valid; anything else (a
+// generation cut mid-object by numPredict, prose around the JSON) is kept
+// verbatim as the answer with valid false, never retried, so a replay can
+// reproduce it (draft 04 §4.3). Without a format the text is always the
+// answer. Validation against the schema itself is not done here yet: valid
+// means "parsed", and handlers must still check the shape they expect.
+func FromEngineText(text string, hasFormat bool) (output json.RawMessage, answer *string, valid bool) {
+	if hasFormat {
+		trimmed := bytes.TrimSpace([]byte(text))
+		if len(trimmed) > 0 && (trimmed[0] == '{' || trimmed[0] == '[') && json.Valid(trimmed) {
+			return json.RawMessage(trimmed), nil, true
+		}
+	}
+	return nil, &text, false
+}
+
 // Hash is keccak256(R): the value committed as responseCiphertextHash for a
 // public-output job.
 func Hash(encoded []byte) string {

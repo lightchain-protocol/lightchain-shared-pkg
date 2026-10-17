@@ -163,6 +163,30 @@ func TestAction_CarriedVerbatim(t *testing.T) {
 	assert.Equal(t, "0x00", back.Action)
 }
 
+func TestFromEngineText(t *testing.T) {
+	t.Parallel()
+
+	out, ans, valid := FromEngineText(`  {"b": 1, "a": 2}  `, true)
+	assert.True(t, valid)
+	assert.Nil(t, ans)
+	assert.JSONEq(t, `{"a":2,"b":1}`, string(out))
+
+	out, ans, valid = FromEngineText(`{"summary":"cut`, true)
+	assert.False(t, valid)
+	assert.Nil(t, out)
+	require.NotNil(t, ans)
+	assert.Equal(t, `{"summary":"cut`, *ans)
+
+	_, ans, valid = FromEngineText(`"a bare string is not an object"`, true)
+	assert.False(t, valid)
+	require.NotNil(t, ans)
+
+	out, ans, valid = FromEngineText(`{"a":1}`, false)
+	assert.False(t, valid, "without a format the text is always the answer")
+	assert.Nil(t, out)
+	assert.Equal(t, `{"a":1}`, *ans)
+}
+
 func TestFormatHash(t *testing.T) {
 	t.Parallel()
 
