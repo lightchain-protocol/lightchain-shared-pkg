@@ -5,11 +5,13 @@
 package promptenv
 
 import (
+	"encoding/hex"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"slices"
 
+	"github.com/gowebpki/jcs"
 	"github.com/lightchain/pkg/searchaug"
 )
 
@@ -22,7 +24,8 @@ import (
 // envelope is treated as text, so older clients keep working unchanged.
 type Envelope struct {
 	// Version is 1 for the first envelope format, 2 once any voice field is
-	// in use, 3 for a self-contained job (see Messages). Its presence is
+	// in use, 3 for a self-contained job (see Messages), 4 for a public-output
+	// job (see Output). Its presence is
 	// what distinguishes an envelope from a prompt that merely happens to be
 	// valid JSON. Decode accepts any version >= 1: unknown fields are
 	// ignored by encoding/json, so an old worker decoding a v2 payload
@@ -68,6 +71,75 @@ type Envelope struct {
 	// call with exactly these messages and no history rebuilt from earlier
 	// jobs in its session. It is text only and its Text stays empty.
 	Messages []Message `json:"messages,omitempty"`
+
+	// --- Public output (envelope v4) ---
+	//
+	// Output is "public" when the answer is committed and published in
+	// plaintext as the public response bytes R (package publicresp) instead
+	// of encrypted under the session key; empty or "private" is the
+	// encrypted path. The prompt stays encrypted either way. An old worker
+	// drops this field and encrypts, so the version is not the gate: the
+	// PUBLIC_OUTPUT session capability is (draft 04 §3.2).
+	Output string `json:"output,omitempty"`
+	// Format is a JSON Schema the engine is asked to constrain its output
+	// to, passed through as Ollama's `format`. At most MaxFormatBytes in
+	// canonical form. Its JCS hash is R.formatHash.
+	Format json.RawMessage `json:"format,omitempty"`
+	// Match names the dispute rule: "similarity" (the default) or "exact",
+	// which requires Output "public" and a Format.
+	Match string `json:"match,omitempty"`
+	// Params are the inference parameters the job requires. Required when
+	// Output is "public": the worker uses exactly these instead of operator
+	// overrides and echoes them in R, so a replay can match.
+	Params *Params `json:"params,omitempty"`
+	// Salt is 32 random bytes as 0x-hex, required when Output is "public",
+	// so R.promptHash (keccak of this envelope's bytes) is not guessable
+	// for a short prompt.
+	Salt string `json:"salt,omitempty"`
+}
+
+// Params are the inference parameters a public-output job fixes.
+type Params struct {
+	NumCtx     int `json:"numCtx"`
+	NumPredict int `json:"numPredict"`
+}
+
+// Output values.
+const (
+	OutputPrivate = "private"
+	OutputPublic  = "public"
+)
+
+// Match values.
+const (
+	MatchSimilarity = "similarity"
+	MatchExact      = "exact"
+)
+
+// MaxFormatBytes bounds the canonical size of Format.
+const MaxFormatBytes = 16 * 1024
+
+// ErrInvalidPublic marks a public-output envelope that must be refused rather
+// than served: a job served under guessed parameters could never be replayed.
+var ErrInvalidPublic = errors.New("invalid public-output prompt")
+
+// Public reports whether the answer is to be committed in plaintext.
+func (e *Envelope) Public() bool {
+	return e.Output == OutputPublic
+}
+
+// Exact reports whether the job is disputed by exact match on its output.
+func (e *Envelope) Exact() bool {
+	return e.Match == MatchExact
+}
+
+// CanonicalFormat is the JCS form of Format, or nil without one. It is what
+// the engine is sent and what R.formatHash commits to.
+func (e *Envelope) CanonicalFormat() (json.RawMessage, error) {
+	if len(e.Format) == 0 {
+		return nil, nil
+	}
+	return jcs.Transform(e.Format)
 }
 
 // Message is one turn of a conversation: of a self-contained job's
@@ -195,7 +267,66 @@ func Decode(raw []byte) (Envelope, error) {
 	if len(env.Audio) > maxPromptAudioB64 {
 		return Envelope{}, fmt.Errorf("%w: %d > %d base64 chars", errAudioTooLarge, len(env.Audio), maxPromptAudioB64)
 	}
+	if err := checkPublic(&env); err != nil {
+		return Envelope{}, err
+	}
 	return env, nil
+}
+
+// checkPublic validates the v4 fields on any envelope that uses them. A
+// private envelope with none of them set passes untouched.
+func checkPublic(env *Envelope) error {
+	switch env.Output {
+	case "", OutputPrivate, OutputPublic:
+	default:
+		return fmt.Errorf("%w: unknown output %q", ErrInvalidPublic, env.Output)
+	}
+	switch env.Match {
+	case "", MatchSimilarity:
+	case MatchExact:
+		if !env.Public() {
+			return fmt.Errorf("%w: exact match needs public output", ErrInvalidPublic)
+		}
+		if len(env.Format) == 0 {
+			return fmt.Errorf("%w: exact match needs a format", ErrInvalidPublic)
+		}
+	default:
+		return fmt.Errorf("%w: unknown match %q", ErrInvalidPublic, env.Match)
+	}
+	if len(env.Format) > 0 {
+		canon, err := jcs.Transform(env.Format)
+		if err != nil {
+			return fmt.Errorf("%w: format is not JSON: %w", ErrInvalidPublic, err)
+		}
+		if len(canon) == 0 || canon[0] != '{' {
+			return fmt.Errorf("%w: format is not a JSON object", ErrInvalidPublic)
+		}
+		if len(canon) > MaxFormatBytes {
+			return fmt.Errorf("%w: format is %d canonical bytes, max %d", ErrInvalidPublic, len(canon), MaxFormatBytes)
+		}
+	}
+	if !env.Public() {
+		return nil
+	}
+	switch {
+	case env.Params == nil:
+		return fmt.Errorf("%w: params are required", ErrInvalidPublic)
+	case env.Params.NumCtx <= 0 || env.Params.NumPredict <= 0:
+		return fmt.Errorf("%w: params.numCtx and params.numPredict must be positive", ErrInvalidPublic)
+	case !isSalt(env.Salt):
+		return fmt.Errorf("%w: salt must be 32 bytes as 0x-hex", ErrInvalidPublic)
+	case env.Audio != "" || env.AudioResponse:
+		return fmt.Errorf("%w: voice is not supported with public output", ErrInvalidPublic)
+	}
+	return nil
+}
+
+func isSalt(s string) bool {
+	if len(s) != 66 || s[:2] != "0x" {
+		return false
+	}
+	_, err := hex.DecodeString(s[2:])
+	return err == nil
 }
 
 func checkSelfContained(env *Envelope) error {
