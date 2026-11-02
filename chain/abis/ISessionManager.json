@@ -56,6 +56,25 @@
   },
   {
     "type": "function",
+    "name": "getClaimPrice",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "getRequest",
     "inputs": [
       {
@@ -107,12 +126,72 @@
   },
   {
     "type": "function",
+    "name": "getRequestTerms",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct ISessionManager.RequestTerms",
+        "components": [
+          {
+            "name": "requiredCaps",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "excludedCaps",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "maxFee",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "getRequiredCapabilities",
     "inputs": [
       {
         "name": "reqId",
         "type": "uint256",
         "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getWorkerPrice",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "modelId",
+        "type": "bytes32",
+        "internalType": "bytes32"
       }
     ],
     "outputs": [
@@ -236,6 +315,30 @@
   },
   {
     "type": "function",
+    "name": "quoteWorkerFee",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "modelId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "renounceOwnership",
     "inputs": [],
     "outputs": [],
@@ -330,6 +433,57 @@
   },
   {
     "type": "function",
+    "name": "requestSessionForWithTerms",
+    "inputs": [
+      {
+        "name": "user",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "modelId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "expiry",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "terms",
+        "type": "tuple",
+        "internalType": "struct ISessionManager.RequestTerms",
+        "components": [
+          {
+            "name": "requiredCaps",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "excludedCaps",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "maxFee",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "requestSessionWithCapabilities",
     "inputs": [
       {
@@ -355,6 +509,70 @@
         "internalType": "uint256"
       }
     ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "requestSessionWithTerms",
+    "inputs": [
+      {
+        "name": "modelId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "expiry",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "terms",
+        "type": "tuple",
+        "internalType": "struct ISessionManager.RequestTerms",
+        "components": [
+          {
+            "name": "requiredCaps",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "excludedCaps",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "maxFee",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setWorkerPrice",
+    "inputs": [
+      {
+        "name": "modelId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "price",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
     "stateMutability": "nonpayable"
   },
   {
@@ -422,6 +640,25 @@
   },
   {
     "type": "event",
+    "name": "SessionClaimPrice",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "price",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
     "name": "SessionClaimed",
     "inputs": [
       {
@@ -453,6 +690,37 @@
         "name": "sessionId",
         "type": "uint256",
         "indexed": true,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "SessionRequestTerms",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "requiredCaps",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "excludedCaps",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "maxFee",
+        "type": "uint256",
+        "indexed": false,
         "internalType": "uint256"
       }
     ],
@@ -503,6 +771,31 @@
     "anonymous": false
   },
   {
+    "type": "event",
+    "name": "WorkerPriceSet",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "modelId",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "price",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
     "type": "error",
     "name": "AddressEmptyCode",
     "inputs": [
@@ -526,6 +819,17 @@
   },
   {
     "type": "error",
+    "name": "ConflictingCapabilities",
+    "inputs": [
+      {
+        "name": "mask",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
     "name": "ERC1967InvalidImplementation",
     "inputs": [
       {
@@ -539,6 +843,22 @@
     "type": "error",
     "name": "ERC1967NonPayable",
     "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ExcludedCapabilities",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "excludedMask",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
   },
   {
     "type": "error",
@@ -628,6 +948,27 @@
         "name": "account",
         "type": "address",
         "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "PriceAboveMaxFee",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "price",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "maxFee",
+        "type": "uint256",
+        "internalType": "uint256"
       }
     ]
   },
