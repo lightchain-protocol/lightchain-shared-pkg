@@ -974,6 +974,22 @@
   },
   {
     "type": "error",
+    "name": "PriceTooHigh",
+    "inputs": [
+      {
+        "name": "price",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "maxPrice",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
     "name": "RequestExpired",
     "inputs": [
       {

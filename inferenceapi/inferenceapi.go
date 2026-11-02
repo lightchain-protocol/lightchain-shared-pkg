@@ -27,19 +27,22 @@ type Route struct {
 	// request between providers with different weights or quantizations.
 	Provider string
 	// Quantization pins the weights' precision (OpenRouter's values: int4,
-	// int8, fp4, fp6, fp8, fp16, bf16, fp32). Empty accepts any.
+	// int8, fp4, fp6, fp8, fp16, bf16, fp32). Empty accepts any. OpenRouter's
+	// "unknown" is refused: it fixes no precision.
 	Quantization string
 }
 
-// Pinned reports whether the route fixes the provider or the quantization.
+// Pinned reports whether the route fixes the provider. A quantization alone
+// does not: the endpoint may still move a request between providers serving
+// that precision on different engines.
 func (r Route) Pinned() bool {
-	return r.Provider != "" || r.Quantization != ""
+	return r.Provider != ""
 }
 
 // String is the route in the syntax ParseRoute reads.
 func (r Route) String() string {
 	s := r.Model
-	if r.Pinned() {
+	if r.Provider != "" || r.Quantization != "" {
 		s += "@" + r.Provider
 		if r.Quantization != "" {
 			s += ":" + r.Quantization
@@ -57,13 +60,14 @@ type ProviderPreferences struct {
 	DataCollection    string   `json:"data_collection,omitempty"`
 }
 
-// Preferences returns the provider object for the route, or nil for an
-// unpinned route, which is sent with none so any OpenAI-compatible endpoint
-// accepts it. A pinned route never falls back to another provider, only goes
-// to providers that honour every request parameter (the seed among them), and
-// only to providers that do not keep prompts.
+// Preferences returns the provider object for the route, or nil for a route
+// with no pin at all, which is sent with none so any OpenAI-compatible
+// endpoint accepts it. A route with a provider never falls back to another;
+// a route with a provider or a quantization only goes to providers that
+// honour every request parameter (the seed among them) and do not keep
+// prompts.
 func (r Route) Preferences() *ProviderPreferences {
-	if !r.Pinned() {
+	if r.Provider == "" && r.Quantization == "" {
 		return nil
 	}
 	noFallbacks := false
@@ -87,9 +91,13 @@ var quantizations = map[string]bool{
 // openai/gpt-oss-20b@deepinfra:fp4. Model ids carry slashes and colons
 // (qwen/qwen3-8b:free), so the provider part starts at the last "@"; provider
 // slugs carry no colon, so its quantization starts at the first ":". An empty
-// provider pins only the quantization (model@:fp8).
+// provider pins only the quantization (model@:fp8). A route never carries "="
+// or ";", the INFERENCE_API_MODELS separators, so one found there is a typo.
 func ParseRoute(s string) (Route, error) {
 	s = strings.TrimSpace(s)
+	if strings.ContainsAny(s, "=;") {
+		return Route{}, fmt.Errorf("route %q: contains \"=\" or \";\"", s)
+	}
 	model, pin, pinned := s, "", false
 	if i := strings.LastIndex(s, "@"); i >= 0 {
 		model, pin, pinned = s[:i], s[i+1:], true
@@ -101,10 +109,13 @@ func ParseRoute(s string) (Route, error) {
 	if !pinned {
 		return r, nil
 	}
-	provider, quant, _ := strings.Cut(pin, ":")
+	provider, quant, hasQuant := strings.Cut(pin, ":")
 	r.Provider, r.Quantization = strings.TrimSpace(provider), strings.ToLower(strings.TrimSpace(quant))
-	if !r.Pinned() {
+	if r.Provider == "" && r.Quantization == "" {
 		return Route{}, fmt.Errorf("route %q: empty pin after @", s)
+	}
+	if hasQuant && r.Quantization == "" {
+		return Route{}, fmt.Errorf("route %q: empty quantization after :", s)
 	}
 	if r.Quantization != "" && !quantizations[r.Quantization] {
 		return Route{}, fmt.Errorf("route %q: unknown quantization %q", s, r.Quantization)
@@ -122,6 +133,7 @@ func ParseRoutes(raw string) (map[string]Route, error) {
 		return nil, nil
 	}
 	out := make(map[string]Route)
+	seen := make(map[string]bool)
 	var errs []error
 	for _, entry := range strings.Split(raw, ";") {
 		entry = strings.TrimSpace(entry)
@@ -134,10 +146,11 @@ func ParseRoutes(raw string) (map[string]Route, error) {
 			errs = append(errs, fmt.Errorf("malformed entry %q (want name=provider-model[@provider[:quantization]])", entry))
 			continue
 		}
-		if _, dup := out[name]; dup {
+		if seen[name] {
 			errs = append(errs, fmt.Errorf("duplicate entry for model %q", name))
 			continue
 		}
+		seen[name] = true
 		r, err := ParseRoute(spec)
 		if err != nil {
 			errs = append(errs, fmt.Errorf("model %q: %w", name, err))

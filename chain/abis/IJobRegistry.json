@@ -2590,6 +2590,17 @@
   },
   {
     "type": "error",
+    "name": "SessionPriced",
+    "inputs": [
+      {
+        "name": "sessionId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
     "name": "SignatureExpired",
     "inputs": [
       {

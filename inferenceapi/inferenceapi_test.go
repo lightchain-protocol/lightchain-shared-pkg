@@ -20,6 +20,9 @@ func TestParseRoute(t *testing.T) {
 		{"qwen/qwen3-8b:free@groq:fp8", Route{Model: "qwen/qwen3-8b:free", Provider: "groq", Quantization: "fp8"}},
 		{"google/gemma-4-26b-a4b-it@:bf16", Route{Model: "google/gemma-4-26b-a4b-it", Quantization: "bf16"}},
 		{" gpt-oss:20b ", Route{Model: "gpt-oss:20b"}},
+		{"m @ p : fp8", Route{Model: "m", Provider: "p", Quantization: "fp8"}},
+		{"a@b@c", Route{Model: "a@b", Provider: "c"}},
+		{"m@p/turbo", Route{Model: "m", Provider: "p/turbo"}},
 	}
 	for _, c := range cases {
 		got, err := ParseRoute(c.in)
@@ -29,7 +32,10 @@ func TestParseRoute(t *testing.T) {
 }
 
 func TestParseRoute_Errors(t *testing.T) {
-	for _, in := range []string{"", "@deepinfra", "openai/gpt-oss-20b@", "openai/gpt-oss-20b@:", "m@p:fp7"} {
+	for _, in := range []string{
+		"", "@deepinfra", "openai/gpt-oss-20b@", "openai/gpt-oss-20b@:", "m@p:fp7",
+		"m@p:", "m@p:fp8:x", "m@p:unknown", "b=c", "m;n",
+	} {
 		_, err := ParseRoute(in)
 		assert.Error(t, err, in)
 	}
@@ -43,6 +49,13 @@ func TestRoute_StringRoundTrips(t *testing.T) {
 	}
 }
 
+func TestRoute_Pinned(t *testing.T) {
+	assert.True(t, Route{Model: "m", Provider: "p"}.Pinned())
+	assert.True(t, Route{Model: "m", Provider: "p", Quantization: "fp8"}.Pinned())
+	assert.False(t, Route{Model: "m", Quantization: "fp8"}.Pinned(), "a quantization alone leaves the provider open")
+	assert.False(t, Route{Model: "m"}.Pinned())
+}
+
 func TestPreferences(t *testing.T) {
 	assert.Nil(t, Route{Model: "m"}.Preferences(), "an unpinned route sends no provider object")
 
@@ -53,6 +66,10 @@ func TestPreferences(t *testing.T) {
 	b, err = json.Marshal(Route{Model: "m", Quantization: "fp8"}.Preferences())
 	require.NoError(t, err)
 	assert.JSONEq(t, `{"quantizations":["fp8"],"require_parameters":true,"data_collection":"deny"}`, string(b))
+
+	b, err = json.Marshal(Route{Model: "m", Provider: "groq"}.Preferences())
+	require.NoError(t, err)
+	assert.JSONEq(t, `{"order":["groq"],"allow_fallbacks":false,"require_parameters":true,"data_collection":"deny"}`, string(b))
 }
 
 func TestParseRoutes(t *testing.T) {
@@ -72,4 +89,16 @@ func TestParseRoutes(t *testing.T) {
 	assert.Contains(t, err.Error(), `duplicate entry for model "a"`)
 	assert.Contains(t, err.Error(), `malformed entry "b"`)
 	assert.Contains(t, err.Error(), `unknown quantization "bad"`)
+
+	_, err = ParseRoutes("a=@x;a=y")
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), `duplicate entry for model "a"`, "a failed first entry still claims the name")
+
+	_, err = ParseRoutes("gpt=openai/x=y")
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), `contains "=" or ";"`)
+
+	_, err = ParseRoutes("a=")
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), `malformed entry "a="`)
 }
