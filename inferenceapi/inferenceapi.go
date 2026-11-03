@@ -115,7 +115,7 @@ func ParseRoute(s string) (Route, error) {
 		return Route{}, fmt.Errorf("route %q: empty pin after @", s)
 	}
 	if hasQuant && r.Quantization == "" {
-		return Route{}, fmt.Errorf("route %q: empty quantization after :", s)
+		return Route{}, fmt.Errorf("route %q: empty quantization after the colon", s)
 	}
 	if r.Quantization != "" && !quantizations[r.Quantization] {
 		return Route{}, fmt.Errorf("route %q: unknown quantization %q", s, r.Quantization)
