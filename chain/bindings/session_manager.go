@@ -48,7 +48,7 @@ type ISessionManagerRequestTerms struct {
 
 // SessionManagerMetaData contains all meta data concerning the SessionManager contract.
 var SessionManagerMetaData = &bind.MetaData{
-	ABI: "[{\"type\":\"constructor\",\"inputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"UPGRADE_INTERFACE_VERSION\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"internalType\":\"string\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"claimSession\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eligibleNow\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getClaimPrice\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRequest\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"tuple\",\"internalType\":\"structISessionManager.Request\",\"components\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"requestBlock\",\"type\":\"uint64\",\"internalType\":\"uint64\"},{\"name\":\"expiry\",\"type\":\"uint64\",\"internalType\":\"uint64\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"status\",\"type\":\"uint8\",\"internalType\":\"enumISessionManager.ReqStatus\"}]}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRequestTerms\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"tuple\",\"internalType\":\"structISessionManager.RequestTerms\",\"components\":[{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"excludedCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFee\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRequiredCapabilities\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getWorkerPrice\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"initialize\",\"inputs\":[{\"name\":\"initialOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"jobRegistry_\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"workerRegistry_\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"aiConfig_\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"reputation_\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"owner\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"provideSessionKey\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"provideSessionKeyFor\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"proxiableUUID\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"quoteWorkerFee\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"renounceOwnership\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSession\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionFor\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionForWithCapabilities\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionForWithTerms\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"terms\",\"type\":\"tuple\",\"internalType\":\"structISessionManager.RequestTerms\",\"components\":[{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"excludedCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFee\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionWithCapabilities\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionWithTerms\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"terms\",\"type\":\"tuple\",\"internalType\":\"structISessionManager.RequestTerms\",\"components\":[{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"excludedCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFee\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setWorkerPrice\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"price\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferOwnership\",\"inputs\":[{\"name\":\"newOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"upgradeToAndCall\",\"inputs\":[{\"name\":\"newImplementation\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"event\",\"name\":\"Initialized\",\"inputs\":[{\"name\":\"version\",\"type\":\"uint64\",\"indexed\":false,\"internalType\":\"uint64\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"OwnershipTransferred\",\"inputs\":[{\"name\":\"previousOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionClaimPrice\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"price\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionClaimed\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionReady\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionRequestTerms\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"excludedCaps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"maxFee\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionRequested\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"},{\"name\":\"requestBlock\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Upgraded\",\"inputs\":[{\"name\":\"implementation\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerPriceSet\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"},{\"name\":\"price\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false}]",
+	ABI: "[{\"type\":\"constructor\",\"inputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"UPGRADE_INTERFACE_VERSION\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"internalType\":\"string\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"claimSession\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eligibleNow\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getClaimPrice\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getMinPriceBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRequest\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"tuple\",\"internalType\":\"structISessionManager.Request\",\"components\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"requestBlock\",\"type\":\"uint64\",\"internalType\":\"uint64\"},{\"name\":\"expiry\",\"type\":\"uint64\",\"internalType\":\"uint64\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"status\",\"type\":\"uint8\",\"internalType\":\"enumISessionManager.ReqStatus\"}]}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRequestTerms\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"tuple\",\"internalType\":\"structISessionManager.RequestTerms\",\"components\":[{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"excludedCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFee\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRequiredCapabilities\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getWorkerPrice\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"initialize\",\"inputs\":[{\"name\":\"initialOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"jobRegistry_\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"workerRegistry_\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"aiConfig_\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"reputation_\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"minWorkerPrice\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"owner\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"provideSessionKey\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"provideSessionKeyFor\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"proxiableUUID\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"quoteWorkerFee\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"renounceOwnership\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSession\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionFor\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionForWithCapabilities\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionForWithTerms\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"terms\",\"type\":\"tuple\",\"internalType\":\"structISessionManager.RequestTerms\",\"components\":[{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"excludedCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFee\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionWithCapabilities\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionWithTerms\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"terms\",\"type\":\"tuple\",\"internalType\":\"structISessionManager.RequestTerms\",\"components\":[{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"excludedCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFee\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setMinPriceBps\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setWorkerPrice\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"price\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferOwnership\",\"inputs\":[{\"name\":\"newOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"upgradeToAndCall\",\"inputs\":[{\"name\":\"newImplementation\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"event\",\"name\":\"Initialized\",\"inputs\":[{\"name\":\"version\",\"type\":\"uint64\",\"indexed\":false,\"internalType\":\"uint64\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"MinPriceBpsSet\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"OwnershipTransferred\",\"inputs\":[{\"name\":\"previousOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionClaimPrice\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"price\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionClaimed\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionReady\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionRequestTerms\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"excludedCaps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"maxFee\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionRequested\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"},{\"name\":\"requestBlock\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Upgraded\",\"inputs\":[{\"name\":\"implementation\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerPriceSet\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"},{\"name\":\"price\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false}]",
 }
 
 // SessionManagerABI is the input ABI used to generate the binding from.
@@ -290,6 +290,37 @@ func (_SessionManager *SessionManagerCallerSession) GetClaimPrice(reqId *big.Int
 	return _SessionManager.Contract.GetClaimPrice(&_SessionManager.CallOpts, reqId)
 }
 
+// GetMinPriceBps is a free data retrieval call binding the contract method 0xefbcbea5.
+//
+// Solidity: function getMinPriceBps() view returns(uint256)
+func (_SessionManager *SessionManagerCaller) GetMinPriceBps(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _SessionManager.contract.Call(opts, &out, "getMinPriceBps")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// GetMinPriceBps is a free data retrieval call binding the contract method 0xefbcbea5.
+//
+// Solidity: function getMinPriceBps() view returns(uint256)
+func (_SessionManager *SessionManagerSession) GetMinPriceBps() (*big.Int, error) {
+	return _SessionManager.Contract.GetMinPriceBps(&_SessionManager.CallOpts)
+}
+
+// GetMinPriceBps is a free data retrieval call binding the contract method 0xefbcbea5.
+//
+// Solidity: function getMinPriceBps() view returns(uint256)
+func (_SessionManager *SessionManagerCallerSession) GetMinPriceBps() (*big.Int, error) {
+	return _SessionManager.Contract.GetMinPriceBps(&_SessionManager.CallOpts)
+}
+
 // GetRequest is a free data retrieval call binding the contract method 0xc58343ef.
 //
 // Solidity: function getRequest(uint256 reqId) view returns((address,bytes32,uint64,uint64,address,uint8))
@@ -412,6 +443,37 @@ func (_SessionManager *SessionManagerSession) GetWorkerPrice(worker common.Addre
 // Solidity: function getWorkerPrice(address worker, bytes32 modelId) view returns(uint256)
 func (_SessionManager *SessionManagerCallerSession) GetWorkerPrice(worker common.Address, modelId [32]byte) (*big.Int, error) {
 	return _SessionManager.Contract.GetWorkerPrice(&_SessionManager.CallOpts, worker, modelId)
+}
+
+// MinWorkerPrice is a free data retrieval call binding the contract method 0x4f349166.
+//
+// Solidity: function minWorkerPrice(bytes32 modelId) view returns(uint256)
+func (_SessionManager *SessionManagerCaller) MinWorkerPrice(opts *bind.CallOpts, modelId [32]byte) (*big.Int, error) {
+	var out []interface{}
+	err := _SessionManager.contract.Call(opts, &out, "minWorkerPrice", modelId)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// MinWorkerPrice is a free data retrieval call binding the contract method 0x4f349166.
+//
+// Solidity: function minWorkerPrice(bytes32 modelId) view returns(uint256)
+func (_SessionManager *SessionManagerSession) MinWorkerPrice(modelId [32]byte) (*big.Int, error) {
+	return _SessionManager.Contract.MinWorkerPrice(&_SessionManager.CallOpts, modelId)
+}
+
+// MinWorkerPrice is a free data retrieval call binding the contract method 0x4f349166.
+//
+// Solidity: function minWorkerPrice(bytes32 modelId) view returns(uint256)
+func (_SessionManager *SessionManagerCallerSession) MinWorkerPrice(modelId [32]byte) (*big.Int, error) {
+	return _SessionManager.Contract.MinWorkerPrice(&_SessionManager.CallOpts, modelId)
 }
 
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
@@ -738,6 +800,27 @@ func (_SessionManager *SessionManagerTransactorSession) RequestSessionWithTerms(
 	return _SessionManager.Contract.RequestSessionWithTerms(&_SessionManager.TransactOpts, modelId, expiry, terms)
 }
 
+// SetMinPriceBps is a paid mutator transaction binding the contract method 0x4555a357.
+//
+// Solidity: function setMinPriceBps(uint256 bps) returns()
+func (_SessionManager *SessionManagerTransactor) SetMinPriceBps(opts *bind.TransactOpts, bps *big.Int) (*types.Transaction, error) {
+	return _SessionManager.contract.Transact(opts, "setMinPriceBps", bps)
+}
+
+// SetMinPriceBps is a paid mutator transaction binding the contract method 0x4555a357.
+//
+// Solidity: function setMinPriceBps(uint256 bps) returns()
+func (_SessionManager *SessionManagerSession) SetMinPriceBps(bps *big.Int) (*types.Transaction, error) {
+	return _SessionManager.Contract.SetMinPriceBps(&_SessionManager.TransactOpts, bps)
+}
+
+// SetMinPriceBps is a paid mutator transaction binding the contract method 0x4555a357.
+//
+// Solidity: function setMinPriceBps(uint256 bps) returns()
+func (_SessionManager *SessionManagerTransactorSession) SetMinPriceBps(bps *big.Int) (*types.Transaction, error) {
+	return _SessionManager.Contract.SetMinPriceBps(&_SessionManager.TransactOpts, bps)
+}
+
 // SetWorkerPrice is a paid mutator transaction binding the contract method 0x56b740f9.
 //
 // Solidity: function setWorkerPrice(bytes32 modelId, uint256 price) returns()
@@ -929,6 +1012,140 @@ func (_SessionManager *SessionManagerFilterer) WatchInitialized(opts *bind.Watch
 func (_SessionManager *SessionManagerFilterer) ParseInitialized(log types.Log) (*SessionManagerInitialized, error) {
 	event := new(SessionManagerInitialized)
 	if err := _SessionManager.contract.UnpackLog(event, "Initialized", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// SessionManagerMinPriceBpsSetIterator is returned from FilterMinPriceBpsSet and is used to iterate over the raw logs and unpacked data for MinPriceBpsSet events raised by the SessionManager contract.
+type SessionManagerMinPriceBpsSetIterator struct {
+	Event *SessionManagerMinPriceBpsSet // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *SessionManagerMinPriceBpsSetIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(SessionManagerMinPriceBpsSet)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(SessionManagerMinPriceBpsSet)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *SessionManagerMinPriceBpsSetIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *SessionManagerMinPriceBpsSetIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// SessionManagerMinPriceBpsSet represents a MinPriceBpsSet event raised by the SessionManager contract.
+type SessionManagerMinPriceBpsSet struct {
+	Bps *big.Int
+	Raw types.Log // Blockchain specific contextual infos
+}
+
+// FilterMinPriceBpsSet is a free log retrieval operation binding the contract event 0xb22a65aff0eb78e17b2c51dedf7609b5ff7d4db86871f3dedb02fd4745c8b268.
+//
+// Solidity: event MinPriceBpsSet(uint256 bps)
+func (_SessionManager *SessionManagerFilterer) FilterMinPriceBpsSet(opts *bind.FilterOpts) (*SessionManagerMinPriceBpsSetIterator, error) {
+
+	logs, sub, err := _SessionManager.contract.FilterLogs(opts, "MinPriceBpsSet")
+	if err != nil {
+		return nil, err
+	}
+	return &SessionManagerMinPriceBpsSetIterator{contract: _SessionManager.contract, event: "MinPriceBpsSet", logs: logs, sub: sub}, nil
+}
+
+// WatchMinPriceBpsSet is a free log subscription operation binding the contract event 0xb22a65aff0eb78e17b2c51dedf7609b5ff7d4db86871f3dedb02fd4745c8b268.
+//
+// Solidity: event MinPriceBpsSet(uint256 bps)
+func (_SessionManager *SessionManagerFilterer) WatchMinPriceBpsSet(opts *bind.WatchOpts, sink chan<- *SessionManagerMinPriceBpsSet) (event.Subscription, error) {
+
+	logs, sub, err := _SessionManager.contract.WatchLogs(opts, "MinPriceBpsSet")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(SessionManagerMinPriceBpsSet)
+				if err := _SessionManager.contract.UnpackLog(event, "MinPriceBpsSet", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseMinPriceBpsSet is a log parse operation binding the contract event 0xb22a65aff0eb78e17b2c51dedf7609b5ff7d4db86871f3dedb02fd4745c8b268.
+//
+// Solidity: event MinPriceBpsSet(uint256 bps)
+func (_SessionManager *SessionManagerFilterer) ParseMinPriceBpsSet(log types.Log) (*SessionManagerMinPriceBpsSet, error) {
+	event := new(SessionManagerMinPriceBpsSet)
+	if err := _SessionManager.contract.UnpackLog(event, "MinPriceBpsSet", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
