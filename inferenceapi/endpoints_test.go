@@ -7,6 +7,7 @@ import (
 	"net/http/httptest"
 	"sync/atomic"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -93,15 +94,22 @@ func TestParamsCache(t *testing.T) {
 	}))
 	t.Cleanup(srv.Close)
 	c := NewParamsCache(srv.Client(), srv.URL, "")
+	now := time.Now()
+	c.now = func() time.Time { return now }
 	r := Route{Model: "m", Provider: "parasail"}
 
 	_, err := c.Get(context.Background(), r)
 	require.Error(t, err)
 	status = http.StatusOK
+	_, err = c.Get(context.Background(), r)
+	require.Error(t, err, "a failure is remembered for a while")
+	assert.Equal(t, int32(1), calls.Load(), "and not looked up again meanwhile")
+
+	now = now.Add(paramsRetryAfter)
 	p, err := c.Get(context.Background(), r)
-	require.NoError(t, err, "a failure is not cached")
+	require.NoError(t, err, "then it is retried")
 	_, err = c.Get(context.Background(), r)
 	require.NoError(t, err)
 	assert.False(t, p.Accepts("reasoning"))
-	assert.Equal(t, int32(2), calls.Load(), "a success is")
+	assert.Equal(t, int32(2), calls.Load(), "a success is cached for good")
 }

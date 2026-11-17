@@ -113,38 +113,59 @@ func escapeModel(model string) string {
 	return strings.Join(parts, "/")
 }
 
+// paramsRetryAfter is how long a failed lookup is answered from memory
+// before it is tried again, so a hung endpoints API costs one request a
+// paramsTimeout wait, not every request.
+const paramsRetryAfter = time.Minute
+
 // ParamsCache looks each route's Params up once per process. A failed lookup
-// is not cached: the next request tries again and, until one succeeds, sends
-// every parameter (nil Params).
+// is retried after paramsRetryAfter; until one succeeds, Get returns the
+// error and the caller sends every parameter (nil Params).
 type ParamsCache struct {
 	client  *http.Client
 	baseURL string
 	apiKey  string
 
-	mu   sync.Mutex
-	seen map[Route]Params
+	mu     sync.Mutex
+	seen   map[Route]Params
+	failed map[Route]paramsFailure
+	now    func() time.Time
+}
+
+type paramsFailure struct {
+	at  time.Time
+	err error
 }
 
 // NewParamsCache creates a cache reading from baseURL with client.
 func NewParamsCache(client *http.Client, baseURL, apiKey string) *ParamsCache {
-	return &ParamsCache{client: client, baseURL: baseURL, apiKey: apiKey, seen: make(map[Route]Params)}
+	return &ParamsCache{
+		client: client, baseURL: baseURL, apiKey: apiKey,
+		seen: make(map[Route]Params), failed: make(map[Route]paramsFailure), now: time.Now,
+	}
 }
 
 // Get returns the route's Params, or nil and the lookup error.
 func (c *ParamsCache) Get(ctx context.Context, r Route) (Params, error) {
 	c.mu.Lock()
 	p, ok := c.seen[r]
+	f, failed := c.failed[r]
 	c.mu.Unlock()
 	if ok {
 		return p, nil
 	}
+	if failed && c.now().Sub(f.at) < paramsRetryAfter {
+		return nil, f.err
+	}
 	p, err := FetchParams(ctx, c.client, c.baseURL, c.apiKey, r)
+	c.mu.Lock()
+	defer c.mu.Unlock()
 	if err != nil {
+		c.failed[r] = paramsFailure{at: c.now(), err: err}
 		return nil, err
 	}
-	c.mu.Lock()
+	delete(c.failed, r)
 	c.seen[r] = p
-	c.mu.Unlock()
 	return p, nil
 }
 
