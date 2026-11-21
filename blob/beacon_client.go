@@ -9,6 +9,7 @@ import (
 	"math/big"
 	"net/http"
 	"strings"
+	"sync/atomic"
 	"time"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -29,16 +30,30 @@ type ELBlockFetcher interface {
 
 // BeaconClient fetches blob sidecars from the CL Beacon API.
 type BeaconClient struct {
-	beaconURL  string
+	beaconURLs []string
+	current    atomic.Int32 // index into beaconURLs of the node in use
 	elFetcher  ELBlockFetcher
 	httpClient *http.Client
 	maxRetries int
 }
 
-// NewBeaconClient creates a BeaconClient for fetching blob data.
+// NewBeaconClient creates a BeaconClient for fetching blob data. beaconURL is
+// one beacon node, or several separated by commas in order of preference: a
+// fetch that fails on one node is retried on the next, and later fetches
+// start from the node that answered last. A retry is what moves it on, so
+// maxRetries 0 means no failover.
 func NewBeaconClient(beaconURL string, elFetcher ELBlockFetcher, timeout time.Duration, maxRetries int) *BeaconClient {
+	var urls []string
+	for u := range strings.SplitSeq(beaconURL, ",") {
+		if u = strings.TrimRight(strings.TrimSpace(u), "/"); u != "" {
+			urls = append(urls, u)
+		}
+	}
+	if len(urls) == 0 {
+		urls = []string{""} // fails on the first request, as an empty URL did before
+	}
 	return &BeaconClient{
-		beaconURL:  beaconURL,
+		beaconURLs: urls,
 		elFetcher:  elFetcher,
 		httpClient: &http.Client{Timeout: timeout},
 		maxRetries: maxRetries,
@@ -84,9 +99,11 @@ func (bc *BeaconClient) FetchBlob(ctx context.Context, versionedHash common.Hash
 			}
 		}
 
+		inUse := bc.current.Load()
 		data, err := bc.fetchBlobOnce(ctx, versionedHash, blockNumber)
 		if err != nil {
 			lastErr = err
+			bc.current.CompareAndSwap(inUse, (inUse+1)%int32(len(bc.beaconURLs)))
 			continue
 		}
 		return data, nil
@@ -166,9 +183,14 @@ func (bc *BeaconClient) fetchBlobAtBlock(ctx context.Context, versionedHash comm
 	return nil, fmt.Errorf("blob with versioned hash %s not found in slot %d sidecars (block %d)", versionedHash.Hex(), blobSlot, blockNumber)
 }
 
+// beaconURL is the node in use.
+func (bc *BeaconClient) beaconURL() string {
+	return bc.beaconURLs[bc.current.Load()]
+}
+
 // getBeaconSlot returns the slot of the canonical beacon block whose parent is parentRoot.
 func (bc *BeaconClient) getBeaconSlot(ctx context.Context, parentRoot string) (uint64, error) {
-	url := fmt.Sprintf("%s/eth/v1/beacon/headers?parent_root=%s", bc.beaconURL, parentRoot)
+	url := fmt.Sprintf("%s/eth/v1/beacon/headers?parent_root=%s", bc.beaconURL(), parentRoot)
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, http.NoBody)
 	if err != nil {
 		return 0, fmt.Errorf("create beacon header request: %w", err)
@@ -209,7 +231,7 @@ func (bc *BeaconClient) getBeaconSlot(ctx context.Context, parentRoot string) (u
 }
 
 func (bc *BeaconClient) getBlobSidecars(ctx context.Context, slot uint64) ([]BlobSidecar, error) {
-	url := fmt.Sprintf("%s/eth/v1/beacon/blob_sidecars/%d", bc.beaconURL, slot)
+	url := fmt.Sprintf("%s/eth/v1/beacon/blob_sidecars/%d", bc.beaconURL(), slot)
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, http.NoBody)
 	if err != nil {
 		return nil, fmt.Errorf("create blob sidecars request: %w", err)

@@ -9,6 +9,7 @@ import (
 	"math/big"
 	"net/http"
 	"net/http/httptest"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -83,6 +84,45 @@ func TestBeaconClient_FetchBlob_Success(t *testing.T) {
 	result, err := bc.FetchBlob(context.Background(), expectedHash, 100)
 	require.NoError(t, err)
 	assert.Equal(t, testPayload, result)
+}
+
+// BEACON_API_URL lists several beacon nodes: with the first one stopped, the
+// blob comes from the next, and later fetches start there.
+func TestBeaconClient_FetchBlob_FailsOverToTheNextBeaconNode(t *testing.T) {
+	t.Parallel()
+
+	testPayload := []byte("fallback payload")
+	blob, err := EncodeBlobData(testPayload)
+	require.NoError(t, err)
+	blobHex := "0x" + hex.EncodeToString(blob[:])
+	_, commitmentHex, expectedHash := fakeVersionedHash("fallback-commitment")
+	beaconRoot := common.HexToHash("0xbeaconroot")
+
+	stopped := httptest.NewServer(http.NotFoundHandler())
+	stopped.Close()
+	var upHits atomic.Int32
+	up := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		upHits.Add(1)
+		switch {
+		case r.URL.Path == "/eth/v1/beacon/headers" && r.URL.Query().Get("parent_root") == beaconRoot.Hex():
+			_, _ = fmt.Fprint(w, canonicalHeader("101"))
+		case r.URL.Path == "/eth/v1/beacon/blob_sidecars/101":
+			_ = json.NewEncoder(w).Encode(blobSidecarsResponse{
+				Data: []BlobSidecar{{Index: "0", Blob: blobHex, KzgCommitment: commitmentHex}},
+			})
+		default:
+			http.NotFound(w, r)
+		}
+	}))
+	defer up.Close()
+
+	bc := NewBeaconClient(stopped.URL+", "+up.URL, &mockELFetcher{block: mockELBlock(beaconRoot)}, 5*time.Second, 1)
+	for range 2 {
+		result, err := bc.FetchBlob(context.Background(), expectedHash, 100)
+		require.NoError(t, err)
+		assert.Equal(t, testPayload, result)
+	}
+	assert.Equal(t, int32(4), upHits.Load(), "the second fetch goes straight to the node that answered")
 }
 
 // The slot after the parent can be empty (a proposer missed it): the block's
