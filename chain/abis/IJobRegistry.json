@@ -19,6 +19,19 @@
   },
   {
     "type": "function",
+    "name": "abandonJob",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "acknowledgeJob",
     "inputs": [
       {
@@ -1440,6 +1453,31 @@
   },
   {
     "type": "event",
+    "name": "JobAbandoned",
+    "inputs": [
+      {
+        "name": "jobId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "worker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "refundAmount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
     "name": "JobAcknowledged",
     "inputs": [
       {
@@ -2659,6 +2697,17 @@
   },
   {
     "type": "error",
+    "name": "WorkerAtCapacity",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
     "name": "WorkerNotEligible",
     "inputs": [
       {
@@ -2682,43 +2731,5 @@
     "type": "error",
     "name": "ZeroDeposit",
     "inputs": []
-  },
-  {
-    "type": "function",
-    "name": "abandonJob",
-    "inputs": [
-      {
-        "name": "jobId",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ],
-    "outputs": [],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "event",
-    "name": "JobAbandoned",
-    "inputs": [
-      {
-        "name": "jobId",
-        "type": "uint256",
-        "indexed": true,
-        "internalType": "uint256"
-      },
-      {
-        "name": "worker",
-        "type": "address",
-        "indexed": true,
-        "internalType": "address"
-      },
-      {
-        "name": "refundAmount",
-        "type": "uint256",
-        "indexed": false,
-        "internalType": "uint256"
-      }
-    ],
-    "anonymous": false
   }
 ]

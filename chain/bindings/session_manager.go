@@ -41,14 +41,16 @@ type ISessionManagerRequest struct {
 
 // ISessionManagerRequestTerms is an auto generated low-level Go binding around an user-defined struct.
 type ISessionManagerRequestTerms struct {
-	RequiredCaps *big.Int
-	ExcludedCaps *big.Int
-	MaxFee       *big.Int
+	RequiredCaps   *big.Int
+	ExcludedCaps   *big.Int
+	MaxFee         *big.Int
+	Worker         common.Address
+	FallbackBlocks uint64
 }
 
 // SessionManagerMetaData contains all meta data concerning the SessionManager contract.
 var SessionManagerMetaData = &bind.MetaData{
-	ABI: "[{\"type\":\"constructor\",\"inputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"UPGRADE_INTERFACE_VERSION\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"internalType\":\"string\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"claimSession\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eligibleNow\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getClaimPrice\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getMinPriceBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRequest\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"tuple\",\"internalType\":\"structISessionManager.Request\",\"components\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"requestBlock\",\"type\":\"uint64\",\"internalType\":\"uint64\"},{\"name\":\"expiry\",\"type\":\"uint64\",\"internalType\":\"uint64\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"status\",\"type\":\"uint8\",\"internalType\":\"enumISessionManager.ReqStatus\"}]}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRequestTerms\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"tuple\",\"internalType\":\"structISessionManager.RequestTerms\",\"components\":[{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"excludedCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFee\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRequiredCapabilities\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getWorkerPrice\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"initialize\",\"inputs\":[{\"name\":\"initialOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"jobRegistry_\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"workerRegistry_\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"aiConfig_\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"reputation_\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"minWorkerPrice\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"owner\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"provideSessionKey\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"provideSessionKeyFor\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"proxiableUUID\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"quoteWorkerFee\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"renounceOwnership\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSession\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionFor\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionForWithCapabilities\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionForWithTerms\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"terms\",\"type\":\"tuple\",\"internalType\":\"structISessionManager.RequestTerms\",\"components\":[{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"excludedCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFee\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionWithCapabilities\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionWithTerms\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"terms\",\"type\":\"tuple\",\"internalType\":\"structISessionManager.RequestTerms\",\"components\":[{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"excludedCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFee\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setMinPriceBps\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setWorkerPrice\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"price\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferOwnership\",\"inputs\":[{\"name\":\"newOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"upgradeToAndCall\",\"inputs\":[{\"name\":\"newImplementation\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"event\",\"name\":\"Initialized\",\"inputs\":[{\"name\":\"version\",\"type\":\"uint64\",\"indexed\":false,\"internalType\":\"uint64\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"MinPriceBpsSet\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"OwnershipTransferred\",\"inputs\":[{\"name\":\"previousOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionClaimPrice\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"price\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionClaimed\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionReady\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionRequestTerms\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"excludedCaps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"maxFee\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionRequested\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"},{\"name\":\"requestBlock\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Upgraded\",\"inputs\":[{\"name\":\"implementation\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerPriceSet\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"},{\"name\":\"price\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false}]",
+	ABI: "[{\"type\":\"constructor\",\"inputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"MAX_PRICE_DELAY_BLOCKS\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"UPGRADE_INTERFACE_VERSION\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"internalType\":\"string\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"cancelRequest\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"claimOpensAt\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"claimSession\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"declineSession\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eligibleNow\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getChosenWorker\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"fallbackBlocks\",\"type\":\"uint64\",\"internalType\":\"uint64\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getClaimPrice\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getMinPriceBps\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getPendingClaims\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getPriceDelayBlocks\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRequest\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"tuple\",\"internalType\":\"structISessionManager.Request\",\"components\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"requestBlock\",\"type\":\"uint64\",\"internalType\":\"uint64\"},{\"name\":\"expiry\",\"type\":\"uint64\",\"internalType\":\"uint64\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"status\",\"type\":\"uint8\",\"internalType\":\"enumISessionManager.ReqStatus\"}]}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRequestTerms\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"tuple\",\"internalType\":\"structISessionManager.RequestTerms\",\"components\":[{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"excludedCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFee\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"fallbackBlocks\",\"type\":\"uint64\",\"internalType\":\"uint64\"}]}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRequiredCapabilities\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getWorkerPrice\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"initialize\",\"inputs\":[{\"name\":\"initialOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"jobRegistry_\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"workerRegistry_\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"aiConfig_\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"reputation_\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"minWorkerPrice\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"owner\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"provideSessionKey\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"provideSessionKeyFor\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"encWorkerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encDisputerKey\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"proxiableUUID\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"quoteWorkerFee\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"releaseClaim\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"renounceOwnership\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSession\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionFor\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionForWithCapabilities\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionForWithTerms\",\"inputs\":[{\"name\":\"user\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"terms\",\"type\":\"tuple\",\"internalType\":\"structISessionManager.RequestTerms\",\"components\":[{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"excludedCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFee\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"fallbackBlocks\",\"type\":\"uint64\",\"internalType\":\"uint64\"}]}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionWithCapabilities\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"requestSessionWithTerms\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"expiry\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"terms\",\"type\":\"tuple\",\"internalType\":\"structISessionManager.RequestTerms\",\"components\":[{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"excludedCaps\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFee\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"fallbackBlocks\",\"type\":\"uint64\",\"internalType\":\"uint64\"}]}],\"outputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setMinPriceBps\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setPriceDelayBlocks\",\"inputs\":[{\"name\":\"blocks\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setWorkerPrice\",\"inputs\":[{\"name\":\"modelId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"price\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferOwnership\",\"inputs\":[{\"name\":\"newOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"upgradeToAndCall\",\"inputs\":[{\"name\":\"newImplementation\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"payable\"},{\"type\":\"event\",\"name\":\"ClaimReleased\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Initialized\",\"inputs\":[{\"name\":\"version\",\"type\":\"uint64\",\"indexed\":false,\"internalType\":\"uint64\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"MinPriceBpsSet\",\"inputs\":[{\"name\":\"bps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"OwnershipTransferred\",\"inputs\":[{\"name\":\"previousOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"newOwner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"PriceDelayBlocksSet\",\"inputs\":[{\"name\":\"blocks\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"RequestCancelled\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"RequestDeclined\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"reopened\",\"type\":\"bool\",\"indexed\":false,\"internalType\":\"bool\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionClaimPrice\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"price\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionClaimed\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionReady\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"sessionId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionRequestTerms\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"requiredCaps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"excludedCaps\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"},{\"name\":\"maxFee\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionRequested\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"user\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"},{\"name\":\"requestBlock\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"SessionWorkerChosen\",\"inputs\":[{\"name\":\"reqId\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"},{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"fallbackBlocks\",\"type\":\"uint64\",\"indexed\":false,\"internalType\":\"uint64\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Upgraded\",\"inputs\":[{\"name\":\"implementation\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"WorkerPriceSet\",\"inputs\":[{\"name\":\"worker\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"modelId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"},{\"name\":\"price\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false}]",
 }
 
 // SessionManagerABI is the input ABI used to generate the binding from.
@@ -197,6 +199,37 @@ func (_SessionManager *SessionManagerTransactorRaw) Transact(opts *bind.Transact
 	return _SessionManager.Contract.contract.Transact(opts, method, params...)
 }
 
+// MAXPRICEDELAYBLOCKS is a free data retrieval call binding the contract method 0xfe283c40.
+//
+// Solidity: function MAX_PRICE_DELAY_BLOCKS() view returns(uint256)
+func (_SessionManager *SessionManagerCaller) MAXPRICEDELAYBLOCKS(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _SessionManager.contract.Call(opts, &out, "MAX_PRICE_DELAY_BLOCKS")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// MAXPRICEDELAYBLOCKS is a free data retrieval call binding the contract method 0xfe283c40.
+//
+// Solidity: function MAX_PRICE_DELAY_BLOCKS() view returns(uint256)
+func (_SessionManager *SessionManagerSession) MAXPRICEDELAYBLOCKS() (*big.Int, error) {
+	return _SessionManager.Contract.MAXPRICEDELAYBLOCKS(&_SessionManager.CallOpts)
+}
+
+// MAXPRICEDELAYBLOCKS is a free data retrieval call binding the contract method 0xfe283c40.
+//
+// Solidity: function MAX_PRICE_DELAY_BLOCKS() view returns(uint256)
+func (_SessionManager *SessionManagerCallerSession) MAXPRICEDELAYBLOCKS() (*big.Int, error) {
+	return _SessionManager.Contract.MAXPRICEDELAYBLOCKS(&_SessionManager.CallOpts)
+}
+
 // UPGRADEINTERFACEVERSION is a free data retrieval call binding the contract method 0xad3cb1cc.
 //
 // Solidity: function UPGRADE_INTERFACE_VERSION() view returns(string)
@@ -228,6 +261,37 @@ func (_SessionManager *SessionManagerCallerSession) UPGRADEINTERFACEVERSION() (s
 	return _SessionManager.Contract.UPGRADEINTERFACEVERSION(&_SessionManager.CallOpts)
 }
 
+// ClaimOpensAt is a free data retrieval call binding the contract method 0x4f2f4a8f.
+//
+// Solidity: function claimOpensAt(uint256 reqId, address worker) view returns(uint256)
+func (_SessionManager *SessionManagerCaller) ClaimOpensAt(opts *bind.CallOpts, reqId *big.Int, worker common.Address) (*big.Int, error) {
+	var out []interface{}
+	err := _SessionManager.contract.Call(opts, &out, "claimOpensAt", reqId, worker)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// ClaimOpensAt is a free data retrieval call binding the contract method 0x4f2f4a8f.
+//
+// Solidity: function claimOpensAt(uint256 reqId, address worker) view returns(uint256)
+func (_SessionManager *SessionManagerSession) ClaimOpensAt(reqId *big.Int, worker common.Address) (*big.Int, error) {
+	return _SessionManager.Contract.ClaimOpensAt(&_SessionManager.CallOpts, reqId, worker)
+}
+
+// ClaimOpensAt is a free data retrieval call binding the contract method 0x4f2f4a8f.
+//
+// Solidity: function claimOpensAt(uint256 reqId, address worker) view returns(uint256)
+func (_SessionManager *SessionManagerCallerSession) ClaimOpensAt(reqId *big.Int, worker common.Address) (*big.Int, error) {
+	return _SessionManager.Contract.ClaimOpensAt(&_SessionManager.CallOpts, reqId, worker)
+}
+
 // EligibleNow is a free data retrieval call binding the contract method 0xa5c6f7e8.
 //
 // Solidity: function eligibleNow(uint256 reqId, address worker) view returns(bool)
@@ -257,6 +321,51 @@ func (_SessionManager *SessionManagerSession) EligibleNow(reqId *big.Int, worker
 // Solidity: function eligibleNow(uint256 reqId, address worker) view returns(bool)
 func (_SessionManager *SessionManagerCallerSession) EligibleNow(reqId *big.Int, worker common.Address) (bool, error) {
 	return _SessionManager.Contract.EligibleNow(&_SessionManager.CallOpts, reqId, worker)
+}
+
+// GetChosenWorker is a free data retrieval call binding the contract method 0x8517e326.
+//
+// Solidity: function getChosenWorker(uint256 reqId) view returns(address worker, uint64 fallbackBlocks)
+func (_SessionManager *SessionManagerCaller) GetChosenWorker(opts *bind.CallOpts, reqId *big.Int) (struct {
+	Worker         common.Address
+	FallbackBlocks uint64
+}, error) {
+	var out []interface{}
+	err := _SessionManager.contract.Call(opts, &out, "getChosenWorker", reqId)
+
+	outstruct := new(struct {
+		Worker         common.Address
+		FallbackBlocks uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Worker = *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+	outstruct.FallbackBlocks = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// GetChosenWorker is a free data retrieval call binding the contract method 0x8517e326.
+//
+// Solidity: function getChosenWorker(uint256 reqId) view returns(address worker, uint64 fallbackBlocks)
+func (_SessionManager *SessionManagerSession) GetChosenWorker(reqId *big.Int) (struct {
+	Worker         common.Address
+	FallbackBlocks uint64
+}, error) {
+	return _SessionManager.Contract.GetChosenWorker(&_SessionManager.CallOpts, reqId)
+}
+
+// GetChosenWorker is a free data retrieval call binding the contract method 0x8517e326.
+//
+// Solidity: function getChosenWorker(uint256 reqId) view returns(address worker, uint64 fallbackBlocks)
+func (_SessionManager *SessionManagerCallerSession) GetChosenWorker(reqId *big.Int) (struct {
+	Worker         common.Address
+	FallbackBlocks uint64
+}, error) {
+	return _SessionManager.Contract.GetChosenWorker(&_SessionManager.CallOpts, reqId)
 }
 
 // GetClaimPrice is a free data retrieval call binding the contract method 0x245e5aac.
@@ -321,6 +430,68 @@ func (_SessionManager *SessionManagerCallerSession) GetMinPriceBps() (*big.Int, 
 	return _SessionManager.Contract.GetMinPriceBps(&_SessionManager.CallOpts)
 }
 
+// GetPendingClaims is a free data retrieval call binding the contract method 0x99f91405.
+//
+// Solidity: function getPendingClaims(address worker) view returns(uint256)
+func (_SessionManager *SessionManagerCaller) GetPendingClaims(opts *bind.CallOpts, worker common.Address) (*big.Int, error) {
+	var out []interface{}
+	err := _SessionManager.contract.Call(opts, &out, "getPendingClaims", worker)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// GetPendingClaims is a free data retrieval call binding the contract method 0x99f91405.
+//
+// Solidity: function getPendingClaims(address worker) view returns(uint256)
+func (_SessionManager *SessionManagerSession) GetPendingClaims(worker common.Address) (*big.Int, error) {
+	return _SessionManager.Contract.GetPendingClaims(&_SessionManager.CallOpts, worker)
+}
+
+// GetPendingClaims is a free data retrieval call binding the contract method 0x99f91405.
+//
+// Solidity: function getPendingClaims(address worker) view returns(uint256)
+func (_SessionManager *SessionManagerCallerSession) GetPendingClaims(worker common.Address) (*big.Int, error) {
+	return _SessionManager.Contract.GetPendingClaims(&_SessionManager.CallOpts, worker)
+}
+
+// GetPriceDelayBlocks is a free data retrieval call binding the contract method 0xfb18cd35.
+//
+// Solidity: function getPriceDelayBlocks() view returns(uint256)
+func (_SessionManager *SessionManagerCaller) GetPriceDelayBlocks(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _SessionManager.contract.Call(opts, &out, "getPriceDelayBlocks")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// GetPriceDelayBlocks is a free data retrieval call binding the contract method 0xfb18cd35.
+//
+// Solidity: function getPriceDelayBlocks() view returns(uint256)
+func (_SessionManager *SessionManagerSession) GetPriceDelayBlocks() (*big.Int, error) {
+	return _SessionManager.Contract.GetPriceDelayBlocks(&_SessionManager.CallOpts)
+}
+
+// GetPriceDelayBlocks is a free data retrieval call binding the contract method 0xfb18cd35.
+//
+// Solidity: function getPriceDelayBlocks() view returns(uint256)
+func (_SessionManager *SessionManagerCallerSession) GetPriceDelayBlocks() (*big.Int, error) {
+	return _SessionManager.Contract.GetPriceDelayBlocks(&_SessionManager.CallOpts)
+}
+
 // GetRequest is a free data retrieval call binding the contract method 0xc58343ef.
 //
 // Solidity: function getRequest(uint256 reqId) view returns((address,bytes32,uint64,uint64,address,uint8))
@@ -354,7 +525,7 @@ func (_SessionManager *SessionManagerCallerSession) GetRequest(reqId *big.Int) (
 
 // GetRequestTerms is a free data retrieval call binding the contract method 0xeaff8f58.
 //
-// Solidity: function getRequestTerms(uint256 reqId) view returns((uint256,uint256,uint256))
+// Solidity: function getRequestTerms(uint256 reqId) view returns((uint256,uint256,uint256,address,uint64))
 func (_SessionManager *SessionManagerCaller) GetRequestTerms(opts *bind.CallOpts, reqId *big.Int) (ISessionManagerRequestTerms, error) {
 	var out []interface{}
 	err := _SessionManager.contract.Call(opts, &out, "getRequestTerms", reqId)
@@ -371,14 +542,14 @@ func (_SessionManager *SessionManagerCaller) GetRequestTerms(opts *bind.CallOpts
 
 // GetRequestTerms is a free data retrieval call binding the contract method 0xeaff8f58.
 //
-// Solidity: function getRequestTerms(uint256 reqId) view returns((uint256,uint256,uint256))
+// Solidity: function getRequestTerms(uint256 reqId) view returns((uint256,uint256,uint256,address,uint64))
 func (_SessionManager *SessionManagerSession) GetRequestTerms(reqId *big.Int) (ISessionManagerRequestTerms, error) {
 	return _SessionManager.Contract.GetRequestTerms(&_SessionManager.CallOpts, reqId)
 }
 
 // GetRequestTerms is a free data retrieval call binding the contract method 0xeaff8f58.
 //
-// Solidity: function getRequestTerms(uint256 reqId) view returns((uint256,uint256,uint256))
+// Solidity: function getRequestTerms(uint256 reqId) view returns((uint256,uint256,uint256,address,uint64))
 func (_SessionManager *SessionManagerCallerSession) GetRequestTerms(reqId *big.Int) (ISessionManagerRequestTerms, error) {
 	return _SessionManager.Contract.GetRequestTerms(&_SessionManager.CallOpts, reqId)
 }
@@ -569,6 +740,27 @@ func (_SessionManager *SessionManagerCallerSession) QuoteWorkerFee(worker common
 	return _SessionManager.Contract.QuoteWorkerFee(&_SessionManager.CallOpts, worker, modelId)
 }
 
+// CancelRequest is a paid mutator transaction binding the contract method 0x3015394c.
+//
+// Solidity: function cancelRequest(uint256 reqId) returns()
+func (_SessionManager *SessionManagerTransactor) CancelRequest(opts *bind.TransactOpts, reqId *big.Int) (*types.Transaction, error) {
+	return _SessionManager.contract.Transact(opts, "cancelRequest", reqId)
+}
+
+// CancelRequest is a paid mutator transaction binding the contract method 0x3015394c.
+//
+// Solidity: function cancelRequest(uint256 reqId) returns()
+func (_SessionManager *SessionManagerSession) CancelRequest(reqId *big.Int) (*types.Transaction, error) {
+	return _SessionManager.Contract.CancelRequest(&_SessionManager.TransactOpts, reqId)
+}
+
+// CancelRequest is a paid mutator transaction binding the contract method 0x3015394c.
+//
+// Solidity: function cancelRequest(uint256 reqId) returns()
+func (_SessionManager *SessionManagerTransactorSession) CancelRequest(reqId *big.Int) (*types.Transaction, error) {
+	return _SessionManager.Contract.CancelRequest(&_SessionManager.TransactOpts, reqId)
+}
+
 // ClaimSession is a paid mutator transaction binding the contract method 0xf446092d.
 //
 // Solidity: function claimSession(uint256 reqId) returns()
@@ -588,6 +780,27 @@ func (_SessionManager *SessionManagerSession) ClaimSession(reqId *big.Int) (*typ
 // Solidity: function claimSession(uint256 reqId) returns()
 func (_SessionManager *SessionManagerTransactorSession) ClaimSession(reqId *big.Int) (*types.Transaction, error) {
 	return _SessionManager.Contract.ClaimSession(&_SessionManager.TransactOpts, reqId)
+}
+
+// DeclineSession is a paid mutator transaction binding the contract method 0xd31b7a24.
+//
+// Solidity: function declineSession(uint256 reqId) returns()
+func (_SessionManager *SessionManagerTransactor) DeclineSession(opts *bind.TransactOpts, reqId *big.Int) (*types.Transaction, error) {
+	return _SessionManager.contract.Transact(opts, "declineSession", reqId)
+}
+
+// DeclineSession is a paid mutator transaction binding the contract method 0xd31b7a24.
+//
+// Solidity: function declineSession(uint256 reqId) returns()
+func (_SessionManager *SessionManagerSession) DeclineSession(reqId *big.Int) (*types.Transaction, error) {
+	return _SessionManager.Contract.DeclineSession(&_SessionManager.TransactOpts, reqId)
+}
+
+// DeclineSession is a paid mutator transaction binding the contract method 0xd31b7a24.
+//
+// Solidity: function declineSession(uint256 reqId) returns()
+func (_SessionManager *SessionManagerTransactorSession) DeclineSession(reqId *big.Int) (*types.Transaction, error) {
+	return _SessionManager.Contract.DeclineSession(&_SessionManager.TransactOpts, reqId)
 }
 
 // Initialize is a paid mutator transaction binding the contract method 0x1459457a.
@@ -651,6 +864,27 @@ func (_SessionManager *SessionManagerSession) ProvideSessionKeyFor(user common.A
 // Solidity: function provideSessionKeyFor(address user, uint256 reqId, bytes encWorkerKey, bytes encDisputerKey) returns()
 func (_SessionManager *SessionManagerTransactorSession) ProvideSessionKeyFor(user common.Address, reqId *big.Int, encWorkerKey []byte, encDisputerKey []byte) (*types.Transaction, error) {
 	return _SessionManager.Contract.ProvideSessionKeyFor(&_SessionManager.TransactOpts, user, reqId, encWorkerKey, encDisputerKey)
+}
+
+// ReleaseClaim is a paid mutator transaction binding the contract method 0xa8bde4eb.
+//
+// Solidity: function releaseClaim(uint256 reqId) returns()
+func (_SessionManager *SessionManagerTransactor) ReleaseClaim(opts *bind.TransactOpts, reqId *big.Int) (*types.Transaction, error) {
+	return _SessionManager.contract.Transact(opts, "releaseClaim", reqId)
+}
+
+// ReleaseClaim is a paid mutator transaction binding the contract method 0xa8bde4eb.
+//
+// Solidity: function releaseClaim(uint256 reqId) returns()
+func (_SessionManager *SessionManagerSession) ReleaseClaim(reqId *big.Int) (*types.Transaction, error) {
+	return _SessionManager.Contract.ReleaseClaim(&_SessionManager.TransactOpts, reqId)
+}
+
+// ReleaseClaim is a paid mutator transaction binding the contract method 0xa8bde4eb.
+//
+// Solidity: function releaseClaim(uint256 reqId) returns()
+func (_SessionManager *SessionManagerTransactorSession) ReleaseClaim(reqId *big.Int) (*types.Transaction, error) {
+	return _SessionManager.Contract.ReleaseClaim(&_SessionManager.TransactOpts, reqId)
 }
 
 // RenounceOwnership is a paid mutator transaction binding the contract method 0x715018a6.
@@ -737,23 +971,23 @@ func (_SessionManager *SessionManagerTransactorSession) RequestSessionForWithCap
 	return _SessionManager.Contract.RequestSessionForWithCapabilities(&_SessionManager.TransactOpts, user, modelId, expiry, requiredCaps)
 }
 
-// RequestSessionForWithTerms is a paid mutator transaction binding the contract method 0xde0faf7a.
+// RequestSessionForWithTerms is a paid mutator transaction binding the contract method 0xbfcebd47.
 //
-// Solidity: function requestSessionForWithTerms(address user, bytes32 modelId, uint256 expiry, (uint256,uint256,uint256) terms) returns(uint256 reqId)
+// Solidity: function requestSessionForWithTerms(address user, bytes32 modelId, uint256 expiry, (uint256,uint256,uint256,address,uint64) terms) returns(uint256 reqId)
 func (_SessionManager *SessionManagerTransactor) RequestSessionForWithTerms(opts *bind.TransactOpts, user common.Address, modelId [32]byte, expiry *big.Int, terms ISessionManagerRequestTerms) (*types.Transaction, error) {
 	return _SessionManager.contract.Transact(opts, "requestSessionForWithTerms", user, modelId, expiry, terms)
 }
 
-// RequestSessionForWithTerms is a paid mutator transaction binding the contract method 0xde0faf7a.
+// RequestSessionForWithTerms is a paid mutator transaction binding the contract method 0xbfcebd47.
 //
-// Solidity: function requestSessionForWithTerms(address user, bytes32 modelId, uint256 expiry, (uint256,uint256,uint256) terms) returns(uint256 reqId)
+// Solidity: function requestSessionForWithTerms(address user, bytes32 modelId, uint256 expiry, (uint256,uint256,uint256,address,uint64) terms) returns(uint256 reqId)
 func (_SessionManager *SessionManagerSession) RequestSessionForWithTerms(user common.Address, modelId [32]byte, expiry *big.Int, terms ISessionManagerRequestTerms) (*types.Transaction, error) {
 	return _SessionManager.Contract.RequestSessionForWithTerms(&_SessionManager.TransactOpts, user, modelId, expiry, terms)
 }
 
-// RequestSessionForWithTerms is a paid mutator transaction binding the contract method 0xde0faf7a.
+// RequestSessionForWithTerms is a paid mutator transaction binding the contract method 0xbfcebd47.
 //
-// Solidity: function requestSessionForWithTerms(address user, bytes32 modelId, uint256 expiry, (uint256,uint256,uint256) terms) returns(uint256 reqId)
+// Solidity: function requestSessionForWithTerms(address user, bytes32 modelId, uint256 expiry, (uint256,uint256,uint256,address,uint64) terms) returns(uint256 reqId)
 func (_SessionManager *SessionManagerTransactorSession) RequestSessionForWithTerms(user common.Address, modelId [32]byte, expiry *big.Int, terms ISessionManagerRequestTerms) (*types.Transaction, error) {
 	return _SessionManager.Contract.RequestSessionForWithTerms(&_SessionManager.TransactOpts, user, modelId, expiry, terms)
 }
@@ -779,23 +1013,23 @@ func (_SessionManager *SessionManagerTransactorSession) RequestSessionWithCapabi
 	return _SessionManager.Contract.RequestSessionWithCapabilities(&_SessionManager.TransactOpts, modelId, expiry, requiredCaps)
 }
 
-// RequestSessionWithTerms is a paid mutator transaction binding the contract method 0xb11aa252.
+// RequestSessionWithTerms is a paid mutator transaction binding the contract method 0x4f5e2db2.
 //
-// Solidity: function requestSessionWithTerms(bytes32 modelId, uint256 expiry, (uint256,uint256,uint256) terms) returns(uint256 reqId)
+// Solidity: function requestSessionWithTerms(bytes32 modelId, uint256 expiry, (uint256,uint256,uint256,address,uint64) terms) returns(uint256 reqId)
 func (_SessionManager *SessionManagerTransactor) RequestSessionWithTerms(opts *bind.TransactOpts, modelId [32]byte, expiry *big.Int, terms ISessionManagerRequestTerms) (*types.Transaction, error) {
 	return _SessionManager.contract.Transact(opts, "requestSessionWithTerms", modelId, expiry, terms)
 }
 
-// RequestSessionWithTerms is a paid mutator transaction binding the contract method 0xb11aa252.
+// RequestSessionWithTerms is a paid mutator transaction binding the contract method 0x4f5e2db2.
 //
-// Solidity: function requestSessionWithTerms(bytes32 modelId, uint256 expiry, (uint256,uint256,uint256) terms) returns(uint256 reqId)
+// Solidity: function requestSessionWithTerms(bytes32 modelId, uint256 expiry, (uint256,uint256,uint256,address,uint64) terms) returns(uint256 reqId)
 func (_SessionManager *SessionManagerSession) RequestSessionWithTerms(modelId [32]byte, expiry *big.Int, terms ISessionManagerRequestTerms) (*types.Transaction, error) {
 	return _SessionManager.Contract.RequestSessionWithTerms(&_SessionManager.TransactOpts, modelId, expiry, terms)
 }
 
-// RequestSessionWithTerms is a paid mutator transaction binding the contract method 0xb11aa252.
+// RequestSessionWithTerms is a paid mutator transaction binding the contract method 0x4f5e2db2.
 //
-// Solidity: function requestSessionWithTerms(bytes32 modelId, uint256 expiry, (uint256,uint256,uint256) terms) returns(uint256 reqId)
+// Solidity: function requestSessionWithTerms(bytes32 modelId, uint256 expiry, (uint256,uint256,uint256,address,uint64) terms) returns(uint256 reqId)
 func (_SessionManager *SessionManagerTransactorSession) RequestSessionWithTerms(modelId [32]byte, expiry *big.Int, terms ISessionManagerRequestTerms) (*types.Transaction, error) {
 	return _SessionManager.Contract.RequestSessionWithTerms(&_SessionManager.TransactOpts, modelId, expiry, terms)
 }
@@ -819,6 +1053,27 @@ func (_SessionManager *SessionManagerSession) SetMinPriceBps(bps *big.Int) (*typ
 // Solidity: function setMinPriceBps(uint256 bps) returns()
 func (_SessionManager *SessionManagerTransactorSession) SetMinPriceBps(bps *big.Int) (*types.Transaction, error) {
 	return _SessionManager.Contract.SetMinPriceBps(&_SessionManager.TransactOpts, bps)
+}
+
+// SetPriceDelayBlocks is a paid mutator transaction binding the contract method 0x477c11ad.
+//
+// Solidity: function setPriceDelayBlocks(uint256 blocks) returns()
+func (_SessionManager *SessionManagerTransactor) SetPriceDelayBlocks(opts *bind.TransactOpts, blocks *big.Int) (*types.Transaction, error) {
+	return _SessionManager.contract.Transact(opts, "setPriceDelayBlocks", blocks)
+}
+
+// SetPriceDelayBlocks is a paid mutator transaction binding the contract method 0x477c11ad.
+//
+// Solidity: function setPriceDelayBlocks(uint256 blocks) returns()
+func (_SessionManager *SessionManagerSession) SetPriceDelayBlocks(blocks *big.Int) (*types.Transaction, error) {
+	return _SessionManager.Contract.SetPriceDelayBlocks(&_SessionManager.TransactOpts, blocks)
+}
+
+// SetPriceDelayBlocks is a paid mutator transaction binding the contract method 0x477c11ad.
+//
+// Solidity: function setPriceDelayBlocks(uint256 blocks) returns()
+func (_SessionManager *SessionManagerTransactorSession) SetPriceDelayBlocks(blocks *big.Int) (*types.Transaction, error) {
+	return _SessionManager.Contract.SetPriceDelayBlocks(&_SessionManager.TransactOpts, blocks)
 }
 
 // SetWorkerPrice is a paid mutator transaction binding the contract method 0x56b740f9.
@@ -882,6 +1137,159 @@ func (_SessionManager *SessionManagerSession) UpgradeToAndCall(newImplementation
 // Solidity: function upgradeToAndCall(address newImplementation, bytes data) payable returns()
 func (_SessionManager *SessionManagerTransactorSession) UpgradeToAndCall(newImplementation common.Address, data []byte) (*types.Transaction, error) {
 	return _SessionManager.Contract.UpgradeToAndCall(&_SessionManager.TransactOpts, newImplementation, data)
+}
+
+// SessionManagerClaimReleasedIterator is returned from FilterClaimReleased and is used to iterate over the raw logs and unpacked data for ClaimReleased events raised by the SessionManager contract.
+type SessionManagerClaimReleasedIterator struct {
+	Event *SessionManagerClaimReleased // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *SessionManagerClaimReleasedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(SessionManagerClaimReleased)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(SessionManagerClaimReleased)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *SessionManagerClaimReleasedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *SessionManagerClaimReleasedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// SessionManagerClaimReleased represents a ClaimReleased event raised by the SessionManager contract.
+type SessionManagerClaimReleased struct {
+	ReqId  *big.Int
+	Worker common.Address
+	Raw    types.Log // Blockchain specific contextual infos
+}
+
+// FilterClaimReleased is a free log retrieval operation binding the contract event 0x909d0309e792d4f17972cef6c4067bfd0b5fa112dd3aa00415fbac21afa3eb3e.
+//
+// Solidity: event ClaimReleased(uint256 indexed reqId, address indexed worker)
+func (_SessionManager *SessionManagerFilterer) FilterClaimReleased(opts *bind.FilterOpts, reqId []*big.Int, worker []common.Address) (*SessionManagerClaimReleasedIterator, error) {
+
+	var reqIdRule []interface{}
+	for _, reqIdItem := range reqId {
+		reqIdRule = append(reqIdRule, reqIdItem)
+	}
+	var workerRule []interface{}
+	for _, workerItem := range worker {
+		workerRule = append(workerRule, workerItem)
+	}
+
+	logs, sub, err := _SessionManager.contract.FilterLogs(opts, "ClaimReleased", reqIdRule, workerRule)
+	if err != nil {
+		return nil, err
+	}
+	return &SessionManagerClaimReleasedIterator{contract: _SessionManager.contract, event: "ClaimReleased", logs: logs, sub: sub}, nil
+}
+
+// WatchClaimReleased is a free log subscription operation binding the contract event 0x909d0309e792d4f17972cef6c4067bfd0b5fa112dd3aa00415fbac21afa3eb3e.
+//
+// Solidity: event ClaimReleased(uint256 indexed reqId, address indexed worker)
+func (_SessionManager *SessionManagerFilterer) WatchClaimReleased(opts *bind.WatchOpts, sink chan<- *SessionManagerClaimReleased, reqId []*big.Int, worker []common.Address) (event.Subscription, error) {
+
+	var reqIdRule []interface{}
+	for _, reqIdItem := range reqId {
+		reqIdRule = append(reqIdRule, reqIdItem)
+	}
+	var workerRule []interface{}
+	for _, workerItem := range worker {
+		workerRule = append(workerRule, workerItem)
+	}
+
+	logs, sub, err := _SessionManager.contract.WatchLogs(opts, "ClaimReleased", reqIdRule, workerRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(SessionManagerClaimReleased)
+				if err := _SessionManager.contract.UnpackLog(event, "ClaimReleased", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseClaimReleased is a log parse operation binding the contract event 0x909d0309e792d4f17972cef6c4067bfd0b5fa112dd3aa00415fbac21afa3eb3e.
+//
+// Solidity: event ClaimReleased(uint256 indexed reqId, address indexed worker)
+func (_SessionManager *SessionManagerFilterer) ParseClaimReleased(log types.Log) (*SessionManagerClaimReleased, error) {
+	event := new(SessionManagerClaimReleased)
+	if err := _SessionManager.contract.UnpackLog(event, "ClaimReleased", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
 }
 
 // SessionManagerInitializedIterator is returned from FilterInitialized and is used to iterate over the raw logs and unpacked data for Initialized events raised by the SessionManager contract.
@@ -1299,6 +1707,438 @@ func (_SessionManager *SessionManagerFilterer) WatchOwnershipTransferred(opts *b
 func (_SessionManager *SessionManagerFilterer) ParseOwnershipTransferred(log types.Log) (*SessionManagerOwnershipTransferred, error) {
 	event := new(SessionManagerOwnershipTransferred)
 	if err := _SessionManager.contract.UnpackLog(event, "OwnershipTransferred", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// SessionManagerPriceDelayBlocksSetIterator is returned from FilterPriceDelayBlocksSet and is used to iterate over the raw logs and unpacked data for PriceDelayBlocksSet events raised by the SessionManager contract.
+type SessionManagerPriceDelayBlocksSetIterator struct {
+	Event *SessionManagerPriceDelayBlocksSet // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *SessionManagerPriceDelayBlocksSetIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(SessionManagerPriceDelayBlocksSet)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(SessionManagerPriceDelayBlocksSet)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *SessionManagerPriceDelayBlocksSetIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *SessionManagerPriceDelayBlocksSetIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// SessionManagerPriceDelayBlocksSet represents a PriceDelayBlocksSet event raised by the SessionManager contract.
+type SessionManagerPriceDelayBlocksSet struct {
+	Blocks *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
+}
+
+// FilterPriceDelayBlocksSet is a free log retrieval operation binding the contract event 0x49cbb0cf02bf9755553abf81d5a11ecf2f8dc2de3d9d8da35e6565b096e071f2.
+//
+// Solidity: event PriceDelayBlocksSet(uint256 blocks)
+func (_SessionManager *SessionManagerFilterer) FilterPriceDelayBlocksSet(opts *bind.FilterOpts) (*SessionManagerPriceDelayBlocksSetIterator, error) {
+
+	logs, sub, err := _SessionManager.contract.FilterLogs(opts, "PriceDelayBlocksSet")
+	if err != nil {
+		return nil, err
+	}
+	return &SessionManagerPriceDelayBlocksSetIterator{contract: _SessionManager.contract, event: "PriceDelayBlocksSet", logs: logs, sub: sub}, nil
+}
+
+// WatchPriceDelayBlocksSet is a free log subscription operation binding the contract event 0x49cbb0cf02bf9755553abf81d5a11ecf2f8dc2de3d9d8da35e6565b096e071f2.
+//
+// Solidity: event PriceDelayBlocksSet(uint256 blocks)
+func (_SessionManager *SessionManagerFilterer) WatchPriceDelayBlocksSet(opts *bind.WatchOpts, sink chan<- *SessionManagerPriceDelayBlocksSet) (event.Subscription, error) {
+
+	logs, sub, err := _SessionManager.contract.WatchLogs(opts, "PriceDelayBlocksSet")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(SessionManagerPriceDelayBlocksSet)
+				if err := _SessionManager.contract.UnpackLog(event, "PriceDelayBlocksSet", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParsePriceDelayBlocksSet is a log parse operation binding the contract event 0x49cbb0cf02bf9755553abf81d5a11ecf2f8dc2de3d9d8da35e6565b096e071f2.
+//
+// Solidity: event PriceDelayBlocksSet(uint256 blocks)
+func (_SessionManager *SessionManagerFilterer) ParsePriceDelayBlocksSet(log types.Log) (*SessionManagerPriceDelayBlocksSet, error) {
+	event := new(SessionManagerPriceDelayBlocksSet)
+	if err := _SessionManager.contract.UnpackLog(event, "PriceDelayBlocksSet", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// SessionManagerRequestCancelledIterator is returned from FilterRequestCancelled and is used to iterate over the raw logs and unpacked data for RequestCancelled events raised by the SessionManager contract.
+type SessionManagerRequestCancelledIterator struct {
+	Event *SessionManagerRequestCancelled // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *SessionManagerRequestCancelledIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(SessionManagerRequestCancelled)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(SessionManagerRequestCancelled)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *SessionManagerRequestCancelledIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *SessionManagerRequestCancelledIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// SessionManagerRequestCancelled represents a RequestCancelled event raised by the SessionManager contract.
+type SessionManagerRequestCancelled struct {
+	ReqId *big.Int
+	Raw   types.Log // Blockchain specific contextual infos
+}
+
+// FilterRequestCancelled is a free log retrieval operation binding the contract event 0xee243f878b7fc2f54e934ca33783d4395d42bc07612e2bd4b8e0e178639f7a28.
+//
+// Solidity: event RequestCancelled(uint256 indexed reqId)
+func (_SessionManager *SessionManagerFilterer) FilterRequestCancelled(opts *bind.FilterOpts, reqId []*big.Int) (*SessionManagerRequestCancelledIterator, error) {
+
+	var reqIdRule []interface{}
+	for _, reqIdItem := range reqId {
+		reqIdRule = append(reqIdRule, reqIdItem)
+	}
+
+	logs, sub, err := _SessionManager.contract.FilterLogs(opts, "RequestCancelled", reqIdRule)
+	if err != nil {
+		return nil, err
+	}
+	return &SessionManagerRequestCancelledIterator{contract: _SessionManager.contract, event: "RequestCancelled", logs: logs, sub: sub}, nil
+}
+
+// WatchRequestCancelled is a free log subscription operation binding the contract event 0xee243f878b7fc2f54e934ca33783d4395d42bc07612e2bd4b8e0e178639f7a28.
+//
+// Solidity: event RequestCancelled(uint256 indexed reqId)
+func (_SessionManager *SessionManagerFilterer) WatchRequestCancelled(opts *bind.WatchOpts, sink chan<- *SessionManagerRequestCancelled, reqId []*big.Int) (event.Subscription, error) {
+
+	var reqIdRule []interface{}
+	for _, reqIdItem := range reqId {
+		reqIdRule = append(reqIdRule, reqIdItem)
+	}
+
+	logs, sub, err := _SessionManager.contract.WatchLogs(opts, "RequestCancelled", reqIdRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(SessionManagerRequestCancelled)
+				if err := _SessionManager.contract.UnpackLog(event, "RequestCancelled", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseRequestCancelled is a log parse operation binding the contract event 0xee243f878b7fc2f54e934ca33783d4395d42bc07612e2bd4b8e0e178639f7a28.
+//
+// Solidity: event RequestCancelled(uint256 indexed reqId)
+func (_SessionManager *SessionManagerFilterer) ParseRequestCancelled(log types.Log) (*SessionManagerRequestCancelled, error) {
+	event := new(SessionManagerRequestCancelled)
+	if err := _SessionManager.contract.UnpackLog(event, "RequestCancelled", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// SessionManagerRequestDeclinedIterator is returned from FilterRequestDeclined and is used to iterate over the raw logs and unpacked data for RequestDeclined events raised by the SessionManager contract.
+type SessionManagerRequestDeclinedIterator struct {
+	Event *SessionManagerRequestDeclined // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *SessionManagerRequestDeclinedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(SessionManagerRequestDeclined)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(SessionManagerRequestDeclined)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *SessionManagerRequestDeclinedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *SessionManagerRequestDeclinedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// SessionManagerRequestDeclined represents a RequestDeclined event raised by the SessionManager contract.
+type SessionManagerRequestDeclined struct {
+	ReqId    *big.Int
+	Worker   common.Address
+	Reopened bool
+	Raw      types.Log // Blockchain specific contextual infos
+}
+
+// FilterRequestDeclined is a free log retrieval operation binding the contract event 0xe010058907f2db92af81a69d9c862f0a98ebe7f459e418151a385e9728fee74f.
+//
+// Solidity: event RequestDeclined(uint256 indexed reqId, address indexed worker, bool reopened)
+func (_SessionManager *SessionManagerFilterer) FilterRequestDeclined(opts *bind.FilterOpts, reqId []*big.Int, worker []common.Address) (*SessionManagerRequestDeclinedIterator, error) {
+
+	var reqIdRule []interface{}
+	for _, reqIdItem := range reqId {
+		reqIdRule = append(reqIdRule, reqIdItem)
+	}
+	var workerRule []interface{}
+	for _, workerItem := range worker {
+		workerRule = append(workerRule, workerItem)
+	}
+
+	logs, sub, err := _SessionManager.contract.FilterLogs(opts, "RequestDeclined", reqIdRule, workerRule)
+	if err != nil {
+		return nil, err
+	}
+	return &SessionManagerRequestDeclinedIterator{contract: _SessionManager.contract, event: "RequestDeclined", logs: logs, sub: sub}, nil
+}
+
+// WatchRequestDeclined is a free log subscription operation binding the contract event 0xe010058907f2db92af81a69d9c862f0a98ebe7f459e418151a385e9728fee74f.
+//
+// Solidity: event RequestDeclined(uint256 indexed reqId, address indexed worker, bool reopened)
+func (_SessionManager *SessionManagerFilterer) WatchRequestDeclined(opts *bind.WatchOpts, sink chan<- *SessionManagerRequestDeclined, reqId []*big.Int, worker []common.Address) (event.Subscription, error) {
+
+	var reqIdRule []interface{}
+	for _, reqIdItem := range reqId {
+		reqIdRule = append(reqIdRule, reqIdItem)
+	}
+	var workerRule []interface{}
+	for _, workerItem := range worker {
+		workerRule = append(workerRule, workerItem)
+	}
+
+	logs, sub, err := _SessionManager.contract.WatchLogs(opts, "RequestDeclined", reqIdRule, workerRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(SessionManagerRequestDeclined)
+				if err := _SessionManager.contract.UnpackLog(event, "RequestDeclined", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseRequestDeclined is a log parse operation binding the contract event 0xe010058907f2db92af81a69d9c862f0a98ebe7f459e418151a385e9728fee74f.
+//
+// Solidity: event RequestDeclined(uint256 indexed reqId, address indexed worker, bool reopened)
+func (_SessionManager *SessionManagerFilterer) ParseRequestDeclined(log types.Log) (*SessionManagerRequestDeclined, error) {
+	event := new(SessionManagerRequestDeclined)
+	if err := _SessionManager.contract.UnpackLog(event, "RequestDeclined", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
@@ -2060,6 +2900,160 @@ func (_SessionManager *SessionManagerFilterer) WatchSessionRequested(opts *bind.
 func (_SessionManager *SessionManagerFilterer) ParseSessionRequested(log types.Log) (*SessionManagerSessionRequested, error) {
 	event := new(SessionManagerSessionRequested)
 	if err := _SessionManager.contract.UnpackLog(event, "SessionRequested", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// SessionManagerSessionWorkerChosenIterator is returned from FilterSessionWorkerChosen and is used to iterate over the raw logs and unpacked data for SessionWorkerChosen events raised by the SessionManager contract.
+type SessionManagerSessionWorkerChosenIterator struct {
+	Event *SessionManagerSessionWorkerChosen // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *SessionManagerSessionWorkerChosenIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(SessionManagerSessionWorkerChosen)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(SessionManagerSessionWorkerChosen)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *SessionManagerSessionWorkerChosenIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *SessionManagerSessionWorkerChosenIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// SessionManagerSessionWorkerChosen represents a SessionWorkerChosen event raised by the SessionManager contract.
+type SessionManagerSessionWorkerChosen struct {
+	ReqId          *big.Int
+	Worker         common.Address
+	FallbackBlocks uint64
+	Raw            types.Log // Blockchain specific contextual infos
+}
+
+// FilterSessionWorkerChosen is a free log retrieval operation binding the contract event 0x91d7b588bdfeb6e0a6991171cf775c7689e4926db7c269e430b858927cef6753.
+//
+// Solidity: event SessionWorkerChosen(uint256 indexed reqId, address indexed worker, uint64 fallbackBlocks)
+func (_SessionManager *SessionManagerFilterer) FilterSessionWorkerChosen(opts *bind.FilterOpts, reqId []*big.Int, worker []common.Address) (*SessionManagerSessionWorkerChosenIterator, error) {
+
+	var reqIdRule []interface{}
+	for _, reqIdItem := range reqId {
+		reqIdRule = append(reqIdRule, reqIdItem)
+	}
+	var workerRule []interface{}
+	for _, workerItem := range worker {
+		workerRule = append(workerRule, workerItem)
+	}
+
+	logs, sub, err := _SessionManager.contract.FilterLogs(opts, "SessionWorkerChosen", reqIdRule, workerRule)
+	if err != nil {
+		return nil, err
+	}
+	return &SessionManagerSessionWorkerChosenIterator{contract: _SessionManager.contract, event: "SessionWorkerChosen", logs: logs, sub: sub}, nil
+}
+
+// WatchSessionWorkerChosen is a free log subscription operation binding the contract event 0x91d7b588bdfeb6e0a6991171cf775c7689e4926db7c269e430b858927cef6753.
+//
+// Solidity: event SessionWorkerChosen(uint256 indexed reqId, address indexed worker, uint64 fallbackBlocks)
+func (_SessionManager *SessionManagerFilterer) WatchSessionWorkerChosen(opts *bind.WatchOpts, sink chan<- *SessionManagerSessionWorkerChosen, reqId []*big.Int, worker []common.Address) (event.Subscription, error) {
+
+	var reqIdRule []interface{}
+	for _, reqIdItem := range reqId {
+		reqIdRule = append(reqIdRule, reqIdItem)
+	}
+	var workerRule []interface{}
+	for _, workerItem := range worker {
+		workerRule = append(workerRule, workerItem)
+	}
+
+	logs, sub, err := _SessionManager.contract.WatchLogs(opts, "SessionWorkerChosen", reqIdRule, workerRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(SessionManagerSessionWorkerChosen)
+				if err := _SessionManager.contract.UnpackLog(event, "SessionWorkerChosen", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseSessionWorkerChosen is a log parse operation binding the contract event 0x91d7b588bdfeb6e0a6991171cf775c7689e4926db7c269e430b858927cef6753.
+//
+// Solidity: event SessionWorkerChosen(uint256 indexed reqId, address indexed worker, uint64 fallbackBlocks)
+func (_SessionManager *SessionManagerFilterer) ParseSessionWorkerChosen(log types.Log) (*SessionManagerSessionWorkerChosen, error) {
+	event := new(SessionManagerSessionWorkerChosen)
+	if err := _SessionManager.contract.UnpackLog(event, "SessionWorkerChosen", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log

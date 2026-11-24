@@ -6,6 +6,19 @@
   },
   {
     "type": "function",
+    "name": "MAX_PRICE_DELAY_BLOCKS",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "UPGRADE_INTERFACE_VERSION",
     "inputs": [],
     "outputs": [
@@ -19,7 +32,57 @@
   },
   {
     "type": "function",
+    "name": "cancelRequest",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "claimOpensAt",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "claimSession",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "declineSession",
     "inputs": [
       {
         "name": "reqId",
@@ -56,6 +119,30 @@
   },
   {
     "type": "function",
+    "name": "getChosenWorker",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "fallbackBlocks",
+        "type": "uint64",
+        "internalType": "uint64"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "getClaimPrice",
     "inputs": [
       {
@@ -76,6 +163,38 @@
   {
     "type": "function",
     "name": "getMinPriceBps",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getPendingClaims",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getPriceDelayBlocks",
     "inputs": [],
     "outputs": [
       {
@@ -167,6 +286,16 @@
             "name": "maxFee",
             "type": "uint256",
             "internalType": "uint256"
+          },
+          {
+            "name": "worker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "fallbackBlocks",
+            "type": "uint64",
+            "internalType": "uint64"
           }
         ]
       }
@@ -371,6 +500,19 @@
   },
   {
     "type": "function",
+    "name": "releaseClaim",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "renounceOwnership",
     "inputs": [],
     "outputs": [],
@@ -501,6 +643,16 @@
             "name": "maxFee",
             "type": "uint256",
             "internalType": "uint256"
+          },
+          {
+            "name": "worker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "fallbackBlocks",
+            "type": "uint64",
+            "internalType": "uint64"
           }
         ]
       }
@@ -576,6 +728,16 @@
             "name": "maxFee",
             "type": "uint256",
             "internalType": "uint256"
+          },
+          {
+            "name": "worker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "fallbackBlocks",
+            "type": "uint64",
+            "internalType": "uint64"
           }
         ]
       }
@@ -595,6 +757,19 @@
     "inputs": [
       {
         "name": "bps",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setPriceDelayBlocks",
+    "inputs": [
+      {
+        "name": "blocks",
         "type": "uint256",
         "internalType": "uint256"
       }
@@ -653,6 +828,25 @@
   },
   {
     "type": "event",
+    "name": "ClaimReleased",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "worker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
     "name": "Initialized",
     "inputs": [
       {
@@ -692,6 +886,57 @@
         "type": "address",
         "indexed": true,
         "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "PriceDelayBlocksSet",
+    "inputs": [
+      {
+        "name": "blocks",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "RequestCancelled",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "RequestDeclined",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "worker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "reopened",
+        "type": "bool",
+        "indexed": false,
+        "internalType": "bool"
       }
     ],
     "anonymous": false
@@ -817,6 +1062,31 @@
   },
   {
     "type": "event",
+    "name": "SessionWorkerChosen",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "worker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "fallbackBlocks",
+        "type": "uint64",
+        "indexed": false,
+        "internalType": "uint64"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
     "name": "Upgraded",
     "inputs": [
       {
@@ -877,10 +1147,75 @@
   },
   {
     "type": "error",
+    "name": "AlreadyDeclined",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ChosenWorkerAtCapacity",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ChosenWorkerNotEligible",
+    "inputs": [
+      {
+        "name": "worker",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ClaimNotOpenYet",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "opensAtBlock",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
     "name": "ConflictingCapabilities",
     "inputs": [
       {
         "name": "mask",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "DelegateMaxFeeAboveModelFee",
+    "inputs": [
+      {
+        "name": "maxFee",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "modelFee",
         "type": "uint256",
         "internalType": "uint256"
       }
@@ -925,6 +1260,11 @@
   },
   {
     "type": "error",
+    "name": "FallbackWithoutChosenWorker",
+    "inputs": []
+  },
+  {
+    "type": "error",
     "name": "InvalidInitialization",
     "inputs": []
   },
@@ -934,6 +1274,33 @@
     "inputs": [
       {
         "name": "bps",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidPriceDelayBlocks",
+    "inputs": [
+      {
+        "name": "blocks",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "MaxFeeBelowMinimum",
+    "inputs": [
+      {
+        "name": "maxFee",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "minPrice",
         "type": "uint256",
         "internalType": "uint256"
       }
@@ -966,6 +1333,49 @@
       },
       {
         "name": "delegate",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotCancellable",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotChosenWorker",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "chosenWorker",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotClaimingWorker",
+    "inputs": [
+      {
+        "name": "reqId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "claimingWorker",
         "type": "address",
         "internalType": "address"
       }
